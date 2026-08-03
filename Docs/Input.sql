@@ -79,3 +79,22 @@ BEGIN
         AND expires_at <= NOW();
 END
 DELIMITER ;
+
+CREATE TABLE workspace.jan_folder_mapping (
+    id INT NOT NULL AUTO_INCREMENT,
+    folder_path VARCHAR(255) NOT NULL,
+    primary_folder_owner VARCHAR(255) NOT NULL,
+    secondary_folder_owner VARCHAR(255) DEFAULT NULL,
+    is_active INT NOT NULL DEFAULT 1,
+    
+    created_by VARCHAR(255) NOT NULL,
+    created_on DATETIME NOT NULL,
+    modified_by VARCHAR(255) DEFAULT NULL,
+    modified_on DATETIME DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+-- Essential Performance Indexes
+CREATE UNIQUE INDEX idx_folder_path ON workspace.jan_folder_mapping (folder_path);
+CREATE INDEX idx_folder_primary_owner ON workspace.jan_folder_mapping (primary_folder_owner, is_active);
+CREATE INDEX idx_folder_is_active ON workspace.jan_folder_mapping (is_active);
