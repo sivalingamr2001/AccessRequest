@@ -1,0 +1,154 @@
+using Microsoft.AspNetCore.Mvc;
+using ACCESSREQUEST.WEB.Services;
+using ACCESSREQUEST.WEB.Models;
+using ACCESSREQUEST.WEB.Interfaces;
+
+namespace ACCESSREQUEST.WEB.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class WorkflowController : ControllerBase
+{
+    private readonly IWorkflowEngine _workflowEngine;
+
+    public WorkflowController(IWorkflowEngine workflowEngine)
+    {
+        _workflowEngine = workflowEngine;
+    }
+
+    [HttpPost("requests")]
+    public async Task<IActionResult> CreateRequest([FromBody] RequestCreationPayload payload)
+    {
+        if (payload == null || string.IsNullOrWhiteSpace(payload.CreatedBy))
+        {
+            return BadRequest("Invalid request payload.");
+        }
+
+        try
+        {
+            var ticketNumber = await _workflowEngine.CreateRequestAsync(payload);
+            return Ok(new { TicketNumber = ticketNumber });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while creating the request: {ex.Message}");
+        }
+    }
+
+    [HttpPost("items/{itemId}/hod-approval")]
+    public async Task<IActionResult> HandleHodApproval(int itemId, [FromBody] ApprovalRequest request)
+    {
+        if (request == null || string.IsNullOrWhiteSpace(request.Approver))
+        {
+            return BadRequest("Invalid approval request.");
+        }
+
+        try
+        {
+            await _workflowEngine.HandleHodApprovalAsync(itemId, request.Approver, request.IsApproved);
+            return Ok(new { Message = "HOD approval processed successfully." });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpPost("items/{itemId}/folder-owner-approval")]
+    public async Task<IActionResult> HandleFolderOwnerApproval(int itemId, [FromBody] ApprovalRequest request)
+    {
+        if (request == null || string.IsNullOrWhiteSpace(request.Approver))
+        {
+            return BadRequest("Invalid approval request.");
+        }
+
+        try
+        {
+            await _workflowEngine.HandleFolderOwnerApprovalAsync(itemId, request.Approver, request.IsApproved);
+            return Ok(new { Message = "Folder owner approval processed successfully." });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpPost("items/{itemId}/operator-action")]
+    public async Task<IActionResult> HandleOperatorAction(int itemId, [FromBody] ApprovalRequest request)
+    {
+        if (request == null || string.IsNullOrWhiteSpace(request.Approver))
+        {
+            return BadRequest("Invalid approval request.");
+        }
+
+        try
+        {
+            await _workflowEngine.HandleOperatorActionAsync(itemId, request.Approver, request.IsApproved);
+            return Ok(new { Message = "Operator action processed successfully." });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpGet("tickets")]
+    public async Task<IActionResult> GetAllTickets()
+    {
+        try
+        {
+            var tickets = await _workflowEngine.GetAllTicketsAsync();
+            return Ok(tickets);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpGet("items/{itemId}/logs")]
+    public async Task<IActionResult> GetApprovalLogs(int itemId)
+    {
+        try
+        {
+            var logs = await _workflowEngine.GetApprovalLogsAsync(itemId);
+            return Ok(logs);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpGet("folder-paths")]
+    public async Task<IActionResult> GetFolderPaths()
+    {
+        try
+        {
+            var paths = await _workflowEngine.GetParsedFolderPathsAsync();
+            return Ok(paths);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while fetching folder paths: {ex.Message}");
+        }
+    }
+}
+
+public class ApprovalRequest
+{
+    public string Approver { get; set; } = string.Empty;
+    public bool IsApproved { get; set; }
+}

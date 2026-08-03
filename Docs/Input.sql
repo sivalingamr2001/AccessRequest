@@ -77,7 +77,7 @@ BEGIN
     WHERE 
         status = 'ACCESS_GRANTED' 
         AND expires_at <= NOW();
-END
+END //
 DELIMITER ;
 
 CREATE TABLE workspace.jan_folder_mapping (

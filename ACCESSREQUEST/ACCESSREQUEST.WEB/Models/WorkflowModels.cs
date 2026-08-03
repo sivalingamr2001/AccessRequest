@@ -1,4 +1,4 @@
-﻿namespace ACCESSREQUEST.WEB.Models;
+namespace ACCESSREQUEST.WEB.Models;
 
 public enum AccessStatus
 {
@@ -35,4 +35,42 @@ public class AccessItemDto
     public string AccessType { get; set; } = string.Empty;
     public string ReasonForAccess { get; set; } = string.Empty;
     public string CreatedBy { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+    public DateTime? GrantedAt { get; set; }
+    public DateTime? ExpiresAt { get; set; }
+    public string? ModifiedBy { get; set; }
+    public DateTime? ModifiedOn { get; set; }
+}
+
+public class TicketDto
+{
+    public int Id { get; set; }
+    public string ReqTo { get; set; } = string.Empty;
+    public string TicketNumber { get; set; } = string.Empty;
+    public string CreatedBy { get; set; } = string.Empty;
+    public DateTime CreatedOn { get; set; }
+    public int IsActive { get; set; }
+    public List<AccessItemDto> Items { get; set; } = new();
+}
+
+public class ApprovalLogDto
+{
+    public int Id { get; set; }
+    public int ItemId { get; set; }
+    public string ApproverRole { get; set; } = string.Empty;
+    public string ApprovedBy { get; set; } = string.Empty;
+    public string ActionTaken { get; set; } = string.Empty;
+    public DateTime ActionDate { get; set; }
+    public string? Comments { get; set; }
+}
+
+public class ParsedFolderPathDto
+{
+    public string FullPath { get; set; } = string.Empty;
+    public string DriveName { get; set; } = string.Empty;
+    public string ParentFolder { get; set; } = string.Empty;
+    public string ChildDepth1 { get; set; } = string.Empty;
+    public string ChildDepth2 { get; set; } = string.Empty;
+    public string ChildDepth3 { get; set; } = string.Empty;
+    public string ChildDepth4 { get; set; } = string.Empty;
 }

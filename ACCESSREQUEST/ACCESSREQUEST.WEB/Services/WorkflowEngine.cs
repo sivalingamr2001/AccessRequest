@@ -1,224 +1,330 @@
-﻿namespace ACCESSREQUEST.WEB.Services;
-
 using System.Data;
-using AccessWorkflow.Service.Models;
-using Dapper;
-using MySqlConnector;
+using ACCESSREQUEST.WEB.Interfaces;
+using ACCESSREQUEST.WEB.Models;
+using DynamicTransaction.Interfaces;
 
-public interface IWorkflowEngine
-{
-    Task<string> CreateRequestAsync(RequestCreationPayload payload);
-    Task HandleHodApprovalAsync(int itemId, string hodUser, bool isApproved);
-    Task HandleFolderOwnerApprovalAsync(int itemId, string ownerUser, bool isApproved);
-    Task HandleOperatorActionAsync(int itemId, string operatorUser, bool isApproved);
-}
+namespace ACCESSREQUEST.WEB.Services;
 
 public class WorkflowEngine : IWorkflowEngine
 {
-    private readonly string _connectionString;
+    private readonly IDynamicQueryExecutor _queryExecutor;
     private readonly INotificationService _notifier;
 
-    public WorkflowEngine(IConfiguration configuration, INotificationService notifier)
+    public WorkflowEngine(IDynamicQueryExecutor queryExecutor, INotificationService notifier)
     {
-        _connectionString = configuration.GetConnectionString("DefaultConnection")!;
-        _notifier = notifier;
+        _queryExecutor = queryExecutor ?? throw new ArgumentNullException(nameof(queryExecutor));
+        _notifier = notifier ?? throw new ArgumentNullException(nameof(notifier));
     }
-
-    private IDbConnection CreateConnection() => new MySqlConnection(_connectionString);
 
     // STAGE 1: Request Submission using precise properties
     public async Task<string> CreateRequestAsync(RequestCreationPayload payload)
     {
-        using var conn = CreateConnection();
-        conn.Open();
-        using var tx = conn.BeginTransaction();
+        string sequentialTicketNumber = string.Empty;
 
-        try
+        await _queryExecutor.ExecuteInTransactionAsync(async tx =>
         {
             // Initial placeholder step to fetch sequential ID securely
-            string insertRequestSql = @"
-                INSERT INTO workspace.jan_access_request (req_to, ticket_number, created_by, created_on, is_active)
-                VALUES (@ReqTo, 'PENDING_GENERATION', @CreatedBy, NOW(), 1);
-                SELECT LAST_INSERT_ID();";
-
-            int generatedId = await conn.ExecuteScalarAsync<int>(insertRequestSql, new
-            {
-                ReqTo = payload.ReqTo,
-                CreatedBy = payload.CreatedBy
-            }, tx);
+            int generatedId = await _queryExecutor.ExecuteScalarAsync<int>(
+                WorkflowEngineQueries.InsertRequest,
+                new
+                {
+                    ReqTo = payload.ReqTo,
+                    CreatedBy = payload.CreatedBy
+                },
+                tx);
 
             // Compute sequential padding code (e.g. REQ-00000104)
-            string sequentialTicketNumber = $"REQ-{generatedId:D8}";
+            sequentialTicketNumber = $"REQ-{generatedId:D8}";
 
-            await conn.ExecuteAsync(@"
-                UPDATE workspace.jan_access_request 
-                SET ticket_number = @TicketNumber 
-                WHERE id = @Id;",
-                new { TicketNumber = sequentialTicketNumber, Id = generatedId }, tx);
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.UpdateRequestTicket,
+                new { TicketNumber = sequentialTicketNumber, Id = generatedId },
+                tx);
 
             // Save individual items containing specific justification criteria
-            string insertItemSql = @"
-                INSERT INTO workspace.jan_access_items 
-                (request_id, access_type, folder_path, reason_for_access, status, created_by, created_on, is_active)
-                VALUES 
-                (@RequestId, @AccessType, @FolderPath, @ReasonForAccess, 'PENDING_DEPT_HOD', @CreatedBy, NOW(), 1);";
-
             foreach (var item in payload.Items)
             {
-                await conn.ExecuteAsync(insertItemSql, new
-                {
-                    RequestId = generatedId,
-                    AccessType = item.AccessType,
-                    FolderPath = item.FolderPath,
-                    ReasonForAccess = item.ReasonForAccess,
-                    CreatedBy = payload.CreatedBy
-                }, tx);
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.InsertAccessItem,
+                    new
+                    {
+                        RequestId = generatedId,
+                        AccessType = item.AccessType,
+                        FolderPath = item.FolderPath,
+                        ReasonForAccess = item.ReasonForAccess,
+                        CreatedBy = payload.CreatedBy
+                    },
+                    tx);
             }
 
-            tx.Commit();
+            return 1;
+        });
 
-            // Run backend alerts
-            await _notifier.SendAsync(payload.CreatedBy, "Ticket Created", $"Your request is active: {sequentialTicketNumber}");
-            await _notifier.SendAsync("hod_dept@company.com", "HOD Review Required", $"New ticket {sequentialTicketNumber} needs evaluation.");
+        // Run backend alerts after transaction commits
+        await _notifier.SendAsync(payload.CreatedBy, "Ticket Created", $"Your request is active: {sequentialTicketNumber}");
+        await _notifier.SendAsync("hod_dept@company.com", "HOD Review Required", $"New ticket {sequentialTicketNumber} needs evaluation.");
 
-            return sequentialTicketNumber;
-        }
-        catch
-        {
-            tx.Rollback();
-            throw;
-        }
+        return sequentialTicketNumber;
     }
 
     // STAGE 2: Department HOD Review with detailed property maps
     public async Task HandleHodApprovalAsync(int itemId, string hodUser, bool isApproved)
     {
-        using var conn = CreateConnection();
-        conn.Open();
-        using var tx = conn.BeginTransaction();
+        bool isPendingOperator = false;
+        bool isPendingFolderOwner = false;
+        string? folderPath = null;
 
-        try
+        await _queryExecutor.ExecuteInTransactionAsync(async tx =>
         {
-            await conn.ExecuteAsync(@"
-                INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date)
-                VALUES (@ItemId, 'DEPT_HOD', @HodUser, @Action, NOW());",
-                new { ItemId = itemId, HodUser = hodUser, Action = isApproved ? "APPROVED" : "REJECTED" }, tx);
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.InsertApprovalLog,
+                new
+                {
+                    ItemId = itemId,
+                    ApproverRole = "DEPT_HOD",
+                    ApprovedBy = hodUser,
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                },
+                tx);
 
             if (!isApproved)
             {
-                await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'REJECTED_BY_DEPT_HOD', modified_on = NOW() WHERE id = @Id;", new { Id = itemId }, tx);
-                tx.Commit();
-                return;
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.UpdateAccessItemStatus,
+                    new { Status = "REJECTED_BY_DEPT_HOD", Id = itemId },
+                    tx);
+                return 0;
             }
 
             // Pull matching item parameters
-            var item = await conn.QuerySingleAsync<AccessItemDto>(@"
-                SELECT id, request_id, folder_path, access_type, reason_for_access, created_by 
-                FROM workspace.jan_access_items WHERE id = @Id;", new { Id = itemId }, tx);
+            var item = await _queryExecutor.QuerySingleOrDefaultAsync<AccessItemDto>(
+                WorkflowEngineQueries.GetAccessItem,
+                new { Id = itemId },
+                tx);
 
+            if (item == null)
+            {
+                throw new InvalidOperationException($"Access item with ID {itemId} not found.");
+            }
+
+            folderPath = item.FolderPath;
             bool departmentsMatch = CheckIfDepartmentsMatch(item.CreatedBy, item.FolderPath);
 
             if (departmentsMatch)
             {
-                await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'PENDING_OPERATOR', modified_on = NOW() WHERE id = @Id;", new { Id = itemId }, tx);
-                tx.Commit();
-                await _notifier.SendAsync("operators@company.com", "Fulfillment Pipeline Entry", $"Item #{itemId} passed HOD.");
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.UpdateAccessItemStatus,
+                    new { Status = "PENDING_OPERATOR", Id = itemId },
+                    tx);
+                isPendingOperator = true;
             }
             else
             {
-                await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'PENDING_FOLDER_OWNER', modified_on = NOW() WHERE id = @Id;", new { Id = itemId }, tx);
-                tx.Commit();
-                await _notifier.SendAsync("folder_owner@company.com", "Cross-Dept Action Needed", $"User request for path {item.FolderPath} needs verification.");
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.UpdateAccessItemStatus,
+                    new { Status = "PENDING_FOLDER_OWNER", Id = itemId },
+                    tx);
+                isPendingFolderOwner = true;
             }
-        }
-        catch
+
+            return 1;
+        });
+
+        if (isPendingOperator)
         {
-            tx.Rollback();
-            throw;
+            await _notifier.SendAsync("operators@company.com", "Fulfillment Pipeline Entry", $"Item #{itemId} passed HOD.");
+        }
+        else if (isPendingFolderOwner)
+        {
+            await _notifier.SendAsync("folder_owner@company.com", "Cross-Dept Action Needed", $"User request for path {folderPath} needs verification.");
         }
     }
 
     // STAGE 3: Folder Owner Verification
     public async Task HandleFolderOwnerApprovalAsync(int itemId, string ownerUser, bool isApproved)
     {
-        using var conn = CreateConnection();
-        conn.Open();
-        using var tx = conn.BeginTransaction();
+        bool isPendingOperator = false;
 
-        try
+        await _queryExecutor.ExecuteInTransactionAsync(async tx =>
         {
-            await conn.ExecuteAsync(@"
-                INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date)
-                VALUES (@ItemId, 'FOLDER_OWNER', @OwnerUser, @Action, NOW());",
-                new { ItemId = itemId, OwnerUser = ownerUser, Action = isApproved ? "APPROVED" : "REJECTED" }, tx);
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.InsertApprovalLog,
+                new
+                {
+                    ItemId = itemId,
+                    ApproverRole = "FOLDER_OWNER",
+                    ApprovedBy = ownerUser,
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                },
+                tx);
 
             if (!isApproved)
             {
-                await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'REJECTED_BY_FOLDER_OWNER', modified_on = NOW() WHERE id = @Id;", new { Id = itemId }, tx);
-                tx.Commit();
-                return;
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.UpdateAccessItemStatus,
+                    new { Status = "REJECTED_BY_FOLDER_OWNER", Id = itemId },
+                    tx);
+                return 0;
             }
 
-            await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'PENDING_OPERATOR', modified_on = NOW() WHERE id = @Id;", new { Id = itemId }, tx);
-            tx.Commit();
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.UpdateAccessItemStatus,
+                new { Status = "PENDING_OPERATOR", Id = itemId },
+                tx);
+            isPendingOperator = true;
+            return 1;
+        });
 
-            await _notifier.SendAsync("operators@company.com", "Ready to Grant", $"Item #{itemId} approved by folder owner.");
-        }
-        catch
+        if (isPendingOperator)
         {
-            tx.Rollback();
-            throw;
+            await _notifier.SendAsync("operators@company.com", "Ready to Grant", $"Item #{itemId} approved by folder owner.");
         }
     }
 
     // STAGE 4: Operator Execution Block
     public async Task HandleOperatorActionAsync(int itemId, string operatorUser, bool isApproved)
     {
-        using var conn = CreateConnection();
-        conn.Open();
-        using var tx = conn.BeginTransaction();
+        string? createdBy = null;
+        string? folderPath = null;
+        bool wasApproved = false;
 
-        try
+        await _queryExecutor.ExecuteInTransactionAsync(async tx =>
         {
-            await conn.ExecuteAsync(@"
-                INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date)
-                VALUES (@ItemId, 'OPERATOR', @OperatorUser, @Action, NOW());",
-                new { ItemId = itemId, OperatorUser = operatorUser, Action = isApproved ? "APPROVED" : "REJECTED" }, tx);
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.InsertApprovalLog,
+                new
+                {
+                    ItemId = itemId,
+                    ApproverRole = "OPERATOR",
+                    ApprovedBy = operatorUser,
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                },
+                tx);
 
-            var item = await conn.QuerySingleAsync<AccessItemDto>(
-                "SELECT created_by, folder_path FROM workspace.jan_access_items WHERE id = @Id;", new { Id = itemId }, tx);
+            var item = await _queryExecutor.QuerySingleOrDefaultAsync<AccessItemDto>(
+                WorkflowEngineQueries.GetAccessItemCreatedByAndPath,
+                new { Id = itemId },
+                tx);
+
+            if (item == null)
+            {
+                throw new InvalidOperationException($"Access item with ID {itemId} not found.");
+            }
+
+            createdBy = item.CreatedBy;
+            folderPath = item.FolderPath;
 
             if (!isApproved)
             {
-                await conn.ExecuteAsync("UPDATE workspace.jan_access_items SET status = 'REJECTED_BY_OPERATOR', modified_by = @OperatorUser, modified_on = NOW() WHERE id = @Id;", new { Id = itemId, OperatorUser = operatorUser }, tx);
-                tx.Commit();
-                await _notifier.SendAsync(item.CreatedBy, "Request Denied", $"Operator rejected execution for path {item.FolderPath}.");
-                return;
+                await _queryExecutor.ExecuteAsync(
+                    WorkflowEngineQueries.UpdateAccessItemOperatorStatus,
+                    new { Status = "REJECTED_BY_OPERATOR", OperatorUser = operatorUser, Id = itemId },
+                    tx);
+                return 0;
             }
 
             // Sets status to granted and explicitly offsets the 90-day expiration window
-            await conn.ExecuteAsync(@"
-                UPDATE workspace.jan_access_items 
-                SET status = 'ACCESS_GRANTED', 
-                    granted_at = NOW(), 
-                    expires_at = DATE_ADD(NOW(), INTERVAL 90 DAY), 
-                    modified_by = @OperatorUser,
-                    modified_on = NOW() 
-                WHERE id = @Id;", new { Id = itemId, OperatorUser = operatorUser }, tx);
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.UpdateAccessItemGranted,
+                new { Id = itemId, OperatorUser = operatorUser },
+                tx);
 
-            tx.Commit();
+            wasApproved = true;
+            return 1;
+        });
 
-            await _notifier.SendAsync(item.CreatedBy, "Access Configured", $"Access to folder #{itemId} is now active. Automated expiration scheduled in 90 days.");
-        }
-        catch
+        if (createdBy != null)
         {
-            tx.Rollback();
-            throw;
+            if (wasApproved)
+            {
+                await _notifier.SendAsync(createdBy, "Access Configured", $"Access to folder #{itemId} is now active. Automated expiration scheduled in 90 days.");
+            }
+            else
+            {
+                await _notifier.SendAsync(createdBy, "Request Denied", $"Operator rejected execution for path {folderPath}.");
+            }
         }
+    }
+
+    public async Task<IEnumerable<TicketDto>> GetAllTicketsAsync()
+    {
+        var tickets = await _queryExecutor.QueryAsync<TicketDto>(WorkflowEngineQueries.GetAllTickets);
+        var items = await _queryExecutor.QueryAsync<AccessItemDto>(WorkflowEngineQueries.GetAllAccessItems);
+        
+        // Group items by RequestId
+        var itemsByRequest = items.GroupBy(i => i.RequestId).ToDictionary(g => g.Key, g => g.ToList());
+        
+        foreach (var ticket in tickets)
+        {
+            if (itemsByRequest.TryGetValue(ticket.Id, out var ticketItems))
+            {
+                ticket.Items = ticketItems;
+            }
+        }
+        
+        return tickets;
+    }
+
+    public async Task<IEnumerable<ApprovalLogDto>> GetApprovalLogsAsync(int itemId)
+    {
+        return await _queryExecutor.QueryAsync<ApprovalLogDto>(
+            WorkflowEngineQueries.GetApprovalLogsByItem,
+            new { ItemId = itemId }
+        );
+    }
+
+    public async Task<IEnumerable<ParsedFolderPathDto>> GetParsedFolderPathsAsync()
+    {
+        var rawPaths = await _queryExecutor.QueryAsync<string>(WorkflowEngineQueries.GetDistinctAuditFolderPaths);
+        var parsedList = new List<ParsedFolderPathDto>();
+
+        foreach (var path in rawPaths)
+        {
+            if (string.IsNullOrWhiteSpace(path)) continue;
+
+            var parts = path.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            var dto = new ParsedFolderPathDto
+            {
+                FullPath = path
+            };
+
+            if (parts.Length > 0)
+            {
+                if (path.StartsWith("\\\\"))
+                {
+                    if (parts.Length >= 2)
+                    {
+                        dto.DriveName = $"\\\\{parts[0]}\\{parts[1]}";
+                        dto.ParentFolder = parts.Length > 2 ? parts[2] : string.Empty;
+                        dto.ChildDepth1 = parts.Length > 3 ? parts[3] : string.Empty;
+                        dto.ChildDepth2 = parts.Length > 4 ? parts[4] : string.Empty;
+                        dto.ChildDepth3 = parts.Length > 5 ? parts[5] : string.Empty;
+                        dto.ChildDepth4 = parts.Length > 6 ? parts[6] : string.Empty;
+                    }
+                    else
+                    {
+                        dto.DriveName = path;
+                    }
+                }
+                else
+                {
+                    dto.DriveName = parts[0];
+                    dto.ParentFolder = parts.Length > 1 ? parts[1] : string.Empty;
+                    dto.ChildDepth1 = parts.Length > 2 ? parts[2] : string.Empty;
+                    dto.ChildDepth2 = parts.Length > 3 ? parts[3] : string.Empty;
+                    dto.ChildDepth3 = parts.Length > 4 ? parts[4] : string.Empty;
+                    dto.ChildDepth4 = parts.Length > 5 ? parts[5] : string.Empty;
+                }
+            }
+            
+            parsedList.Add(dto);
+        }
+
+        return parsedList;
     }
 
     private bool CheckIfDepartmentsMatch(string user, string path)
     {
-        return false; // Toggle to true to skip owner approval step during testing
+        return path.Equals("edp", System.StringComparison.OrdinalIgnoreCase) || false; // Toggle to true to skip owner approval step during testing
     }
 }
