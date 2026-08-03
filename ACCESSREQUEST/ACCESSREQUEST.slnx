@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ACCESSREQUEST.WEB/ACCESSREQUEST.WEB.csproj" />
+  <Project Path="DynamicTransaction/DynamicTransaction.csproj" Id="5d8ab88a-9791-47af-b9b6-843d721f0e87" />
+</Solution>
