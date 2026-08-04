@@ -145,6 +145,34 @@ public class WorkflowController : ControllerBase
             return StatusCode(500, $"An error occurred while fetching folder paths: {ex.Message}");
         }
     }
+
+    [HttpPost("items/{itemId}/resubmit")]
+    public async Task<IActionResult> ResubmitItem(int itemId, [FromBody] ResubmitRequestDto request)
+    {
+        try
+        {
+            var success = await _workflowEngine.ResubmitItemAsync(itemId, request.FolderPath, request.AccessType, request.ReasonForAccess, request.Username);
+            return Ok(new { Success = success });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while resubmitting item: {ex.Message}");
+        }
+    }
+
+    [HttpPost("mail-log")]
+    public async Task<IActionResult> InsertMailLog([FromBody] MailLogDto request)
+    {
+        try
+        {
+            var success = await _workflowEngine.InsertMailLogAsync(request);
+            return Ok(new { Success = success });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while inserting mail log: {ex.Message}");
+        }
+    }
 }
 
 public class ApprovalRequest
@@ -152,3 +180,13 @@ public class ApprovalRequest
     public string Approver { get; set; } = string.Empty;
     public bool IsApproved { get; set; }
 }
+
+public class ResubmitRequestDto
+{
+    public string FolderPath { get; set; } = string.Empty;
+    public string AccessType { get; set; } = string.Empty;
+    public string ReasonForAccess { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+}
+
+

@@ -418,11 +418,68 @@ export const api = {
       }
     }
     return [
-      { fullPath: "edp", driveName: "EDP Root", parentFolder: "edp", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" },
+      { fullPath: "edp", driveName: "edp", parentFolder: "", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" },
       { fullPath: "\\\\10.30.50.15\\jipl", driveName: "\\\\10.30.50.15\\jipl", parentFolder: "", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" },
       { fullPath: "\\\\10.30.50.15\\jipl\\21", driveName: "\\\\10.30.50.15\\jipl", parentFolder: "21", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" },
-      { fullPath: "\\\\10.30.50.15\\jipl\\Accounts\\Finance\\Audit", driveName: "\\\\10.30.50.15\\jipl", parentFolder: "Accounts", childDepth1: "Finance", childDepth2: "Audit", childDepth3: "", childDepth4: "" },
-      { fullPath: "\\\\10.30.50.15\\jipl\\CI Projects backup", driveName: "\\\\10.30.50.15\\jipl", parentFolder: "CI Projects backup", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" }
+      { fullPath: "\\\\10.30.50.15\\jipl\\Accounts", driveName: "\\\\10.30.50.15\\jipl", parentFolder: "Accounts", childDepth1: "", childDepth2: "", childDepth3: "", childDepth4: "" }
     ];
+  },
+
+  resubmitItem: async (itemId: number, folderPath: string, accessType: string, reasonForAccess: string, username: string): Promise<boolean> => {
+    if (isOnline) {
+      try {
+        return await workflowApi.resubmitItem(itemId, folderPath, accessType, reasonForAccess, username);
+      } catch {
+        // Fallback
+      }
+    }
+
+    const tickets: TicketDto[] = parseJson('tickets');
+    const logs: ApprovalLog[] = parseJson('logs');
+    
+    let targetItem: AccessItemDto | null = null;
+    for (const t of tickets) {
+      const found = t.items?.find(i => i.id === itemId);
+      if (found) {
+        targetItem = found;
+        break;
+      }
+    }
+
+    if (targetItem) {
+      targetItem.folderPath = folderPath;
+      targetItem.accessType = accessType;
+      targetItem.reasonForAccess = reasonForAccess;
+      targetItem.status = 'PENDING_DEPT_HOD';
+
+      const newLog: ApprovalLog = {
+        id: Date.now(),
+        itemId: itemId,
+        approverRole: 'Requester',
+        approvedBy: username,
+        actionTaken: 'RESUBMITTED',
+        actionDate: new Date().toISOString()
+      };
+
+      logs.push(newLog);
+      localStorage.setItem('tickets', jsonStr(tickets));
+      localStorage.setItem('logs', jsonStr(logs));
+      return true;
+    }
+    return false;
+  },
+
+  insertMailLog: async (payload: any): Promise<boolean> => {
+    if (isOnline) {
+      try {
+        return await workflowApi.insertMailLog(payload);
+      } catch {
+        // Fallback
+      }
+    }
+    const mailLogs: any[] = parseJson('mailLogs');
+    mailLogs.push({ id: Date.now(), ...payload });
+    localStorage.setItem('mailLogs', jsonStr(mailLogs));
+    return true;
   }
 };

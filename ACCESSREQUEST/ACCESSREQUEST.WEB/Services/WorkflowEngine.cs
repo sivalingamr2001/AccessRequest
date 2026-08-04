@@ -64,6 +64,46 @@ public class WorkflowEngine : IWorkflowEngine
         await _notifier.SendAsync(payload.CreatedBy, "Ticket Created", $"Your request is active: {sequentialTicketNumber}");
         await _notifier.SendAsync("hod_dept@company.com", "HOD Review Required", $"New ticket {sequentialTicketNumber} needs evaluation.");
 
+        try
+        {
+            var mailBody = $@"
+<div style=""font-family: Arial, sans-serif; color: #1f2937;"">
+  <h2 style=""color:#2563eb;"">New Access Request Pending HOD Approval</h2>
+  <table cellpadding=""8"" cellspacing=""0"" border=""1"" style=""border-collapse:collapse;width:100%;margin-bottom:16px;"">
+    <tr><td><b>Ticket No</b></td><td>{sequentialTicketNumber}</td></tr>
+    <tr><td><b>Requester</b></td><td>{payload.CreatedBy}</td></tr>
+    <tr><td><b>Approver / Actor</b></td><td>{payload.ReqTo}</td></tr>
+    <tr><td><b>Stage</b></td><td>PENDING_DEPT_HOD</td></tr>
+    <tr><td><b>Action</b></td><td>CREATED</td></tr>
+    <tr><td><b>Date</b></td><td>{DateTime.Now.ToString("g")}</td></tr>
+  </table>
+  <h3>Access Request Details</h3>
+  <table cellpadding=""8"" cellspacing=""0"" border=""1"" style=""border-collapse:collapse;width:100%;"">
+    <thead style=""background:#f1f5f9;"">
+      <tr><th>#</th><th>Folder Path</th><th>Access Type</th><th>Reason</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      {string.Join("", payload.Items.Select((item, idx) => $"<tr><td>{idx + 1}</td><td>{item.FolderPath}</td><td>{item.AccessType}</td><td>{item.ReasonForAccess}</td><td>PENDING_DEPT_HOD</td></tr>"))}
+    </tbody>
+  </table>
+</div>";
+
+            await _queryExecutor.ExecuteAsync(WorkflowEngineQueries.InsertMailLog, new
+            {
+                MailProgram = "ACCESS_REQUEST_CREATED",
+                MailFrom = "feedback@janatics.co.in",
+                MailTo = payload.ReqTo ?? "hod_dept@company.com",
+                MailSubject = $"Access request {sequentialTicketNumber} pending HOD approval",
+                MailSent = 0,
+                MailBody = mailBody,
+                MailCc = string.Empty
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Mail Log Insert Warning]: {ex.Message}");
+        }
+
         return sequentialTicketNumber;
     }
 
@@ -321,6 +361,44 @@ public class WorkflowEngine : IWorkflowEngine
         }
 
         return parsedList;
+    }
+
+    public async Task<bool> ResubmitItemAsync(int itemId, string folderPath, string accessType, string reasonForAccess, string username)
+    {
+        await _queryExecutor.ExecuteAsync(WorkflowEngineQueries.UpdateAccessItemForResubmit, new
+        {
+            Id = itemId,
+            FolderPath = folderPath,
+            AccessType = accessType,
+            ReasonForAccess = reasonForAccess,
+            ModifiedBy = username
+        });
+
+        await _queryExecutor.ExecuteAsync(WorkflowEngineQueries.InsertApprovalLog, new
+        {
+            ItemId = itemId,
+            ApproverRole = "Requester",
+            ApprovedBy = username,
+            ActionTaken = "RESUBMITTED"
+        });
+
+        return true;
+    }
+
+    public async Task<bool> InsertMailLogAsync(MailLogDto mailDto)
+    {
+        await _queryExecutor.ExecuteAsync(WorkflowEngineQueries.InsertMailLog, new
+        {
+            MailProgram = mailDto.MailProgram,
+            MailFrom = mailDto.MailFrom,
+            MailTo = mailDto.MailTo,
+            MailSubject = mailDto.MailSubject,
+            MailSent = mailDto.MailSent ? 1 : 0,
+            MailBody = mailDto.MailBody,
+            MailCc = mailDto.MailCc
+        });
+
+        return true;
     }
 
     private bool CheckIfDepartmentsMatch(string user, string path)

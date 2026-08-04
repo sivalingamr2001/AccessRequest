@@ -74,3 +74,15 @@ public class ParsedFolderPathDto
     public string ChildDepth3 { get; set; } = string.Empty;
     public string ChildDepth4 { get; set; } = string.Empty;
 }
+
+public class MailLogDto
+{
+    public string MailDate { get; set; } = string.Empty;
+    public string MailProgram { get; set; } = string.Empty;
+    public string MailFrom { get; set; } = string.Empty;
+    public string MailTo { get; set; } = string.Empty;
+    public string MailSubject { get; set; } = string.Empty;
+    public bool MailSent { get; set; }
+    public string MailBody { get; set; } = string.Empty;
+    public string MailCc { get; set; } = string.Empty;
+}

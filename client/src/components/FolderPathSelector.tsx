@@ -133,114 +133,119 @@ export default function FolderPathSelector({ value, onChange, folderPaths }: Fol
         </Col>
 
         {/* Parent Directory */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Parent Folder</div>
-          <Select
-            showSearch
-            allowClear
-            disabled={!drive}
-            value={parent || undefined}
-            onChange={(val) => {
-              const p = val || '';
-              setParent(p);
-              setChild1('');
-              setChild2('');
-              setChild3('');
-              setChild4('');
-              propagate(drive, p, '', '', '', '');
-            }}
-            placeholder="Root folder"
-            options={parentOptions}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
-          />
-        </Col>
+        {drive && parentOptions.length > 0 && (
+          <Col span={8}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Parent Folder</div>
+            <Select
+              showSearch
+              allowClear
+              value={parent || undefined}
+              onChange={(val) => {
+                const p = val || '';
+                setParent(p);
+                setChild1('');
+                setChild2('');
+                setChild3('');
+                setChild4('');
+                propagate(drive, p, '', '', '', '');
+              }}
+              placeholder="Root folder"
+              options={parentOptions}
+              style={{ width: '100%' }}
+              optionFilterProp="label"
+            />
+          </Col>
+        )}
 
         {/* Depth 1 Child */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 1</div>
-          <Select
-            showSearch
-            allowClear
-            disabled={!parent}
-            value={child1 || undefined}
-            onChange={(val) => {
-              const c1 = val || '';
-              setChild1(c1);
-              setChild2('');
-              setChild3('');
-              setChild4('');
-              propagate(drive, parent, c1, '', '', '');
-            }}
-            placeholder="Child level 1"
-            options={child1Options}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
-          />
-        </Col>
+        {parent && child1Options.length > 0 && (
+          <Col span={8}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 1</div>
+            <Select
+              showSearch
+              allowClear
+              value={child1 || undefined}
+              onChange={(val) => {
+                const c1 = val || '';
+                setChild1(c1);
+                setChild2('');
+                setChild3('');
+                setChild4('');
+                propagate(drive, parent, c1, '', '', '');
+              }}
+              placeholder="Child level 1"
+              options={child1Options}
+              style={{ width: '100%' }}
+              optionFilterProp="label"
+            />
+          </Col>
+        )}
 
         {/* Depth 2 Child */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 2</div>
-          <Select
-            showSearch
-            allowClear
-            disabled={!child1}
-            value={child2 || undefined}
-            onChange={(val) => {
-              const c2 = val || '';
-              setChild2(c2);
-              setChild3('');
-              setChild4('');
-              propagate(drive, parent, child1, c2, '', '');
-            }}
-            placeholder="Child level 2"
-            options={child2Options}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
-          />
-        </Col>
+        {child1 && child2Options.length > 0 && (
+          <Col span={8}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 2</div>
+            <Select
+              showSearch
+              allowClear
+              value={child2 || undefined}
+              onChange={(val) => {
+                const c2 = val || '';
+                setChild2(c2);
+                setChild3('');
+                setChild4('');
+                propagate(drive, parent, child1, c2, '', '');
+              }}
+              placeholder="Child level 2"
+              options={child2Options}
+              style={{ width: '100%' }}
+              optionFilterProp="label"
+            />
+          </Col>
+        )}
 
         {/* Depth 3 Child */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 3</div>
-          <Select
-            showSearch
-            allowClear
-            disabled={!child2}
-            value={child3 || undefined}
-            onChange={(val) => {
-              const c3 = val || '';
-              setChild3(c3);
-              setChild4('');
-              propagate(drive, parent, child1, child2, c3, '');
-            }}
-            placeholder="Child level 3"
-            options={child3Options}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
-          />
-        </Col>
+        {child2 && child3Options.length > 0 && (
+          <Col span={8}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 3</div>
+            <Select
+              showSearch
+              allowClear
+              value={child3 || undefined}
+              onChange={(val) => {
+                const c3 = val || '';
+                setChild3(c3);
+                setChild4('');
+                propagate(drive, parent, child1, child2, c3, '');
+              }}
+              placeholder="Child level 3"
+              options={child3Options}
+              style={{ width: '100%' }}
+              optionFilterProp="label"
+            />
+          </Col>
+        )}
 
         {/* Depth 4 Child */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 4</div>
-          <Select
-            showSearch
-            allowClear
-            disabled={!child3}
-            value={child4 || undefined}
-            onChange={(val) => {
-              const c4 = val || '';
-              setChild4(c4);
-              propagate(drive, parent, child1, child2, child3, c4);
-            }}
-            placeholder="Child level 4"
-            options={child4Options}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
-          />
-        </Col>
+        {child3 && child4Options.length > 0 && (
+          <Col span={8}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 4</div>
+            <Select
+              showSearch
+              allowClear
+              value={child4 || undefined}
+              onChange={(val) => {
+                const c4 = val || '';
+                setChild4(c4);
+                propagate(drive, parent, child1, child2, child3, c4);
+              }}
+              placeholder="Child level 4"
+              options={child4Options}
+              style={{ width: '100%' }}
+              optionFilterProp="label"
+            />
+          </Col>
+        )}
       </Row>
     </div>
   );

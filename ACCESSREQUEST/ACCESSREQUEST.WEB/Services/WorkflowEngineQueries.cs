@@ -22,9 +22,25 @@ public static class WorkflowEngineQueries
         INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date)
         VALUES (@ItemId, @ApproverRole, @ApprovedBy, @ActionTaken, NOW());";
 
+    public const string InsertMailLog = @"
+        INSERT INTO workspace.jan_mail_system 
+        (mail_date, mail_program, mail_from, mail_to, mail_subject, mail_sent, mail_body, mail_cc)
+        VALUES 
+        (NOW(), @MailProgram, @MailFrom, @MailTo, @MailSubject, @MailSent, @MailBody, @MailCc);";
+
     public const string UpdateAccessItemStatus = @"
         UPDATE workspace.jan_access_items 
         SET status = @Status, modified_on = NOW() 
+        WHERE id = @Id;";
+
+    public const string UpdateAccessItemForResubmit = @"
+        UPDATE workspace.jan_access_items 
+        SET folder_path = @FolderPath, 
+            access_type = @AccessType, 
+            reason_for_access = @ReasonForAccess, 
+            status = 'PENDING_DEPT_HOD', 
+            modified_by = @ModifiedBy, 
+            modified_on = NOW() 
         WHERE id = @Id;";
 
     public const string GetAccessItem = @"

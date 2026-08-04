@@ -35,5 +35,15 @@ export const workflowApi = {
   getParsedFolderPaths: async (): Promise<any[]> => {
     const res = await axiosClient.get<any[]>('/Workflow/folder-paths');
     return res.data;
+  },
+
+  resubmitItem: async (itemId: number, folderPath: string, accessType: string, reasonForAccess: string, username: string): Promise<boolean> => {
+    const res = await axiosClient.post(`/Workflow/items/${itemId}/resubmit`, { folderPath, accessType, reasonForAccess, username });
+    return res.status === 200;
+  },
+
+  insertMailLog: async (payload: any): Promise<boolean> => {
+    const res = await axiosClient.post('/Workflow/mail-log', payload);
+    return res.status === 200;
   }
 };
