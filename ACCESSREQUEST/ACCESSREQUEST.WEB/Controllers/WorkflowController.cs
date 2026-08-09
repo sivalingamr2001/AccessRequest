@@ -45,7 +45,7 @@ public class WorkflowController : ControllerBase
 
         try
         {
-            await _workflowEngine.HandleHodApprovalAsync(itemId, request.Approver, request.IsApproved);
+            await _workflowEngine.HandleHodApprovalAsync(itemId, request.Approver, request.IsApproved, request.Comments, request.ConfirmAccessType);
             return Ok(new { Message = "HOD approval processed successfully." });
         }
         catch (KeyNotFoundException ex)
@@ -68,7 +68,7 @@ public class WorkflowController : ControllerBase
 
         try
         {
-            await _workflowEngine.HandleFolderOwnerApprovalAsync(itemId, request.Approver, request.IsApproved);
+            await _workflowEngine.HandleFolderOwnerApprovalAsync(itemId, request.Approver, request.IsApproved, request.Comments, request.ConfirmAccessType);
             return Ok(new { Message = "Folder owner approval processed successfully." });
         }
         catch (KeyNotFoundException ex)
@@ -91,7 +91,7 @@ public class WorkflowController : ControllerBase
 
         try
         {
-            await _workflowEngine.HandleOperatorActionAsync(itemId, request.Approver, request.IsApproved);
+            await _workflowEngine.HandleOperatorActionAsync(itemId, request.Approver, request.IsApproved, request.Comments);
             return Ok(new { Message = "Operator action processed successfully." });
         }
         catch (KeyNotFoundException ex)
@@ -101,6 +101,29 @@ public class WorkflowController : ControllerBase
         catch (Exception ex)
         {
             return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpPost("items/{itemId}/revoke")]
+    public async Task<IActionResult> HandleRevokeAccess(int itemId, [FromBody] RevokeRequestDto request)
+    {
+        if (request == null || string.IsNullOrWhiteSpace(request.OperatorUser) || string.IsNullOrWhiteSpace(request.Comments))
+        {
+            return BadRequest("Operator username and comments are required for revocation.");
+        }
+
+        try
+        {
+            var success = await _workflowEngine.HandleRevokeAccessAsync(itemId, request.OperatorUser, request.Comments);
+            return Ok(new { Success = success, Message = "Access revoked successfully." });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while revoking access: {ex.Message}");
         }
     }
 
@@ -179,6 +202,8 @@ public class ApprovalRequest
 {
     public string Approver { get; set; } = string.Empty;
     public bool IsApproved { get; set; }
+    public string? Comments { get; set; }
+    public string? ConfirmAccessType { get; set; }
 }
 
 public class ResubmitRequestDto
@@ -187,6 +212,12 @@ public class ResubmitRequestDto
     public string AccessType { get; set; } = string.Empty;
     public string ReasonForAccess { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
+}
+
+public class RevokeRequestDto
+{
+    public string OperatorUser { get; set; } = string.Empty;
+    public string Comments { get; set; } = string.Empty;
 }
 
 

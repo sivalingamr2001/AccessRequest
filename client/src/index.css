@@ -167,22 +167,53 @@ body {
   overflow: hidden;
 }
 
-.login-bg::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-  top: -200px;
-  left: -200px;
+/* Modal Enhancements */
+.ant-modal-content {
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
 }
 
-.login-bg::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-  bottom: -150px;
-  right: -150px;
+.ant-modal-header {
+  margin-bottom: 16px !important;
+}
+
+.ant-modal-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+.folder-code-badge {
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-all;
+  border: 1px solid #e2e8f0;
+}
+
+.info-banner-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.comment-bubble {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: #1e293b;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
 }

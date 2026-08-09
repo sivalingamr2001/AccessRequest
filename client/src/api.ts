@@ -262,9 +262,9 @@ export const api = {
   },
 
   // ── Approvals & Fulfillment ──────────────────────────────────────────────
-  handleHodApproval: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
+  handleHodApproval: async (itemId: number, approver: string, isApproved: boolean, comments?: string, confirmAccessType?: string): Promise<boolean> => {
     if (isOnline) {
-      return await workflowApi.handleHodApproval(itemId, approver, isApproved);
+      return await workflowApi.handleHodApproval(itemId, approver, isApproved, comments, confirmAccessType);
     }
     const tickets: TicketDto[] = parseJson('tickets');
     const logs: ApprovalLog[] = parseJson('logs');
@@ -285,6 +285,11 @@ export const api = {
         : 'REJECTED_BY_DEPT_HOD';
       
       targetItem.status = nextStatus;
+      if (isApproved && confirmAccessType) {
+        targetItem.confirmAccessType = confirmAccessType;
+      } else if (isApproved && !targetItem.confirmAccessType) {
+        targetItem.confirmAccessType = targetItem.accessType;
+      }
       
       const newLog: ApprovalLog = {
         id: Date.now(),
@@ -292,7 +297,8 @@ export const api = {
         approverRole: 'DEPT_HOD',
         approvedBy: approver,
         actionTaken: isApproved ? 'APPROVED' : 'REJECTED',
-        actionDate: new Date().toISOString()
+        actionDate: new Date().toISOString(),
+        comments: comments || null
       };
       
       logs.push(newLog);
@@ -303,9 +309,9 @@ export const api = {
     return false;
   },
 
-  handleFolderOwnerApproval: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
+  handleFolderOwnerApproval: async (itemId: number, approver: string, isApproved: boolean, comments?: string, confirmAccessType?: string): Promise<boolean> => {
     if (isOnline) {
-      return await workflowApi.handleFolderOwnerApproval(itemId, approver, isApproved);
+      return await workflowApi.handleFolderOwnerApproval(itemId, approver, isApproved, comments, confirmAccessType);
     }
     const tickets: TicketDto[] = parseJson('tickets');
     const logs: ApprovalLog[] = parseJson('logs');
@@ -321,13 +327,20 @@ export const api = {
 
     if (targetItem) {
       targetItem.status = isApproved ? 'PENDING_OPERATOR' : 'REJECTED_BY_FOLDER_OWNER';
+      if (isApproved && confirmAccessType) {
+        targetItem.confirmAccessType = confirmAccessType;
+      } else if (isApproved && !targetItem.confirmAccessType) {
+        targetItem.confirmAccessType = targetItem.accessType;
+      }
+
       const newLog: ApprovalLog = {
         id: Date.now(),
         itemId,
         approverRole: 'FOLDER_OWNER',
         approvedBy: approver,
         actionTaken: isApproved ? 'APPROVED' : 'REJECTED',
-        actionDate: new Date().toISOString()
+        actionDate: new Date().toISOString(),
+        comments: comments || null
       };
       
       logs.push(newLog);
@@ -338,9 +351,9 @@ export const api = {
     return false;
   },
 
-  handleOperatorAction: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
+  handleOperatorAction: async (itemId: number, approver: string, isApproved: boolean, comments?: string): Promise<boolean> => {
     if (isOnline) {
-      return await workflowApi.handleOperatorAction(itemId, approver, isApproved);
+      return await workflowApi.handleOperatorAction(itemId, approver, isApproved, comments);
     }
     const tickets: TicketDto[] = parseJson('tickets');
     const logs: ApprovalLog[] = parseJson('logs');
@@ -369,7 +382,47 @@ export const api = {
         approverRole: 'OPERATOR',
         approvedBy: approver,
         actionTaken: isApproved ? 'APPROVED' : 'REJECTED',
-        actionDate: new Date().toISOString()
+        actionDate: new Date().toISOString(),
+        comments: comments || null
+      };
+      
+      logs.push(newLog);
+      localStorage.setItem('tickets', jsonStr(tickets));
+      localStorage.setItem('logs', jsonStr(logs));
+      return true;
+    }
+    return false;
+  },
+
+  revokeAccess: async (itemId: number, operatorUser: string, comments: string): Promise<boolean> => {
+    if (isOnline) {
+      return await workflowApi.revokeAccess(itemId, operatorUser, comments);
+    }
+    const tickets: TicketDto[] = parseJson('tickets');
+    const logs: ApprovalLog[] = parseJson('logs');
+    
+    let targetItem: AccessItemDto | null = null;
+    for (const t of tickets) {
+      const found = t.items?.find(i => i.id === itemId);
+      if (found) {
+        targetItem = found;
+        break;
+      }
+    }
+
+    if (targetItem) {
+      targetItem.status = 'ACCESS_REVOKED';
+      targetItem.modifiedBy = operatorUser;
+      targetItem.modifiedOn = new Date().toISOString();
+      
+      const newLog: ApprovalLog = {
+        id: Date.now(),
+        itemId,
+        approverRole: 'OPERATOR',
+        approvedBy: operatorUser,
+        actionTaken: 'REVOKED',
+        actionDate: new Date().toISOString(),
+        comments: comments || null
       };
       
       logs.push(newLog);

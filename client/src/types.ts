@@ -27,6 +27,7 @@ export interface AccessItemDto {
   folderPath: string;
   accessType: string;
   reasonForAccess: string;
+  confirmAccessType?: string | null;
   createdBy: string;
   status: string;
   grantedAt?: string | null;

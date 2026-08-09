@@ -34,6 +34,7 @@ public class AccessItemDto
     public string FolderPath { get; set; } = string.Empty;
     public string AccessType { get; set; } = string.Empty;
     public string ReasonForAccess { get; set; } = string.Empty;
+    public string? ConfirmAccessType { get; set; }
     public string CreatedBy { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public DateTime? GrantedAt { get; set; }

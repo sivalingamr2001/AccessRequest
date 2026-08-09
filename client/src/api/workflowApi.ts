@@ -12,18 +12,23 @@ export const workflowApi = {
     return res.data;
   },
 
-  handleHodApproval: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
-    const res = await axiosClient.post(`/Workflow/items/${itemId}/hod-approval`, { approver, isApproved });
+  handleHodApproval: async (itemId: number, approver: string, isApproved: boolean, comments?: string, confirmAccessType?: string): Promise<boolean> => {
+    const res = await axiosClient.post(`/Workflow/items/${itemId}/hod-approval`, { approver, isApproved, comments, confirmAccessType });
     return res.status === 200;
   },
 
-  handleFolderOwnerApproval: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
-    const res = await axiosClient.post(`/Workflow/items/${itemId}/folder-owner-approval`, { approver, isApproved });
+  handleFolderOwnerApproval: async (itemId: number, approver: string, isApproved: boolean, comments?: string, confirmAccessType?: string): Promise<boolean> => {
+    const res = await axiosClient.post(`/Workflow/items/${itemId}/folder-owner-approval`, { approver, isApproved, comments, confirmAccessType });
     return res.status === 200;
   },
 
-  handleOperatorAction: async (itemId: number, approver: string, isApproved: boolean): Promise<boolean> => {
-    const res = await axiosClient.post(`/Workflow/items/${itemId}/operator-action`, { approver, isApproved });
+  handleOperatorAction: async (itemId: number, approver: string, isApproved: boolean, comments?: string): Promise<boolean> => {
+    const res = await axiosClient.post(`/Workflow/items/${itemId}/operator-action`, { approver, isApproved, comments });
+    return res.status === 200;
+  },
+
+  revokeAccess: async (itemId: number, operatorUser: string, comments: string): Promise<boolean> => {
+    const res = await axiosClient.post(`/Workflow/items/${itemId}/revoke`, { operatorUser, comments });
     return res.status === 200;
   },
 

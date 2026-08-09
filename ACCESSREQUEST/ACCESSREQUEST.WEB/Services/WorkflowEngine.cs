@@ -108,7 +108,7 @@ public class WorkflowEngine : IWorkflowEngine
     }
 
     // STAGE 2: Department HOD Review with detailed property maps
-    public async Task HandleHodApprovalAsync(int itemId, string hodUser, bool isApproved)
+    public async Task HandleHodApprovalAsync(int itemId, string hodUser, bool isApproved, string? comments = null, string? confirmAccessType = null)
     {
         bool isPendingOperator = false;
         bool isPendingFolderOwner = false;
@@ -123,7 +123,8 @@ public class WorkflowEngine : IWorkflowEngine
                     ItemId = itemId,
                     ApproverRole = "DEPT_HOD",
                     ApprovedBy = hodUser,
-                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED",
+                    Comments = comments
                 },
                 tx);
 
@@ -149,21 +150,24 @@ public class WorkflowEngine : IWorkflowEngine
 
             folderPath = item.FolderPath;
             bool departmentsMatch = CheckIfDepartmentsMatch(item.CreatedBy, item.FolderPath);
+            string nextStatus = departmentsMatch ? "PENDING_OPERATOR" : "PENDING_FOLDER_OWNER";
+
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.UpdateAccessItemStatusAndConfirmType,
+                new 
+                { 
+                    Status = nextStatus, 
+                    ConfirmAccessType = string.IsNullOrWhiteSpace(confirmAccessType) ? item.AccessType : confirmAccessType,
+                    Id = itemId 
+                },
+                tx);
 
             if (departmentsMatch)
             {
-                await _queryExecutor.ExecuteAsync(
-                    WorkflowEngineQueries.UpdateAccessItemStatus,
-                    new { Status = "PENDING_OPERATOR", Id = itemId },
-                    tx);
                 isPendingOperator = true;
             }
             else
             {
-                await _queryExecutor.ExecuteAsync(
-                    WorkflowEngineQueries.UpdateAccessItemStatus,
-                    new { Status = "PENDING_FOLDER_OWNER", Id = itemId },
-                    tx);
                 isPendingFolderOwner = true;
             }
 
@@ -181,7 +185,7 @@ public class WorkflowEngine : IWorkflowEngine
     }
 
     // STAGE 3: Folder Owner Verification
-    public async Task HandleFolderOwnerApprovalAsync(int itemId, string ownerUser, bool isApproved)
+    public async Task HandleFolderOwnerApprovalAsync(int itemId, string ownerUser, bool isApproved, string? comments = null, string? confirmAccessType = null)
     {
         bool isPendingOperator = false;
 
@@ -194,7 +198,8 @@ public class WorkflowEngine : IWorkflowEngine
                     ItemId = itemId,
                     ApproverRole = "FOLDER_OWNER",
                     ApprovedBy = ownerUser,
-                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED",
+                    Comments = comments
                 },
                 tx);
 
@@ -207,9 +212,19 @@ public class WorkflowEngine : IWorkflowEngine
                 return 0;
             }
 
+            var item = await _queryExecutor.QuerySingleOrDefaultAsync<AccessItemDto>(
+                WorkflowEngineQueries.GetAccessItem,
+                new { Id = itemId },
+                tx);
+
             await _queryExecutor.ExecuteAsync(
-                WorkflowEngineQueries.UpdateAccessItemStatus,
-                new { Status = "PENDING_OPERATOR", Id = itemId },
+                WorkflowEngineQueries.UpdateAccessItemStatusAndConfirmType,
+                new 
+                { 
+                    Status = "PENDING_OPERATOR", 
+                    ConfirmAccessType = string.IsNullOrWhiteSpace(confirmAccessType) ? (item?.ConfirmAccessType ?? item?.AccessType) : confirmAccessType,
+                    Id = itemId 
+                },
                 tx);
             isPendingOperator = true;
             return 1;
@@ -222,7 +237,7 @@ public class WorkflowEngine : IWorkflowEngine
     }
 
     // STAGE 4: Operator Execution Block
-    public async Task HandleOperatorActionAsync(int itemId, string operatorUser, bool isApproved)
+    public async Task HandleOperatorActionAsync(int itemId, string operatorUser, bool isApproved, string? comments = null)
     {
         string? createdBy = null;
         string? folderPath = null;
@@ -237,7 +252,8 @@ public class WorkflowEngine : IWorkflowEngine
                     ItemId = itemId,
                     ApproverRole = "OPERATOR",
                     ApprovedBy = operatorUser,
-                    ActionTaken = isApproved ? "APPROVED" : "REJECTED"
+                    ActionTaken = isApproved ? "APPROVED" : "REJECTED",
+                    Comments = comments
                 },
                 tx);
 
@@ -284,6 +300,54 @@ public class WorkflowEngine : IWorkflowEngine
                 await _notifier.SendAsync(createdBy, "Request Denied", $"Operator rejected execution for path {folderPath}.");
             }
         }
+    }
+
+    public async Task<bool> HandleRevokeAccessAsync(int itemId, string operatorUser, string comments)
+    {
+        string? createdBy = null;
+        string? folderPath = null;
+
+        await _queryExecutor.ExecuteInTransactionAsync(async tx =>
+        {
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.InsertApprovalLog,
+                new
+                {
+                    ItemId = itemId,
+                    ApproverRole = "OPERATOR",
+                    ApprovedBy = operatorUser,
+                    ActionTaken = "REVOKED",
+                    Comments = comments
+                },
+                tx);
+
+            var item = await _queryExecutor.QuerySingleOrDefaultAsync<AccessItemDto>(
+                WorkflowEngineQueries.GetAccessItemCreatedByAndPath,
+                new { Id = itemId },
+                tx);
+
+            if (item == null)
+            {
+                throw new InvalidOperationException($"Access item with ID {itemId} not found.");
+            }
+
+            createdBy = item.CreatedBy;
+            folderPath = item.FolderPath;
+
+            await _queryExecutor.ExecuteAsync(
+                WorkflowEngineQueries.UpdateAccessItemRevoked,
+                new { Id = itemId, OperatorUser = operatorUser },
+                tx);
+
+            return 1;
+        });
+
+        if (createdBy != null)
+        {
+            await _notifier.SendAsync(createdBy, "Access Revoked", $"Access to folder {folderPath} (item #{itemId}) was revoked by operator {operatorUser}. Reason: {comments}");
+        }
+
+        return true;
     }
 
     public async Task<IEnumerable<TicketDto>> GetAllTicketsAsync()

@@ -19,8 +19,8 @@ public static class WorkflowEngineQueries
         (@RequestId, @AccessType, @FolderPath, @ReasonForAccess, 'PENDING_DEPT_HOD', @CreatedBy, NOW(), 1);";
 
     public const string InsertApprovalLog = @"
-        INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date)
-        VALUES (@ItemId, @ApproverRole, @ApprovedBy, @ActionTaken, NOW());";
+        INSERT INTO workspace.jan_approval_log (item_id, approver_role, approved_by, action_taken, action_date, comments)
+        VALUES (@ItemId, @ApproverRole, @ApprovedBy, @ActionTaken, NOW(), @Comments);";
 
     public const string InsertMailLog = @"
         INSERT INTO workspace.jan_mail_system 
@@ -31,6 +31,13 @@ public static class WorkflowEngineQueries
     public const string UpdateAccessItemStatus = @"
         UPDATE workspace.jan_access_items 
         SET status = @Status, modified_on = NOW() 
+        WHERE id = @Id;";
+
+    public const string UpdateAccessItemStatusAndConfirmType = @"
+        UPDATE workspace.jan_access_items 
+        SET status = @Status, 
+            confirm_access_type = COALESCE(@ConfirmAccessType, confirm_access_type), 
+            modified_on = NOW() 
         WHERE id = @Id;";
 
     public const string UpdateAccessItemForResubmit = @"
@@ -44,11 +51,11 @@ public static class WorkflowEngineQueries
         WHERE id = @Id;";
 
     public const string GetAccessItem = @"
-        SELECT id, request_id AS RequestId, folder_path AS FolderPath, access_type AS AccessType, reason_for_access AS ReasonForAccess, created_by AS CreatedBy, status AS Status, granted_at AS GrantedAt, expires_at AS ExpiresAt, modified_by AS ModifiedBy, modified_on AS ModifiedOn, is_active AS IsActive
+        SELECT id, request_id AS RequestId, folder_path AS FolderPath, access_type AS AccessType, reason_for_access AS ReasonForAccess, confirm_access_type AS ConfirmAccessType, created_by AS CreatedBy, status AS Status, granted_at AS GrantedAt, expires_at AS ExpiresAt, modified_by AS ModifiedBy, modified_on AS ModifiedOn, is_active AS IsActive
         FROM workspace.jan_access_items WHERE id = @Id;";
 
     public const string GetAccessItemCreatedByAndPath = @"
-        SELECT created_by AS CreatedBy, folder_path AS FolderPath FROM workspace.jan_access_items WHERE id = @Id;";
+        SELECT created_by AS CreatedBy, folder_path AS FolderPath, confirm_access_type AS ConfirmAccessType, access_type AS AccessType FROM workspace.jan_access_items WHERE id = @Id;";
 
     public const string UpdateAccessItemOperatorStatus = @"
         UPDATE workspace.jan_access_items 
@@ -64,12 +71,19 @@ public static class WorkflowEngineQueries
             modified_on = NOW() 
         WHERE id = @Id;";
 
+    public const string UpdateAccessItemRevoked = @"
+        UPDATE workspace.jan_access_items 
+        SET status = 'ACCESS_REVOKED', 
+            modified_by = @OperatorUser, 
+            modified_on = NOW() 
+        WHERE id = @Id;";
+
     public const string GetAllTickets = @"
         SELECT id, req_to AS ReqTo, ticket_number AS TicketNumber, created_by AS CreatedBy, created_on AS CreatedOn, is_active AS IsActive 
         FROM workspace.jan_access_request;";
 
     public const string GetAllAccessItems = @"
-        SELECT id, request_id AS RequestId, folder_path AS FolderPath, access_type AS AccessType, reason_for_access AS ReasonForAccess, created_by AS CreatedBy, status AS Status, granted_at AS GrantedAt, expires_at AS ExpiresAt, modified_by AS ModifiedBy, modified_on AS ModifiedOn, is_active AS IsActive 
+        SELECT id, request_id AS RequestId, folder_path AS FolderPath, access_type AS AccessType, reason_for_access AS ReasonForAccess, confirm_access_type AS ConfirmAccessType, created_by AS CreatedBy, status AS Status, granted_at AS GrantedAt, expires_at AS ExpiresAt, modified_by AS ModifiedBy, modified_on AS ModifiedOn, is_active AS IsActive 
         FROM workspace.jan_access_items;";
 
     public const string GetApprovalLogsByItem = @"
