@@ -1,7 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
-  font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Plus Jakarta Sans",
+    "Outfit",
+    system-ui,
+    -apple-system,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -13,7 +18,11 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at 10% 20%, rgba(240, 244, 250, 0.9) 0%, rgba(246, 248, 251, 1) 90.7%);
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgba(240, 244, 250, 0.9) 0%,
+    rgba(246, 248, 251, 1) 90.7%
+  );
 }
 
 /* Glassmorphism Navigation Bar */
@@ -27,7 +36,7 @@ body {
 }
 
 .top-navbar .logo {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
   background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
@@ -57,7 +66,7 @@ body {
 
 /* Premium Gradient Headers */
 .gradient-header {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
   letter-spacing: -0.5px;
   background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -129,13 +138,16 @@ body {
 }
 
 /* Custom Input styling */
-.ant-input, .ant-select-selector {
+.ant-input,
+.ant-select-selector {
   border-radius: 8px !important;
   border: 1px solid #cbd5e1 !important;
   transition: all 0.2s ease !important;
 }
 
-.ant-input:focus, .ant-input-focused, .ant-select-focused .ant-select-selector {
+.ant-input:focus,
+.ant-input-focused,
+.ant-select-focused .ant-select-selector {
   border-color: #4f46e5 !important;
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15) !important;
 }
@@ -180,7 +192,7 @@ body {
 }
 
 .ant-modal-title {
-  font-family: 'Outfit', sans-serif !important;
+  font-family: "Outfit", sans-serif !important;
   font-weight: 700 !important;
   font-size: 1.25rem !important;
 }

@@ -1,3 +1,29 @@
+// Add to your existing types.ts
+
+export type NotificationItem = {
+  id: number;
+  title: string;
+  description: string;
+  time: string;
+  read: boolean;
+};
+
+export type DecisionModalState = {
+  isOpen: boolean;
+  item: AccessItemDto | null;
+  ticket: TicketDto | null;
+  role: "HOD" | "OWNER" | "OPERATOR";
+  isApproved: boolean;
+};
+
+export type RevokeModalState = {
+  isOpen: boolean;
+  item: AccessItemDto | null;
+  ticket: TicketDto | null;
+};
+
+export type PendingItemRecord = { ticket: TicketDto; item: AccessItemDto };
+
 export interface UserDetailsDto {
   userId: number;
   userName: string;

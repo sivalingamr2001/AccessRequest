@@ -9,18 +9,8 @@ public static class UserQueries
             u.emp_id AS EmpId, 
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
-            u.DEPT_ID AS DeptId,
-            COALESCE(
-                (SELECT CONCAT('[', GROUP_CONCAT(CONCAT('""', Role, '""')), ']') 
-                 FROM workspace.jan_roles 
-                 WHERE Id = u.CMPL_USER_ID AND IsActive = 1), 
-                '[]'
-            ) AS RolesJson,
-            COALESCE(
-                (SELECT Location FROM workspace.jan_roles WHERE Id = u.CMPL_USER_ID AND IsActive = 1 LIMIT 1), 
-                ''
-            ) AS Location
-        FROM workspace.jan_portal_user u
+            u.DEPT_ID AS DeptId
+        FROM jan_tms_test.jan_complaint_login u
         WHERE u.CMPL_USER_ID = @UserId;";
 
     public const string Login = @"
@@ -30,18 +20,8 @@ public static class UserQueries
             u.emp_id AS EmpId, 
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
-            u.DEPT_ID AS DeptId,
-            COALESCE(
-                (SELECT CONCAT('[', GROUP_CONCAT(CONCAT('""', Role, '""')), ']') 
-                 FROM workspace.jan_roles 
-                 WHERE Id = u.CMPL_USER_ID AND IsActive = 1), 
-                '[]'
-            ) AS RolesJson,
-            COALESCE(
-                (SELECT Location FROM workspace.jan_roles WHERE Id = u.CMPL_USER_ID AND IsActive = 1 LIMIT 1), 
-                ''
-            ) AS Location
-        FROM workspace.jan_portal_user u
+            u.DEPT_ID AS DeptId
+        FROM jan_tms_test.jan_complaint_login u
         WHERE u.CMPL_USER_NAME = @Username 
           AND (u.emp_id = @Password 
                OR u.CMPL_USER_KEY = @Password 
@@ -55,18 +35,8 @@ public static class UserQueries
             u.emp_id AS EmpId, 
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
-            u.DEPT_ID AS DeptId,
-            COALESCE(
-                (SELECT CONCAT('[', GROUP_CONCAT(CONCAT('""', Role, '""')), ']') 
-                 FROM workspace.jan_roles 
-                 WHERE Id = u.CMPL_USER_ID AND IsActive = 1), 
-                '[]'
-            ) AS RolesJson,
-            COALESCE(
-                (SELECT Location FROM workspace.jan_roles WHERE Id = u.CMPL_USER_ID AND IsActive = 1 LIMIT 1), 
-                ''
-            ) AS Location
-        FROM workspace.jan_portal_user u;";
+            u.DEPT_ID AS DeptId
+        FROM jan_tms_test.jan_complaint_login u;";
 
     public const string GetUserByIdentifier = @"
         SELECT 
@@ -75,18 +45,8 @@ public static class UserQueries
             u.emp_id AS EmpId, 
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
-            u.DEPT_ID AS DeptId,
-            COALESCE(
-                (SELECT CONCAT('[', GROUP_CONCAT(CONCAT('""', Role, '""')), ']') 
-                 FROM workspace.jan_roles 
-                 WHERE Id = u.CMPL_USER_ID AND IsActive = 1), 
-                '[]'
-            ) AS RolesJson,
-            COALESCE(
-                (SELECT Location FROM workspace.jan_roles WHERE Id = u.CMPL_USER_ID AND IsActive = 1 LIMIT 1), 
-                ''
-            ) AS Location
-        FROM workspace.jan_portal_user u
+            u.DEPT_ID AS DeptId
+        FROM jan_tms_test.jan_complaint_login u
         WHERE u.CMPL_USER_ID = @IdOrZero 
            OR u.emp_id = @Identifier 
            OR u.CMPL_USER_NAME = @Identifier 
@@ -99,25 +59,13 @@ public static class UserQueries
             u.emp_id AS EmpId, 
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
-            u.DEPT_ID AS DeptId,
-            COALESCE(
-                (SELECT CONCAT('[', GROUP_CONCAT(CONCAT('""', Role, '""')), ']') 
-                 FROM workspace.jan_roles 
-                 WHERE Id = u.CMPL_USER_ID AND IsActive = 1), 
-                '[]'
-            ) AS RolesJson,
-            COALESCE(
-                (SELECT Location FROM workspace.jan_roles WHERE Id = u.CMPL_USER_ID AND IsActive = 1 LIMIT 1), 
-                ''
-            ) AS Location
-        FROM workspace.jan_portal_user u
-        INNER JOIN workspace.jan_roles r ON u.CMPL_USER_ID = r.Id
-        WHERE r.Role = 'Hod' AND r.IsActive = 1;";
+            u.DEPT_ID AS DeptId
+        FROM jan_tms_test.jan_complaint_login u;";
 
     public const string DeleteUserRoles = @"
-        DELETE FROM workspace.jan_roles WHERE Id = @UserId;";
+        DELETE FROM jan_portal_user WHERE Id = @UserId;";
 
     public const string InsertUserRole = @"
-        INSERT INTO workspace.jan_roles (Id, Role, Location, CreatedBy, CreatedOn, IsActive)
+        INSERT INTO jan_portal_user (Id, Role, Location, CreatedBy, CreatedOn, IsActive)
         VALUES (@UserId, @Role, @Location, 'SYSTEM', NOW(), 1);";
 }

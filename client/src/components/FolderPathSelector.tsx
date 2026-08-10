@@ -1,252 +1,272 @@
-import { useState, useEffect } from 'react';
-import { Select, Row, Col } from 'antd';
-import type { ParsedFolderPathDto } from '../types';
+﻿import {
+  CheckCircleFilled,
+  EditOutlined,
+  FolderOutlined,
+  LeftOutlined,
+} from "@ant-design/icons";
+import { Button, Drawer, Input, Space, Typography } from "antd";
+import { useMemo, useState } from "react";
+import type { ParsedFolderPathDto } from "../types";
+
+const { Text } = Typography;
+
+type FolderNode = {
+  driveName: string;
+  name: string;
+  children?: FolderNode[];
+};
 
 interface FolderPathSelectorProps {
-  value?: string;
-  onChange?: (val: string) => void;
   folderPaths: ParsedFolderPathDto[];
+  value?: string;
+  onChange?: (fullPath: string | undefined) => void;
 }
 
-export default function FolderPathSelector({ value, onChange, folderPaths }: FolderPathSelectorProps) {
-  const [drive, setDrive] = useState<string>('');
-  const [parent, setParent] = useState<string>('');
-  const [child1, setChild1] = useState<string>('');
-  const [child2, setChild2] = useState<string>('');
-  const [child3, setChild3] = useState<string>('');
-  const [child4, setChild4] = useState<string>('');
+function normalize(value: unknown): string {
+  return String(value ?? "").trim();
+}
 
-  // Synchronize internal states if value is changed externally (e.g., reset)
-  useEffect(() => {
-    if (!value) {
-      setDrive('');
-      setParent('');
-      setChild1('');
-      setChild2('');
-      setChild3('');
-      setChild4('');
-    }
-  }, [value]);
+function getOrCreateChild(parent: FolderNode, name: string): FolderNode {
+  if (!parent.children) parent.children = [];
+  let child = parent.children.find((node) => node.name === name);
+  if (!child) {
+    child = { driveName: parent.driveName, name, children: [] };
+    parent.children.push(child);
+  }
+  return child;
+}
 
-  const propagate = (d: string, p: string, c1: string, c2: string, c3: string, c4: string) => {
-    const parts = [d, p, c1, c2, c3, c4].filter(Boolean);
-    const combined = parts.join('\\');
-    if (onChange) {
-      onChange(combined);
+function sortTree(node: FolderNode): FolderNode {
+  if (!node.children) return node;
+  node.children = node.children
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(sortTree);
+  return node;
+}
+
+function buildFolderTree(paths: ParsedFolderPathDto[]): FolderNode[] {
+  const driveMap = new Map<string, FolderNode>();
+
+  for (const path of paths) {
+    const drive = normalize(path.driveName);
+    if (!drive) continue;
+
+    let driveNode = driveMap.get(drive);
+    if (!driveNode) {
+      driveNode = { driveName: drive, name: "", children: [] };
+      driveMap.set(drive, driveNode);
     }
+
+    const parent = normalize(path.parentFolder);
+    if (!parent) continue;
+
+    let current = getOrCreateChild(driveNode, parent);
+    for (const childName of [
+      normalize(path.childDepth1),
+      normalize(path.childDepth2),
+      normalize(path.childDepth3),
+      normalize(path.childDepth4),
+    ]) {
+      if (!childName) break;
+      current = getOrCreateChild(current, childName);
+    }
+  }
+
+  return Array.from(driveMap.values())
+    .sort((a, b) => a.driveName.localeCompare(b.driveName))
+    .map(sortTree);
+}
+
+function buildFullPath(stack: FolderNode[]): string {
+  if (!stack.length) return "";
+  const drive = stack[0].driveName;
+  const segments = stack.slice(1).map((node) => node.name).filter(Boolean);
+  return [drive, ...segments].join("\\");
+}
+
+export default function FolderPathSelector({
+  folderPaths,
+  value,
+  onChange,
+}: FolderPathSelectorProps) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [stack, setStack] = useState<FolderNode[]>([]);
+  const [search, setSearch] = useState("");
+
+  const folderTree = useMemo(() => buildFolderTree(folderPaths), [folderPaths]);
+
+  const currentFolders = useMemo(() => {
+    if (!stack.length) return folderTree;
+    return stack[stack.length - 1].children ?? [];
+  }, [folderTree, stack]);
+
+  const filteredFolders = useMemo(() => {
+    if (!search.trim()) return currentFolders;
+    const term = search.toLowerCase();
+    return currentFolders.filter((folder) =>
+      (folder.name || folder.driveName).toLowerCase().includes(term),
+    );
+  }, [currentFolders, search]);
+
+  const currentPath = useMemo(() => buildFullPath(stack), [stack]);
+
+  const openDrawer = () => {
+    setDrawerOpen(true);
+    setSearch("");
+    setStack([]);
   };
 
-  // Option generators
-  const driveOptions = Array.from(new Set(folderPaths.map(p => p.driveName)))
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+    setSearch("");
+    setStack([]);
+  };
 
-  const parentOptions = Array.from(
-    new Set(folderPaths.filter(p => p.driveName === drive).map(p => p.parentFolder))
-  )
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
+  const handleFolderClick = (folder: FolderNode) => {
+    if (folder.children?.length) {
+      setStack((prev) => [...prev, folder]);
+      setSearch("");
+      return;
+    }
 
-  const child1Options = Array.from(
-    new Set(
-      folderPaths
-        .filter(p => p.driveName === drive && p.parentFolder === parent)
-        .map(p => p.childDepth1)
-    )
-  )
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
+    const selected = buildFullPath([...stack, folder]);
+    onChange?.(selected);
+    closeDrawer();
+  };
 
-  const child2Options = Array.from(
-    new Set(
-      folderPaths
-        .filter(
-          p =>
-            p.driveName === drive &&
-            p.parentFolder === parent &&
-            p.childDepth1 === child1
-        )
-        .map(p => p.childDepth2)
-    )
-  )
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
-
-  const child3Options = Array.from(
-    new Set(
-      folderPaths
-        .filter(
-          p =>
-            p.driveName === drive &&
-            p.parentFolder === parent &&
-            p.childDepth1 === child1 &&
-            p.childDepth2 === child2
-        )
-        .map(p => p.childDepth3)
-    )
-  )
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
-
-  const child4Options = Array.from(
-    new Set(
-      folderPaths
-        .filter(
-          p =>
-            p.driveName === drive &&
-            p.parentFolder === parent &&
-            p.childDepth1 === child1 &&
-            p.childDepth2 === child2 &&
-            p.childDepth3 === child3
-        )
-        .map(p => p.childDepth4)
-    )
-  )
-    .filter(Boolean)
-    .map(val => ({ value: val, label: val }));
+  const handleSelectCurrent = () => {
+    if (!stack.length) return;
+    const selected = currentPath;
+    onChange?.(selected);
+    closeDrawer();
+  };
 
   return (
-    <div style={{ background: 'rgba(241, 245, 249, 0.5)', padding: 12, borderRadius: 8, border: '1px solid #cbd5e1' }}>
-      <Row gutter={[8, 8]}>
-        {/* Drive Selector */}
-        <Col span={8}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Drive / Server Share</div>
-          <Select
-            showSearch
-            allowClear
-            value={drive || undefined}
-            onChange={(val) => {
-              const d = val || '';
-              setDrive(d);
-              setParent('');
-              setChild1('');
-              setChild2('');
-              setChild3('');
-              setChild4('');
-              propagate(d, '', '', '', '', '');
+    <>
+      <div style={{ display: "grid", gap: 8 }}>
+        {value ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+              padding: "10px 14px",
+              background: "#f0fdf4",
+              border: "1px solid #bbf7d0",
+              borderRadius: 8,
             }}
-            placeholder="Select root share"
-            options={driveOptions}
-            style={{ width: '100%' }}
-            optionFilterProp="label"
+          >
+            <Space align="start">
+              <CheckCircleFilled
+                style={{ color: "#22c55e", fontSize: "1.1rem", marginTop: 2 }}
+              />
+              <div>
+                <Text
+                  type="secondary"
+                  style={{ fontSize: "0.75rem", display: "block" }}
+                >
+                  Selected Folder Path
+                </Text>
+                <Text
+                  strong
+                  style={{ fontFamily: "monospace", fontSize: "0.9rem" }}
+                >
+                  {value}
+                </Text>
+              </div>
+            </Space>
+            <Button size="small" icon={<EditOutlined />} onClick={openDrawer}>
+              Change
+            </Button>
+          </div>
+        ) : (
+          <Button type="default" onClick={openDrawer}>
+            Select folder path
+          </Button>
+        )}
+      </div>
+
+      <Drawer
+        open={drawerOpen}
+        onClose={closeDrawer}
+        title="Select Folder Path"
+        width={520}
+        bodyStyle={{ padding: 16 }}
+      >
+        <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+          {stack.length > 0 && (
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
+              <Button
+                type="text"
+                icon={<LeftOutlined />}
+                onClick={() => setStack((prev) => prev.slice(0, -1))}
+              >
+                Back
+              </Button>
+              <Button type="primary" onClick={handleSelectCurrent}>
+                Select This Folder
+              </Button>
+            </div>
+          )}
+
+          <Input
+            allowClear
+            placeholder="Search folders..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
           />
-        </Col>
 
-        {/* Parent Directory */}
-        {drive && parentOptions.length > 0 && (
-          <Col span={8}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Parent Folder</div>
-            <Select
-              showSearch
-              allowClear
-              value={parent || undefined}
-              onChange={(val) => {
-                const p = val || '';
-                setParent(p);
-                setChild1('');
-                setChild2('');
-                setChild3('');
-                setChild4('');
-                propagate(drive, p, '', '', '', '');
+          {stack.length > 0 && (
+            <div
+              style={{
+                padding: 10,
+                borderRadius: 8,
+                backgroundColor: "#f5f7ff",
+                border: "1px solid #dbeafe",
+                fontFamily: "monospace",
+                fontSize: "0.9rem",
+                wordBreak: "break-all",
               }}
-              placeholder="Root folder"
-              options={parentOptions}
-              style={{ width: '100%' }}
-              optionFilterProp="label"
-            />
-          </Col>
-        )}
+            >
+              {currentPath}
+            </div>
+          )}
 
-        {/* Depth 1 Child */}
-        {parent && child1Options.length > 0 && (
-          <Col span={8}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 1</div>
-            <Select
-              showSearch
-              allowClear
-              value={child1 || undefined}
-              onChange={(val) => {
-                const c1 = val || '';
-                setChild1(c1);
-                setChild2('');
-                setChild3('');
-                setChild4('');
-                propagate(drive, parent, c1, '', '', '');
-              }}
-              placeholder="Child level 1"
-              options={child1Options}
-              style={{ width: '100%' }}
-              optionFilterProp="label"
-            />
-          </Col>
-        )}
-
-        {/* Depth 2 Child */}
-        {child1 && child2Options.length > 0 && (
-          <Col span={8}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 2</div>
-            <Select
-              showSearch
-              allowClear
-              value={child2 || undefined}
-              onChange={(val) => {
-                const c2 = val || '';
-                setChild2(c2);
-                setChild3('');
-                setChild4('');
-                propagate(drive, parent, child1, c2, '', '');
-              }}
-              placeholder="Child level 2"
-              options={child2Options}
-              style={{ width: '100%' }}
-              optionFilterProp="label"
-            />
-          </Col>
-        )}
-
-        {/* Depth 3 Child */}
-        {child2 && child3Options.length > 0 && (
-          <Col span={8}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 3</div>
-            <Select
-              showSearch
-              allowClear
-              value={child3 || undefined}
-              onChange={(val) => {
-                const c3 = val || '';
-                setChild3(c3);
-                setChild4('');
-                propagate(drive, parent, child1, child2, c3, '');
-              }}
-              placeholder="Child level 3"
-              options={child3Options}
-              style={{ width: '100%' }}
-              optionFilterProp="label"
-            />
-          </Col>
-        )}
-
-        {/* Depth 4 Child */}
-        {child3 && child4Options.length > 0 && (
-          <Col span={8}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Subfolder Level 4</div>
-            <Select
-              showSearch
-              allowClear
-              value={child4 || undefined}
-              onChange={(val) => {
-                const c4 = val || '';
-                setChild4(c4);
-                propagate(drive, parent, child1, child2, child3, c4);
-              }}
-              placeholder="Child level 4"
-              options={child4Options}
-              style={{ width: '100%' }}
-              optionFilterProp="label"
-            />
-          </Col>
-        )}
-      </Row>
-    </div>
+          <div style={{ display: "grid", gap: 8 }}>
+            {filteredFolders.length === 0 ? (
+              <div style={{ color: "#6b7280", fontSize: "0.95rem" }}>
+                No folders found.
+              </div>
+            ) : (
+              filteredFolders.map((folder) => (
+                <Button
+                  key={`${folder.driveName}-${folder.name}`}
+                  type="default"
+                  onClick={() => handleFolderClick(folder)}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "12px 16px",
+                    borderRadius: 8,
+                    textAlign: "left",
+                  }}
+                >
+                  <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <FolderOutlined style={{ fontSize: 16 }} />
+                    <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {folder.name || folder.driveName}
+                    </span>
+                  </span>
+                  {folder.children?.length ? "→" : null}
+                </Button>
+              )))
+            }
+          </div>
+        </Space>
+      </Drawer>
+    </>
   );
 }
