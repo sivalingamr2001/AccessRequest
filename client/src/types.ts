@@ -99,3 +99,25 @@ export interface ParsedFolderPathDto {
   childDepth3: string;
   childDepth4: string;
 }
+
+export interface AuditLogDetailDto {
+  logId: number;
+  itemId: number;
+  requestId: number;
+  ticketNumber: string;
+  reqTo: string;
+  requester: string;
+  requestDate: string;
+  folderPath: string;
+  requestedAccessType: string;
+  confirmedAccessType: string;
+  reasonForAccess: string;
+  currentStatus: string;
+  grantedAt?: string | null;
+  expiresAt?: string | null;
+  approverRole: string;
+  actionBy: string;
+  actionTaken: string;
+  actionDate: string;
+  comments?: string | null;
+}

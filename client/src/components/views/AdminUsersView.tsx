@@ -1,9 +1,9 @@
-import { Card, Empty, Input, Space, Table, Tag, Typography } from "antd";
-import { useState } from "react";
+import { Button, Space, Tag, Typography } from "antd";
 import type { UserDetailsDto } from "../../types";
-import { Button } from "antd";
+import { DynamicGrid, type DynamicColumnType } from "../DynamicGrid";
+import { EditFilled } from "@ant-design/icons";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 interface Props {
   users: UserDetailsDto[];
@@ -11,97 +11,85 @@ interface Props {
 }
 
 export default function AdminUsersView({ users, onEditUser }: Props) {
-  const [searchText, setSearchText] = useState("");
-
-  const filtered = users.filter((u) => {
-    if (!searchText.trim()) return true;
-    const query = searchText.toLowerCase();
-    return (
-      u.userName.toLowerCase().includes(query) ||
-      u.empId.toLowerCase().includes(query) ||
-      u.email.toLowerCase().includes(query) ||
-      (u.location && u.location.toLowerCase().includes(query)) ||
-      u.roles.some((r) => r.toLowerCase().includes(query))
-    );
-  });
+  const columns: DynamicColumnType<UserDetailsDto>[] = [
+    {
+      title: "User ID",
+      dataIndex: "userId",
+      key: "userId",
+      width: "10%",
+    },
+    {
+      title: "Username",
+      dataIndex: "userName",
+      key: "userName",
+      width: "16%",
+      render: (text: string) => <strong>{text}</strong>,
+    },
+    {
+      title: "Emp ID",
+      dataIndex: "empId",
+      key: "empId",
+      width: "12%",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: "22%",
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
+      width: "14%",
+      render: (text: string) => text || <Text type="secondary">Not set</Text>,
+      exportValue: (text: string) => text || "Not set",
+    },
+    {
+      title: "Roles",
+      dataIndex: "roles",
+      key: "roles",
+      width: "16%",
+      render: (roles: string[]) => (
+        <Space size={[0, 4]} wrap>
+          {roles?.map((r) => (
+            <Tag color="blue" key={r}>
+              {r}
+            </Tag>
+          ))}
+        </Space>
+      ),
+      exportValue: (roles: string[]) => roles?.join("; ") || "",
+    },
+    {
+      title: "Action",
+      key: "action",
+      width: "10%",
+      exportable: false,
+      render: (_: any, record: UserDetailsDto) => (
+        <Button type="primary" onClick={() => onEditUser(record)}>
+          <EditFilled />
+        </Button>
+      ),
+    },
+  ];
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <div>
-          <Title level={2} className="gradient-header" style={{ margin: 0 }}>
-            Manage User Roles & Location
-          </Title>
-          <Text type="secondary">
-            Configure corporate permissions, offices, and HOD statuses for
-            portal accounts.
-          </Text>
-        </div>
-        <Input.Search
-          placeholder="Search users by name, emp ID..."
-          allowClear
-          onChange={(e) => setSearchText(e.target.value)}
-          style={{ width: 320 }}
-        />
-      </div>
-
-      <Card className="premium-card">
-        <Table
-          dataSource={filtered}
-          rowKey="userId"
-          columns={[
-            { title: "User ID", dataIndex: "userId", key: "userId" },
-            {
-              title: "Username",
-              dataIndex: "userName",
-              key: "userName",
-              render: (text: string) => <strong>{text}</strong>,
-            },
-            { title: "Emp ID", dataIndex: "empId", key: "empId" },
-            { title: "Email", dataIndex: "email", key: "email" },
-            {
-              title: "Location",
-              dataIndex: "location",
-              key: "location",
-              render: (text: string) =>
-                text || <Text type="secondary">Not set</Text>,
-            },
-            {
-              title: "Roles",
-              dataIndex: "roles",
-              key: "roles",
-              render: (roles: string[]) => (
-                <Space size={[0, 4]} wrap>
-                  {roles.map((r) => (
-                    <Tag color="blue" key={r}>
-                      {r}
-                    </Tag>
-                  ))}
-                </Space>
-              ),
-            },
-            {
-              title: "Action",
-              key: "action",
-              render: (_: any, record: UserDetailsDto) => (
-                <Button type="link" onClick={() => onEditUser(record)}>
-                  Edit Roles/Loc
-                </Button>
-              ),
-            },
-          ]}
-          locale={{ emptyText: <Empty description="No users found" /> }}
-        />
-      </Card>
-    </div>
+    <DynamicGrid<UserDetailsDto>
+      dataSource={users}
+      columns={columns}
+      rowKey="userId"
+      title="Manage User Roles & Location"
+      subTitle="Configure corporate permissions, offices, and HOD statuses for portal accounts."
+      searchPlaceholder="Search users by name, emp ID, email, role..."
+      customFilter={(u, query) =>
+        u.userName.toLowerCase().includes(query) ||
+        u.empId.toLowerCase().includes(query) ||
+        u.email.toLowerCase().includes(query) ||
+        Boolean(u.location && u.location.toLowerCase().includes(query)) ||
+        u.roles.some((r) => r.toLowerCase().includes(query))
+      }
+      emptyText="No users found"
+    />
   );
 }

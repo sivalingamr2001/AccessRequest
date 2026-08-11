@@ -2,6 +2,7 @@ import {
   AuditOutlined,
   DashboardOutlined,
   DatabaseOutlined,
+  HistoryOutlined,
   TeamOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
@@ -18,6 +19,7 @@ import RequestFormModal from "./components/modals/RequestFormModal";
 import RevokeModal from "./components/modals/RevokeModal";
 import TicketDetailModal from "./components/modals/TicketDetailModal";
 import UserEditModal from "./components/modals/UserEditModal";
+import AdminAuditLogsView from "./components/views/AdminAuditLogsView";
 import AdminMappingsView from "./components/views/AdminMappingsView";
 import AdminUsersView from "./components/views/AdminUsersView";
 import HodQueueView from "./components/views/HodQueueView";
@@ -39,12 +41,26 @@ import type {
   AccessItemDto,
 } from "./types";
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 export default function App() {
   const { currentUser, handleLogin, handleLogout } = useAuth();
-  const [currentView, setCurrentView] = useState<string>("admin-users");
-  const [activeMenuKey, setActiveMenuKey] = useState<string>("admin-users");
+  const [currentView, setCurrentView] = useState<string>(() => {
+    const saved = localStorage.getItem("fsfa_active_view");
+    if (saved) return saved;
+    if (currentUser?.roles.includes("Admin")) return "admin-users";
+    if (currentUser?.roles.includes("Operator")) return "operator-queue";
+    if (currentUser?.roles.includes("Hod")) return "hod-queue";
+    return "my-requests";
+  });
+  const [activeMenuKey, setActiveMenuKey] = useState<string>(() => {
+    const saved = localStorage.getItem("fsfa_active_view");
+    if (saved) return saved;
+    if (currentUser?.roles.includes("Admin")) return "admin-users";
+    if (currentUser?.roles.includes("Operator")) return "operator-queue";
+    if (currentUser?.roles.includes("Hod")) return "hod-queue";
+    return "my-requests";
+  });
 
   const { tickets, users, folderPaths, folderMappings, allHods, loadData } =
     useAppData(currentUser);
@@ -99,6 +115,7 @@ export default function App() {
   });
 
   const goTo = (view: string) => {
+    localStorage.setItem("fsfa_active_view", view);
     setCurrentView(view);
     setActiveMenuKey(view);
   };
@@ -113,22 +130,26 @@ export default function App() {
   const getMenuItems = () => {
     if (!currentUser) return [];
     const items: any[] = [];
+    const roles = currentUser.roles || [];
 
+    // Requests menu: shown for Users, HODs, Operators, or Admins if they also have User/Operator or can browse requests
     if (
-      currentUser.roles.includes("User") ||
-      currentUser.roles.includes("Hod") ||
-      currentUser.roles.includes("Operator")
+      roles.includes("User") ||
+      roles.includes("Hod") ||
+      roles.includes("Operator") ||
+      roles.includes("Admin")
     ) {
       items.push({
         key: "my-requests",
         icon: <DashboardOutlined />,
-        label: currentUser.roles.includes("Operator")
+        label: roles.includes("Operator") || roles.includes("Admin") || roles.includes("Hod")
           ? "All Requests"
           : "My Requests",
         onClick: () => goTo("my-requests"),
       });
     }
-    if (currentUser.roles.includes("Hod")) {
+
+    if (roles.includes("Hod")) {
       items.push({
         key: "hod-queue",
         icon: <AuditOutlined />,
@@ -136,7 +157,8 @@ export default function App() {
         onClick: () => goTo("hod-queue"),
       });
     }
-    if (currentUser.roles.includes("Operator")) {
+
+    if (roles.includes("Operator")) {
       items.push({
         key: "operator-queue",
         icon: <ToolOutlined />,
@@ -144,7 +166,8 @@ export default function App() {
         onClick: () => goTo("operator-queue"),
       });
     }
-    if (currentUser.roles.includes("Admin")) {
+
+    if (roles.includes("Admin")) {
       items.push(
         {
           key: "admin-users",
@@ -158,8 +181,15 @@ export default function App() {
           label: "Folder Mappings",
           onClick: () => goTo("admin-mappings"),
         },
+        {
+          key: "admin-audit-logs",
+          icon: <HistoryOutlined />,
+          label: "Audit Logs",
+          onClick: () => goTo("admin-audit-logs"),
+        },
       );
     }
+
     return items;
   };
 
@@ -183,13 +213,14 @@ export default function App() {
   const handleCreateRequest = async (values: any) => {
     if (!currentUser) return;
     try {
+      const submittedItems = values?.items || [];
       if (
         editingTicket &&
         editingTicket.items &&
         editingTicket.items.length > 0
       ) {
-        for (let i = 0; i < values.items.length; i++) {
-          const formItem = values.items[i];
+        for (let i = 0; i < submittedItems.length; i++) {
+          const formItem = submittedItems[i];
           const existingItem = editingTicket.items[i] || editingTicket.items[0];
           await workflowApi.resubmitItem(
             existingItem.id,
@@ -218,7 +249,7 @@ export default function App() {
             approver: selectedHod?.userName || "System HOD",
             stage: "PENDING_DEPT_HOD",
             action: "RESUBMITTED",
-            items: values.items,
+            items: submittedItems,
           }),
         });
 
@@ -232,13 +263,23 @@ export default function App() {
           `Ticket ${editingTicket.ticketNumber} ${actionText} in-place. Sent to HOD.`,
         );
       } else {
-        const selectedHod =
-          allHods.find((h) => h.userId === values.hodUserId) ??
-          allHods.find((h) => h.deptId === currentUser.deptId);
+        const isHodRequester =
+          currentUser.roles.includes("Hod") ||
+          currentUser.roles.includes("HOD") ||
+          allHods.some(
+            (h) =>
+              h.userName.toLowerCase() === currentUser.userName.toLowerCase(),
+          );
+
+        const selectedHod = isHodRequester
+          ? null
+          : allHods.find((h) => h.userId === values.hodUserId) ??
+            allHods.find((h) => h.deptId === currentUser.deptId);
+
         const payload = {
-          reqTo: selectedHod?.userName || "System HOD",
+          reqTo: isHodRequester ? "Operator" : selectedHod?.userName || "System HOD",
           createdBy: currentUser.userName,
-          items: values.items.map((item: any) => ({
+          items: submittedItems.map((item: any) => ({
             folderPath: item.folderPath,
             accessType: item.accessType,
             reasonForAccess: item.reasonForAccess,
@@ -246,31 +287,59 @@ export default function App() {
         };
 
         const ticketNo = await workflowApi.createRequest(payload);
+        const operatorUsers = users.filter((u) => u.roles.includes("Operator"));
 
-        await sendMailLog({
-          mailProgram: "ACCESS_REQUEST_CREATED",
-          mailTo: selectedHod?.email || "",
-          mailSubject: `Access request ${ticketNo} pending HOD approval`,
-          mailBody: buildMailBody({
-            title: "New Access Request Pending HOD Approval",
-            ticketNo,
-            requester: currentUser.userName,
-            approver: selectedHod?.userName || "System HOD",
-            stage: "PENDING_DEPT_HOD",
-            action: "CREATED",
-            items: payload.items,
-          }),
-        });
+        if (isHodRequester) {
+          await sendMailLog({
+            mailProgram: "ACCESS_REQUEST_PENDING_OPERATOR",
+            mailTo: operatorUsers.map((u) => u.email).join(";"),
+            mailSubject: `Access request ${ticketNo} pending operator action`,
+            mailBody: buildMailBody({
+              title: "New Access Request Pending Operator Fulfillment",
+              ticketNo,
+              requester: currentUser.userName,
+              approver: "Operator",
+              stage: "PENDING_OPERATOR",
+              action: "CREATED",
+              items: payload.items,
+            }),
+          });
 
-        notification.success({
-          message: "Request CREATED",
-          description: `Ticket ${ticketNo} created successfully. Sent to HOD for review.`,
-          placement: "topRight",
-        });
-        pushNotification(
-          "Ticket CREATED",
-          `Ticket ${ticketNo} created successfully. Sent to HOD.`,
-        );
+          notification.success({
+            message: "Request CREATED (Direct to Operator)",
+            description: `Ticket ${ticketNo} created and routed directly to Operator cart.`,
+            placement: "topRight",
+          });
+          pushNotification(
+            "Ticket CREATED",
+            `Ticket ${ticketNo} created directly into Operator cart.`,
+          );
+        } else {
+          await sendMailLog({
+            mailProgram: "ACCESS_REQUEST_CREATED",
+            mailTo: selectedHod?.email || "",
+            mailSubject: `Access request ${ticketNo} pending HOD approval`,
+            mailBody: buildMailBody({
+              title: "New Access Request Pending HOD Approval",
+              ticketNo,
+              requester: currentUser.userName,
+              approver: selectedHod?.userName || "System HOD",
+              stage: "PENDING_DEPT_HOD",
+              action: "CREATED",
+              items: payload.items,
+            }),
+          });
+
+          notification.success({
+            message: "Request CREATED",
+            description: `Ticket ${ticketNo} created successfully. Sent to HOD for review.`,
+            placement: "topRight",
+          });
+          pushNotification(
+            "Ticket CREATED",
+            `Ticket ${ticketNo} created successfully. Sent to HOD.`,
+          );
+        }
       }
 
       setIsRequestModalOpen(false);
@@ -342,8 +411,8 @@ export default function App() {
   }
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header style={{ padding: 0 }}>
+    <Layout style={{ minHeight: "100vh", height: "100vh", overflow: "hidden" }}>
+      <Header style={{ padding: 0, height: 56, lineHeight: "56px" }}>
         <AppHeader
           currentUser={currentUser}
           activeMenuKey={activeMenuKey}
@@ -360,8 +429,17 @@ export default function App() {
         />
       </Header>
 
-      <Content style={{ padding: "24px 50px", background: "#f8fafc" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <Content
+        style={{
+          height: "calc(100vh - 56px)",
+          overflowY: "auto",
+          padding: "24px",
+          background: "#f8fafc",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        <div style={{ width: "100%" }}>
           {currentView === "my-requests" && (
             <MyRequestsView
               currentUser={currentUser}
@@ -428,19 +506,10 @@ export default function App() {
               onDeleted={loadData}
             />
           )}
+
+          {currentView === "admin-audit-logs" && <AdminAuditLogsView />}
         </div>
       </Content>
-
-      <Footer
-        style={{
-          textAlign: "center",
-          color: "#94a3b8",
-          background: "#f8fafc",
-          padding: 24,
-        }}
-      >
-        AccessRequest Portal ©2026 Crafted for FSFA s
-      </Footer>
 
       <RequestFormModal
         open={isRequestModalOpen}

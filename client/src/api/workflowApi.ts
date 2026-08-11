@@ -75,6 +75,13 @@ export const workflowApi = {
     return res.data;
   },
 
+  getAllAuditLogs: async (): Promise<import("../types").AuditLogDetailDto[]> => {
+    const res = await axiosClient.get<import("../types").AuditLogDetailDto[]>(
+      "/Workflow/audit-logs",
+    );
+    return res.data;
+  },
+
   getParsedFolderPaths: async (): Promise<any[]> => {
     const res = await axiosClient.get<any[]>("/Workflow/folder-paths");
     return res.data;
@@ -97,7 +104,7 @@ export const workflowApi = {
   },
 
   insertMailLog: async (payload: any): Promise<boolean> => {
-    const res = await axiosClient.post("/Workflow/mail-log", payload);
+    const res = await axiosClient.post("/Workflow/mail-logs", payload);
     return res.status === 200;
   },
 };

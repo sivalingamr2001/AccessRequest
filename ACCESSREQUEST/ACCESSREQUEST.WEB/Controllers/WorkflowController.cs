@@ -155,6 +155,20 @@ public class WorkflowController : ControllerBase
         }
     }
 
+    [HttpGet("audit-logs")]
+    public async Task<IActionResult> GetAllAuditLogs()
+    {
+        try
+        {
+            var logs = await _workflowEngine.GetAllAuditLogsAsync();
+            return Ok(logs);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while fetching audit logs: {ex.Message}");
+        }
+    }
+
     [HttpGet("folder-paths")]
     public async Task<IActionResult> GetFolderPaths()
     {
@@ -183,12 +197,69 @@ public class WorkflowController : ControllerBase
         }
     }
 
-    [HttpPost("mail-log")]
-    public async Task<IActionResult> InsertMailLog([FromBody] MailLogDto request)
+    [HttpGet("folder-mappings")]
+    public async Task<IActionResult> GetFolderMappings()
     {
         try
         {
-            var success = await _workflowEngine.InsertMailLogAsync(request);
+            var mappings = await _workflowEngine.GetAllFolderMappingsAsync();
+            return Ok(mappings);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while fetching folder mappings: {ex.Message}");
+        }
+    }
+
+    [HttpPost("folder-mappings")]
+    public async Task<IActionResult> AddFolderMapping([FromBody] FolderMappingDto mapping)
+    {
+        try
+        {
+            var id = await _workflowEngine.AddFolderMappingAsync(mapping);
+            return Ok(new { Success = true, Id = id });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while adding folder mapping: {ex.Message}");
+        }
+    }
+
+    [HttpPut("folder-mappings/{id}")]
+    public async Task<IActionResult> UpdateFolderMapping(int id, [FromBody] FolderMappingDto mapping)
+    {
+        try
+        {
+            mapping.Id = id;
+            var success = await _workflowEngine.UpdateFolderMappingAsync(mapping);
+            return Ok(new { Success = success });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while updating folder mapping: {ex.Message}");
+        }
+    }
+
+    [HttpDelete("folder-mappings/{id}")]
+    public async Task<IActionResult> DeleteFolderMapping(int id)
+    {
+        try
+        {
+            var success = await _workflowEngine.DeleteFolderMappingAsync(id);
+            return Ok(new { Success = success });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred while deleting folder mapping: {ex.Message}");
+        }
+    }
+
+    [HttpPost("mail-logs")]
+    public async Task<IActionResult> InsertMailLog([FromBody] MailLogDto mailDto)
+    {
+        try
+        {
+            var success = await _workflowEngine.InsertMailLogAsync(mailDto);
             return Ok(new { Success = success });
         }
         catch (Exception ex)
@@ -219,5 +290,3 @@ public class RevokeRequestDto
     public string OperatorUser { get; set; } = string.Empty;
     public string Comments { get; set; } = string.Empty;
 }
-
-

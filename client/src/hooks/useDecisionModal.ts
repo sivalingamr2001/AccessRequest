@@ -112,9 +112,14 @@ export function useDecisionModal({
           (u) => u.userName.toLowerCase() === ticket.createdBy.toLowerCase(),
         );
         const operatorUsers = users.filter((u) => u.roles.includes("Operator"));
-        const mapping = folderMappings.find(
-          (m) => m.folderPath.toLowerCase() === item.folderPath.toLowerCase(),
-        );
+        const normItemPath = item.folderPath.replace(/\//g, "\\").trim().toLowerCase();
+        const mapping = folderMappings.find((m) => {
+          const normMapPath = m.folderPath.replace(/\//g, "\\").trim().toLowerCase();
+          return (
+            normItemPath === normMapPath ||
+            normItemPath.startsWith(normMapPath + "\\")
+          );
+        });
 
         let mailProgram = "";
         let mailTo = "";
@@ -127,15 +132,34 @@ export function useDecisionModal({
           subject = `Access request ${ticket.ticketNumber} rejected by ${role}`;
           title = `Access Request Rejected by ${role}`;
         } else if (role === "HOD") {
+          const isOwnerSameAsHod =
+            mapping &&
+            ((mapping.primaryFolderOwner &&
+              mapping.primaryFolderOwner.toLowerCase() ===
+                currentUser.userName.toLowerCase()) ||
+              (mapping.secondaryFolderOwner &&
+                mapping.secondaryFolderOwner.toLowerCase() ===
+                  currentUser.userName.toLowerCase()));
+
           const owner = users.find(
             (u) =>
               u.userName.toLowerCase() ===
               mapping?.primaryFolderOwner?.toLowerCase(),
           );
-          mailProgram = "ACCESS_REQUEST_PENDING_FOLDER_OWNER";
-          mailTo = owner?.email || "";
-          subject = `Access request ${ticket.ticketNumber} pending folder owner approval`;
-          title = "Access Request Pending Folder Owner Approval";
+          const isSameDept =
+            owner && currentUser.deptId && owner.deptId === currentUser.deptId;
+
+          if (isOwnerSameAsHod || isSameDept || !mapping?.primaryFolderOwner) {
+            mailProgram = "ACCESS_REQUEST_PENDING_OPERATOR";
+            mailTo = operatorUsers.map((u) => u.email).join(";");
+            subject = `Access request ${ticket.ticketNumber} pending operator action`;
+            title = "Access Request Pending Operator Fulfillment";
+          } else {
+            mailProgram = "ACCESS_REQUEST_PENDING_FOLDER_OWNER";
+            mailTo = owner?.email || "";
+            subject = `Access request ${ticket.ticketNumber} pending folder owner approval`;
+            title = "Access Request Pending Folder Owner Approval";
+          }
         } else if (role === "OWNER") {
           mailProgram = "ACCESS_REQUEST_PENDING_OPERATOR";
           mailTo = operatorUsers.map((u) => u.email).join(";");

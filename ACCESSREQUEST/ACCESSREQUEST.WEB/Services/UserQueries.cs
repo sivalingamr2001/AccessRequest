@@ -10,7 +10,7 @@ public static class UserQueries
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
             u.DEPT_ID AS DeptId
-        FROM jan_tms_test.jan_complaint_login u
+        FROM jan_complaint_login u
         WHERE u.CMPL_USER_ID = @UserId;";
 
     public const string Login = @"
@@ -21,7 +21,7 @@ public static class UserQueries
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
             u.DEPT_ID AS DeptId
-        FROM jan_tms_test.jan_complaint_login u
+        FROM jan_complaint_login u
         WHERE u.CMPL_USER_NAME = @Username 
           AND (u.emp_id = @Password 
                OR u.CMPL_USER_KEY = @Password 
@@ -36,7 +36,7 @@ public static class UserQueries
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
             u.DEPT_ID AS DeptId
-        FROM jan_tms_test.jan_complaint_login u;";
+        FROM jan_complaint_login u;";
 
     public const string GetUserByIdentifier = @"
         SELECT 
@@ -46,7 +46,7 @@ public static class UserQueries
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
             u.DEPT_ID AS DeptId
-        FROM jan_tms_test.jan_complaint_login u
+        FROM jan_complaint_login u
         WHERE u.CMPL_USER_ID = @IdOrZero 
            OR u.emp_id = @Identifier 
            OR u.CMPL_USER_NAME = @Identifier 
@@ -60,7 +60,7 @@ public static class UserQueries
             u.MOB_NO AS PhoneNo, 
             u.MAIL_ID AS Email, 
             u.DEPT_ID AS DeptId
-        FROM jan_tms_test.jan_complaint_login u;";
+        FROM jan_complaint_login u;";
 
     public const string DeleteUserRoles = @"
         DELETE FROM jan_portal_user WHERE Id = @UserId;";

@@ -48,6 +48,13 @@ export default function RequestFormModal({
   const [form] = Form.useForm();
   const [step, setStep] = useState(1);
 
+  const isHodRequester =
+    currentUser?.roles?.includes("Hod") ||
+    currentUser?.roles?.includes("HOD") ||
+    allHods.some(
+      (h) => h.userName.toLowerCase() === currentUser.userName.toLowerCase(),
+    );
+
   const deptHods = allHods.filter((h) => h.deptId === currentUser.deptId);
 
   useEffect(() => {
@@ -63,7 +70,7 @@ export default function RequestFormModal({
           { folderPath: undefined, accessType: "ReadOnly", reasonForAccess: "" },
         ],
       agreement: false,
-      hodUserId: deptHods[0]?.userId,
+      hodUserId: isHodRequester ? undefined : deptHods[0]?.userId,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, editingTicket]);
@@ -71,7 +78,7 @@ export default function RequestFormModal({
   const formValues = Form.useWatch([], form);
   const itemsList = formValues?.items || [];
   const isStep1NextDisabled =
-    !formValues?.hodUserId ||
+    (!isHodRequester && !formValues?.hodUserId) ||
     itemsList.length === 0 ||
     itemsList.some(
       (item: any) =>
@@ -103,7 +110,7 @@ export default function RequestFormModal({
       centered
       destroyOnClose
     >
-      <Form form={form} layout="vertical" onFinish={onSubmit}>
+      <Form form={form} layout="vertical" onFinish={onSubmit} preserve={true}>
         <Steps
           current={step - 1}
           size="small"
@@ -184,140 +191,154 @@ export default function RequestFormModal({
                 justifyContent: "center",
               }}
             >
-              <Form.Item
-                name="hodUserId"
-                label="Department HOD"
-                rules={[
-                  { required: true, message: "Select the approving HOD" },
-                ]}
-                style={{ marginBottom: 0 }}
-              >
-                <Select placeholder="Select HOD" style={{ width: "100%" }}>
-                  {deptHods.map((hod) => (
-                    <Option key={hod.userId} value={hod.userId}>
-                      {hod.userName}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
+              {isHodRequester ? (
+                <div
+                  style={{
+                    background: "#eff6ff",
+                    border: "1px solid #bfdbfe",
+                    padding: "10px 14px",
+                    borderRadius: 8,
+                  }}
+                >
+                  <Text strong style={{ color: "#1d4ed8", display: "block", fontSize: "0.88rem" }}>
+                    Direct to Operator (HOD Mode)
+                  </Text>
+                  <Text type="secondary" style={{ fontSize: "0.78rem", color: "#3b82f6" }}>
+                    Your request bypasses HOD approval and routes directly to the Operator fulfillment cart.
+                  </Text>
+                </div>
+              ) : (
+                <Form.Item
+                  name="hodUserId"
+                  label="Department HOD"
+                  rules={[
+                    { required: true, message: "Select the approving HOD" },
+                  ]}
+                  style={{ marginBottom: 0 }}
+                >
+                  <Select placeholder="Select HOD" style={{ width: "100%" }}>
+                    {deptHods.map((hod) => (
+                      <Option key={hod.userId} value={hod.userId}>
+                        {hod.userName}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              )}
             </Col>
           </Row>
         </div>
 
-        {step === 1 && (
-          <>
-            <Divider style={{ margin: "12px 0 20px 0" }}>
-              Access Folder Items
-            </Divider>
-            <FolderItemFieldList folderPaths={folderPaths} />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "8px",
-                paddingTop: "12px",
-                borderTop: "1px solid #f0f0f0",
+        <div style={{ display: step === 1 ? "block" : "none" }}>
+          <Divider style={{ margin: "12px 0 20px 0" }}>
+            Access Folder Items
+          </Divider>
+          <FolderItemFieldList folderPaths={folderPaths} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "8px",
+              paddingTop: "12px",
+              borderTop: "1px solid #f0f0f0",
+            }}
+          >
+            <Button onClick={onClose}>Cancel</Button>
+            <Button
+              type="primary"
+              onClick={async () => {
+                try {
+                  await form.validateFields(["hodUserId", "items"]);
+                  setStep(2);
+                } catch {
+                  // validation errors shown by the form
+                }
               }}
+              disabled={isStep1NextDisabled}
             >
-              <Button onClick={onClose}>Cancel</Button>
-              <Button
-                type="primary"
-                onClick={async () => {
-                  try {
-                    await form.validateFields(["hodUserId", "items"]);
-                    setStep(2);
-                  } catch {
-                    // validation errors shown by the form
-                  }
-                }}
-                disabled={isStep1NextDisabled}
-              >
-                Next: Review Terms
-              </Button>
-            </div>
-          </>
-        )}
+              Next: Review Terms
+            </Button>
+          </div>
+        </div>
 
-        {step === 2 && (
-          <>
-            <Card
-              type="inner"
-              style={{
-                marginBottom: 20,
-                background: "#f8fafc",
-                borderRadius: 12,
-              }}
+        <div style={{ display: step === 2 ? "block" : "none" }}>
+          <Card
+            type="inner"
+            style={{
+              marginBottom: 20,
+              background: "#f8fafc",
+              borderRadius: 12,
+            }}
+          >
+            <Text strong style={{ display: "block", marginBottom: 12 }}>
+              Terms & Conditions
+            </Text>
+            <Space
+              direction="vertical"
+              size="small"
+              style={{ width: "100%" }}
             >
-              <Text strong style={{ display: "block", marginBottom: 12 }}>
-                Terms & Conditions
-              </Text>
-              <Space
-                direction="vertical"
-                size="small"
-                style={{ width: "100%" }}
-              >
-                {TERMS.map((term, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      display: "flex",
-                      gap: 12,
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div style={{ width: 20, color: "#2563eb", marginTop: 2 }}>
-                      •
-                    </div>
-                    <Text>{term}</Text>
+              {TERMS.map((term, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    gap: 12,
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div style={{ width: 20, color: "#2563eb", marginTop: 2 }}>
+                    •
                   </div>
-                ))}
-              </Space>
-            </Card>
+                  <Text>{term}</Text>
+                </div>
+              ))}
+            </Space>
+          </Card>
 
-            <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                {
-                  validator: (_, value) =>
-                    value
-                      ? Promise.resolve()
-                      : Promise.reject(
-                        new Error(
-                          "You must agree to the terms to submit request",
-                        ),
+          <Form.Item
+            name="agreement"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject(
+                      new Error(
+                        "You must agree to the terms to submit request",
                       ),
-                },
-              ]}
-              style={{ marginBottom: 24 }}
-            >
-              <Checkbox>
-                I declare that the access requested above is required for my
-                official tasks and I agree to comply with the company
-                information security guidelines.
-              </Checkbox>
-            </Form.Item>
+                    ),
+              },
+            ]}
+            style={{ marginBottom: 24 }}
+          >
+            <Checkbox>
+              I declare that the access requested above is required for my
+              official tasks and I agree to comply with the company
+              information security guidelines.
+            </Checkbox>
+          </Form.Item>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "8px",
-                paddingTop: "12px",
-                borderTop: "1px solid #f0f0f0",
-              }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "8px",
+              paddingTop: "12px",
+              borderTop: "1px solid #f0f0f0",
+            }}
+          >
+            <Button onClick={() => setStep(1)}>Back</Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={isStep2SubmitDisabled}
             >
-              <Button onClick={() => setStep(1)}>Back</Button>
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={isStep2SubmitDisabled}
-              >
-                {submitLabel}
-              </Button>
-            </div>
-          </>
-        )}
+              {submitLabel}
+            </Button>
+          </div>
+        </div>
       </Form>
     </Modal>
   );

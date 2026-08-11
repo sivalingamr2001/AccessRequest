@@ -49,6 +49,17 @@ body {
   letter-spacing: -0.5px;
 }
 
+/* Capsule Page Changer Styling */
+.capsule-nav-item:hover:not(.active) {
+  color: #1e293b !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  transform: translateY(-0.5px);
+}
+
+.capsule-nav-item.active {
+  color: #4f46e5 !important;
+}
+
 /* Glassmorphic Premium Cards */
 .premium-card {
   background: rgba(255, 255, 255, 0.85) !important;
@@ -137,19 +148,86 @@ body {
   box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.45) !important;
 }
 
-/* Custom Input styling */
-.ant-input,
+/* Custom Input & Search styling */
+.ant-input:not(.ant-input-affix-wrapper .ant-input),
+.ant-input-affix-wrapper,
 .ant-select-selector {
   border-radius: 8px !important;
   border: 1px solid #cbd5e1 !important;
   transition: all 0.2s ease !important;
 }
 
+/* Remove internal borders inside input wrappers */
+.ant-input-affix-wrapper > input.ant-input,
+.ant-input-affix-wrapper .ant-input,
+.ant-input-group .ant-input-affix-wrapper .ant-input {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Search bar matching height & clean alignment */
+.ant-input-search {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.ant-input-search .ant-input-group {
+  display: flex !important;
+  align-items: stretch !important;
+  height: 32px !important;
+}
+
+.ant-input-search .ant-input-affix-wrapper {
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  padding: 4px 8px !important;
+}
+
+.ant-input-search .ant-input-group-addon {
+  display: flex !important;
+  height: 32px !important;
+}
+
+.ant-input-search .ant-input-search-button,
+.ant-input-search .ant-input-group-addon .ant-btn {
+  height: 32px !important;
+  line-height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  border: 1px solid #cbd5e1 !important;
+  border-left: none !important;
+  padding: 0 12px !important;
+}
+
 .ant-input:focus,
 .ant-input-focused,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused,
+.ant-input-affix-wrapper:focus-within,
 .ant-select-focused .ant-select-selector {
   border-color: #4f46e5 !important;
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Table Full-Width and Column Distribution */
+.ant-table-wrapper,
+.ant-table,
+.ant-table-container,
+.ant-table-content,
+.ant-table-content > table {
+  width: 100% !important;
 }
 
 /* Scrollbar styling */

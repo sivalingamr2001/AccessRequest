@@ -1,4 +1,4 @@
-import { StopOutlined } from "@ant-design/icons";
+import { ClockCircleFilled, StopOutlined } from "@ant-design/icons";
 import {
   Button,
   Col,
@@ -6,7 +6,6 @@ import {
   Modal,
   Row,
   Space,
-  Table,
   Tag,
   Typography,
 } from "antd";
@@ -16,6 +15,7 @@ import type {
   TicketDto,
   UserDetailsDto,
 } from "../../types";
+import { DynamicGrid, type DynamicColumnType } from "../DynamicGrid";
 import { renderStatusTag } from "../../utils/statusTag";
 
 const { Text } = Typography;
@@ -47,10 +47,9 @@ export default function TicketDetailModal({
 
   const isOwner =
     ticket.createdBy.toLowerCase() === currentUser.userName.toLowerCase();
-  const isPending = ticket.items?.some(
-    (i) =>
-      i.status === "PENDING_DEPT_HOD" || i.status === "PENDING_FOLDER_OWNER",
-  );
+  const canEdit =
+    (ticket.items?.length ?? 0) > 0 &&
+    ticket.items!.every((i) => i.status === "PENDING_DEPT_HOD");
   const isRejectedOrExpired = ticket.items?.some(
     (i) =>
       i.status.startsWith("REJECTED") ||
@@ -61,15 +60,148 @@ export default function TicketDetailModal({
     (r) => r === "Operator" || r === "Admin",
   );
 
+  const itemColumns: DynamicColumnType<AccessItemDto>[] = [
+    {
+      title: "Folder Path",
+      dataIndex: "folderPath",
+      key: "folderPath",
+      width: "30%",
+      render: (text: string) => (
+        <span className="folder-code-badge">{text}</span>
+      ),
+    },
+    {
+      title: "Requested Access",
+      dataIndex: "accessType",
+      key: "accessType",
+      width: "14%",
+      render: (text: string) => <Tag color="blue">{text}</Tag>,
+    },
+    {
+      title: "Confirmed Access",
+      dataIndex: "confirmAccessType",
+      key: "confirmAccessType",
+      width: "14%",
+      render: (cat: string) =>
+        cat ? (
+          <Tag color="purple">{cat}</Tag>
+        ) : (
+          <Text type="secondary">-</Text>
+        ),
+      exportValue: (cat: string) => cat || "-",
+    },
+    {
+      title: "Reason",
+      dataIndex: "reasonForAccess",
+      key: "reasonForAccess",
+      width: "18%",
+      ellipsis: true,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      width: "14%",
+      render: (status: string) => renderStatusTag(status),
+      exportValue: (status: string) => status,
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      width: "10%",
+      exportable: false,
+      render: (_: any, record: AccessItemDto) => {
+        const isGranted = record.status === "ACCESS_GRANTED";
+        return (
+          <Space>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => onViewLogs(record)}
+            >
+              <ClockCircleFilled />
+            </Button>
+            {isGranted && isOperatorOrAdmin && (
+              <Button
+                danger
+                size="small"
+                icon={<StopOutlined />}
+                onClick={() => onRevoke(ticket, record)}
+              >
+                Revoke
+              </Button>
+            )}
+          </Space>
+        );
+      },
+    },
+  ];
+
+  const logColumns: DynamicColumnType<ApprovalLog>[] = [
+    {
+      title: "Date / Time",
+      dataIndex: "actionDate",
+      key: "actionDate",
+      width: "20%",
+      render: (d) => (d ? new Date(d).toLocaleString() : "-"),
+      exportValue: (d) => (d ? new Date(d).toLocaleString() : "-"),
+    },
+    {
+      title: "Role Stage",
+      dataIndex: "approverRole",
+      key: "approverRole",
+      width: "15%",
+      render: (r) => <Tag color="cyan">{r}</Tag>,
+      exportValue: (r) => r,
+    },
+    {
+      title: "Approver",
+      dataIndex: "approvedBy",
+      key: "approvedBy",
+      width: "18%",
+      render: (text) => <strong>{text}</strong>,
+    },
+    {
+      title: "Action",
+      dataIndex: "actionTaken",
+      key: "actionTaken",
+      width: "12%",
+      render: (act) =>
+        act === "APPROVED" ? (
+          <Tag color="green">Approved</Tag>
+        ) : act === "RESUBMITTED" ? (
+          <Tag color="orange">Resubmitted</Tag>
+        ) : (
+          <Tag color="red">Rejected</Tag>
+        ),
+      exportValue: (act) => act,
+    },
+    {
+      title: "Comments",
+      dataIndex: "comments",
+      key: "comments",
+      width: "35%",
+      render: (comm: string) =>
+        comm ? (
+          <div className="comment-bubble">{comm}</div>
+        ) : (
+          <Text type="secondary" italic>
+            No comments
+          </Text>
+        ),
+      exportValue: (comm: string) => comm || "No comments",
+    },
+  ];
+
   return (
     <Modal
       title={`Ticket Details: ${ticket.ticketNumber}`}
       open={open}
       onCancel={onClose}
-      width={940}
+      width={1400}
       footer={[
         isOwner &&
-          (isPending ? (
+          (canEdit ? (
             <Button key="edit" type="primary" onClick={() => onEdit(ticket)}>
               Edit Request
             </Button>
@@ -91,7 +223,7 @@ export default function TicketDetailModal({
         </Button>,
       ]}
     >
-      <div className="info-banner-card">
+      <div className="info-banner-card" style={{ marginBottom: 16 }}>
         <Row gutter={[20, 10]} align="middle">
           <Col xs={24} sm={8}>
             <Text
@@ -165,143 +297,27 @@ export default function TicketDetailModal({
         </Row>
       </div>
 
-      <Table
-        dataSource={ticket.items}
+      <DynamicGrid<AccessItemDto>
+        dataSource={ticket.items || []}
+        columns={itemColumns}
         rowKey="id"
-        size="middle"
+        cardWrapper={false}
+        searchable={false}
         pagination={false}
-        columns={[
-          {
-            title: "Folder Path",
-            dataIndex: "folderPath",
-            key: "folderPath",
-            render: (text: string) => (
-              <span className="folder-code-badge">{text}</span>
-            ),
-          },
-          {
-            title: "Requested Access",
-            dataIndex: "accessType",
-            key: "accessType",
-            width: 140,
-            render: (text: string) => <Tag color="blue">{text}</Tag>,
-          },
-          {
-            title: "Confirmed Access",
-            dataIndex: "confirmAccessType",
-            key: "confirmAccessType",
-            width: 140,
-            render: (cat: string) =>
-              cat ? (
-                <Tag color="purple">{cat}</Tag>
-              ) : (
-                <Text type="secondary">-</Text>
-              ),
-          },
-          {
-            title: "Reason",
-            dataIndex: "reasonForAccess",
-            key: "reasonForAccess",
-            ellipsis: true,
-          },
-          {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
-            width: 180,
-            render: (status: string) => renderStatusTag(status),
-          },
-          {
-            title: "Actions",
-            key: "actions",
-            width: 190,
-            render: (_: any, record: AccessItemDto) => {
-              const isGranted = record.status === "ACCESS_GRANTED";
-              return (
-                <Space>
-                  <Button
-                    type="primary"
-                    ghost
-                    size="small"
-                    onClick={() => onViewLogs(record)}
-                  >
-                    Audit Trail
-                  </Button>
-                  {isGranted && isOperatorOrAdmin && (
-                    <Button
-                      danger
-                      size="small"
-                      icon={<StopOutlined />}
-                      onClick={() => onRevoke(ticket, record)}
-                    >
-                      Revoke
-                    </Button>
-                  )}
-                </Space>
-              );
-            },
-          },
-        ]}
+        emptyText="No items in this request"
       />
 
       {approvalLogs.length > 0 && (
         <div style={{ marginTop: 24 }}>
           <Divider>Approval Audit Trail & Comments</Divider>
-          <Table
+          <DynamicGrid<ApprovalLog>
             dataSource={approvalLogs}
+            columns={logColumns}
             rowKey="id"
-            size="middle"
+            cardWrapper={false}
+            searchable={false}
             pagination={false}
-            columns={[
-              {
-                title: "Date / Time",
-                dataIndex: "actionDate",
-                key: "actionDate",
-                width: 170,
-                render: (d) => new Date(d).toLocaleString(),
-              },
-              {
-                title: "Role Stage",
-                dataIndex: "approverRole",
-                key: "approverRole",
-                width: 140,
-                render: (r) => <Tag color="cyan">{r}</Tag>,
-              },
-              {
-                title: "Approver",
-                dataIndex: "approvedBy",
-                key: "approvedBy",
-                width: 160,
-                render: (text) => <strong>{text}</strong>,
-              },
-              {
-                title: "Action",
-                dataIndex: "actionTaken",
-                key: "actionTaken",
-                width: 120,
-                render: (act) =>
-                  act === "APPROVED" ? (
-                    <Tag color="green">Approved</Tag>
-                  ) : act === "RESUBMITTED" ? (
-                    <Tag color="orange">Resubmitted</Tag>
-                  ) : (
-                    <Tag color="red">Rejected</Tag>
-                  ),
-              },
-              {
-                title: "Comments",
-                dataIndex: "comments",
-                key: "comments",
-                render: (comm: string) =>
-                  comm ? (
-                    <div className="comment-bubble">{comm}</div>
-                  ) : (
-                    <Text type="secondary" italic>
-                      No comments
-                    </Text>
-                  ),
-              },
-            ]}
+            emptyText="No audit logs available"
           />
         </div>
       )}

@@ -27,16 +27,36 @@ export function usePendingItems(
             t.reqTo.toLowerCase() === currentUser.userName.toLowerCase();
           if (isDeptMatch || isReqToMatch) list.push({ ticket: t, item: i });
         } else if (i.status === "PENDING_FOLDER_OWNER") {
-          const mapping = folderMappings.find(
-            (m) => m.folderPath.toLowerCase() === i.folderPath.toLowerCase(),
-          );
+          const normItemPath = i.folderPath.replace(/\//g, "\\").trim().toLowerCase();
+          const mapping = folderMappings.find((m) => {
+            const normMapPath = m.folderPath.replace(/\//g, "\\").trim().toLowerCase();
+            return (
+              normItemPath === normMapPath ||
+              normItemPath.startsWith(normMapPath + "\\")
+            );
+          });
           const isOwner =
             mapping &&
-            (mapping.primaryFolderOwner.toLowerCase() ===
-              currentUser.userName.toLowerCase() ||
-              mapping.secondaryFolderOwner?.toLowerCase() ===
-                currentUser.userName.toLowerCase());
-          if (isOwner) list.push({ ticket: t, item: i });
+            ((mapping.primaryFolderOwner &&
+              mapping.primaryFolderOwner.toLowerCase() ===
+                currentUser.userName.toLowerCase()) ||
+              (mapping.secondaryFolderOwner &&
+                mapping.secondaryFolderOwner.toLowerCase() ===
+                  currentUser.userName.toLowerCase()));
+
+          const ownerUser = mapping?.primaryFolderOwner
+            ? users.find(
+                (u) =>
+                  u.userName.toLowerCase() ===
+                  mapping.primaryFolderOwner.toLowerCase(),
+              )
+            : null;
+          const isOwnerHod =
+            ownerUser &&
+            currentUser.roles.some((r) => r.toLowerCase() === "hod") &&
+            ownerUser.deptId === currentUser.deptId;
+
+          if (isOwner || isOwnerHod) list.push({ ticket: t, item: i });
         }
       });
     });

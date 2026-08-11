@@ -98,3 +98,8 @@ CREATE TABLE workspace.jan_folder_mapping (
 CREATE UNIQUE INDEX idx_folder_path ON workspace.jan_folder_mapping (folder_path);
 CREATE INDEX idx_folder_primary_owner ON workspace.jan_folder_mapping (primary_folder_owner, is_active);
 CREATE INDEX idx_folder_is_active ON workspace.jan_folder_mapping (is_active);
+
+    "DefaultConnection": "Server=localhost;Database=workspace;User Id=root;Password=Root@123",
+    "LoginConnection": "server=10.30.50.40;user id=common_login_usr;password=we#^drTS1ER^3^*U;persistsecurityinfo=True;database=jan_tms_test;"
+        "DefaultConnection": "Server=localhost;Database=workspace;User Id=root;Password=",
+    "LoginConnection": "Server=localhost;Database=itsr;User Id=root;Password="
