@@ -1,0 +1,2023 @@
+[
+  {
+    "file": "adi.vb",
+    "queries": [
+      {
+        "method": "btnsave_Click",
+        "line": 18,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='UNIT2'",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 35,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select jan_GATE_NO_SEQ.NEXTVAL FROM DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 50,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "SELECT TO_CHAR(JAN_FYR_DATE,'yyyy') FROM DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 58,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='\" & txtrole.Text & \"'  AND GDATE>JAN_FYR_DATE",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 74,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "SELECT TO_CHAR(JAN_FYR_DATE,'yyyy') FROM DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 82,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='JAPL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 102,
+        "raw_line": "'cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='JAPL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 122,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select gate_no from jan_gate_header where gate_no='\" & txtgno.Text & \"'and extract (month from gdate)=\" & Date.Now.Month & \" and extract (year from gdate)=\" & Date.Now.Year & \" and unit='\" & txtrole.Text & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 139,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select GATE_ID,UNIT,GTYPE,DC_DATE,dc_no ,supplier_name from jan_gate_header where validated<>6 and supplier_name='\" & cmbsup.Text & \"' and extract (month from gdate)=\" & Date.Now.Month & \" and unit='\" & txtrole.Text & \"' and extract (year from gdate)=\" & Date.Now.Year & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 220,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "[\"insert into jan_gate_header(gate_no,gate_id,supplier_name,supplier_site,dc_no,dc_date,validated,gtype,gdate,vehicle_det,courier_name,pod_no ,no_of_box ,po_wt ,rec_Wt,unit,flag,adi_no,adi_date,INVOICE_VAL,xerox,VENDOR_ID,adi_via,ADI_TYPE,direct_dlyd_flag)]  '\" & 1 & \"', '\" & cmbtype.Text & \"' ,nvl((select gate_Dt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),sysdate),nvl((select vehicle_Det from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),'') ,(select courier_name from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),(select pod_no from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),(select no_of_box from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),(select pod_wt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1),(select rec_wt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1) ,sysdate,'\" & txtveh.Text & \"','\" & cmbcr.Text & \"','\" & txtpod.Text & \"','\" & txtbox.Text & \"','\" & txtpodwt.Text & \"','\" & txtrwt.Text & \"'  ,'UNIT1'  ,'UNIT7'  ,'UNIT2'  ,'UNIT4'  ,'SKYFAST'  ,'JAPL' ,'\" & 1 & \"','\" & TXT_ASN_NO.Text & \"','\" & Format(CDate(asndt), \"dd-MMM-yyyy\") & \"','\" & Txt_inv_val.Text & \"','No',\" & SID & \",'ADI','\" & ASNTYPE & \"','Y')",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 281,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_gate_lines (line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff  ,wip_entity_id,opn_seq  ,spot_inspection,self_certify  )values(\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt2, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \", '\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(14, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"', '\" & 1 & \"', '\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(19, i).Value & \"' ,'\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"'  ,'\" & dgv1.Item(25, i).Value & \"','\" & dgv1.Item(26, i).Value & \"'  ,'\" & dgv1.Item(27, i).Value & \"','\" & dgv1.Item(28, i).Value & \"'  )",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 291,
+        "raw_line": "'        cl.oradap= New OracleClient.OracleDataAdapter(sql,cl.oracon)",
+        "query": "insert into jan_gate_lines (line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff  ,wip_entity_id,opn_seq  ,spot_inspection,self_certify  )values(\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt2, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \", '\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(14, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"', '\" & 1 & \"', '\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(19, i).Value & \"' ,'\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"'  ,'\" & dgv1.Item(25, i).Value & \"','\" & dgv1.Item(26, i).Value & \"'  ,'\" & dgv1.Item(27, i).Value & \"','\" & dgv1.Item(28, i).Value & \"'  )",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 311,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_del where gatE_no=\" & head & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 317,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "delete from  jan_fifo_lotno_details where ref_id=\" & head & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 321,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_fifo_lotno_details where ref_id=\" & head & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 329,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_fifo_lotno_details select org_id,item_id,item,gh.gate_no,'Po',nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi')),sum(supdcqty),'',sysdate, '' from jan_gate_lines gl,jan_gate_header gh where gl.gate_no=gh.gate_no and gh.gate_no=\" & head & \"group by org_id,item_id,item,gh.gate_no, nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi'))",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 335,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_fifo_lotno_details where ref_id=\" & head & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 343,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_fifo_lotno_details select org_id,item_id,item,gh.gate_no,'Po',nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi')),sum(supdcqty),'',sysdate, '' from jan_gate_lines gl,jan_gate_header gh where gl.gate_no=gh.gate_no and gh.gate_no=\" & head & \"group by org_id,item_id,item,gh.gate_no, nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi'))",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 353,
+        "raw_line": "'cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "insert into jan_fifo_lotno_details select org_id,item_id,item,gh.gate_no,'Po',nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi')),sum(supdcqty),'',sysdate, '' from jan_gate_lines gl,jan_gate_header gh where gl.gate_no=gh.gate_no and gh.gate_no=\" & head & \"group by org_id,item_id,item,gh.gate_no, nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi'))",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 357,
+        "raw_line": "'cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "insert into jan_fifo_lotno_details select org_id,item_id,item,gh.gate_no,'Po',nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi')),sum(supdcqty),'',sysdate, '' from jan_gate_lines gl,jan_gate_header gh where gl.gate_no=gh.gate_no and gh.gate_no=\" & head & \"group by org_id,item_id,item,gh.gate_no, nvl(LOT_NO,gl.item||'_'||to_char(gh.gdate,'iyyyiwdhhmi'))",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 362,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & head & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 370,
+        "raw_line": "Dim cmdsql As New SqlClient.SqlCommand(sql, scmcon2) '",
+        "query": "update jan_gate_header set gate_no='\" & head & \"' where asn_no='\" & TXT_ASN_NO.Text & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 445,
+        "raw_line": "Dim cmdsql As New SqlClient.SqlCommand(sql, scmcon2)",
+        "query": "select JH.*,JL.*,JH.DEL_ASN DELASN from jan_gate_header jh,jan_gate_lines jl where jh.ASN_NO=JL.ASN_NO  AND JH.ASN_NO=",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 497,
+        "raw_line": "'        cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select JH.*,JL.*,JH.DEL_ASN DELASN from jan_gate_header jh,jan_gate_lines jl where jh.ASN_NO=JL.ASN_NO  AND JH.ASN_NO=",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 517,
+        "raw_line": "'        cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select JH.*,JL.*,JH.DEL_ASN DELASN from jan_gate_header jh,jan_gate_lines jl where jh.ASN_NO=JL.ASN_NO  AND JH.ASN_NO=",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 533,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select sys_context ('USERENV', 'IP_ADDRESS')ip ,(SELECT COUNT(*) FROM PO_VENDORS WHERE VENDOR_ID=\" & MDS.Tables(\"asn_det\").Rows(0).Item(\"supplier_id\") & \" AND INVOICE_CURRENCY_CODE<>'INR') from dual",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 560,
+        "raw_line": "'                cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select sys_context ('USERENV', 'IP_ADDRESS')ip ,(SELECT COUNT(*) FROM PO_VENDORS WHERE VENDOR_ID=\" & MDS.Tables(\"asn_det\").Rows(0).Item(\"supplier_id\") & \" AND INVOICE_CURRENCY_CODE<>'INR') from dual",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 628,
+        "raw_line": "'                    cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select sys_context ('USERENV', 'IP_ADDRESS')ip ,(SELECT COUNT(*) FROM PO_VENDORS WHERE VENDOR_ID=\" & MDS.Tables(\"asn_det\").Rows(0).Item(\"supplier_id\") & \" AND INVOICE_CURRENCY_CODE<>'INR') from dual",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 737,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='UNIT2'",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 760,
+        "raw_line": "'    cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='UNIT2'",
+        "variable": "sql"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 785,
+        "raw_line": "cl.orcmd = New OracleClient.OracleCommand(sql, cl.oracon)",
+        "query": "SELECT pov.*, (SELECT VENDOR_SITE_CODE FROM PO_VENDOR_SITES_ALL WHERE VENDOR_ID=POv.VENDOR_ID and rownum=1) site FROM PO_VENDORS pov WHERE pov.VENDOR_ID=",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 843,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(po_qty-recd),0) po from jan_po_pending_bought_outs where pono='\" & f & \"' and po_line_id='\" & r & \"' AND LINE_LOCATION_ID=",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 849,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(supdcqty),0) po from jan_gate_lines  where pono='\" & f & \"'  and validated<>'4'  and flag<>0 and poline='\" & r & \"' AND LOCATION_ID=",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 855,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(b.quantity_received),0) po from jan_gate_lines a,jan_pur_listing b where  a.item=b.item_no and a.gate_id=b.gate_no and b.pono ='\" & f & \"' and a.flag<>0 and a.poline=\" & r & \" AND LOCATION_ID=",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 863,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(po_qty-recd),0) po from jan_po_pending_osp where pono='\" & f & \"'   and po_line_id='\" & r & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 869,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(supdcqty),0) po from jan_gate_lines  where pono='\" & f & \"'   and validated<>'4'  and flag<>0 and poline='\" & r & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 875,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(sum(b.quantity_received),0) po from jan_gate_lines a,jan_osp_listing b where  a.item=b.partno and a.gate_id=b.gate_no  and b.pono='\" & f & \"'  and a.flag<>0 and a.poline='\" & r & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 884,
+        "raw_line": "'    cl.orcmd = New OracleClient.OracleCommand(sql,cl.oracon)",
+        "query": "select nvl(sum(b.quantity_received),0) po from jan_gate_lines a,jan_osp_listing b where  a.item=b.partno and a.gate_id=b.gate_no  and b.pono='\" & f & \"'  and a.flag<>0 and a.poline='\" & r & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 904,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  b.po_line_id,b.po_header_id,b.line_location_id,b.po_qty,b.bom_revision, b.po_uom, b.osp_no,(select organization_code from org_organization_definitions  where organization_id=b.ship_to_organization_id)org ,b.price,B.PARTNAME,b.podt,b.operations, b.job_no,(SELECT CATEGORY  FROM(JAN_COUNTING_CATEGORY)  WHERE(organization_id = b.ship_to_organization_id) AND DECODE((SELECT ITEM_COST  FROM JAN_ITEMCOST B   WHERE(ITEM_NO = b.PARTNO) AND org_id = b.ship_to_organization_id  AND PO_LINE_ID=B.PO_LINE_ID),0,   (SELECT STAGE_COST FROM JAN_PO_PENDING_OSP C WHERE(PARTNO = b.PARTNO)AND ship_to_organization_id = b.ship_to_organization_id AND PO_LINE_ID=B.PO_LINE_ID), (SELECT ITEM_COST  FROM JAN_ITEMCOST B WHERE(ITEM_NO = b.PARTNO) AND org_id = b.ship_to_organization_id AND PO_LINE_ID=B.PO_LINE_ID)) BETWEEN from_value and to_value) CAT,DECODE(B.LINE_TYPE_ID,1021,'Services',B.LINE_TYPE)LINE_TYPE,wip_entity_id,opn_seq   from jan_po_pending_osp b  where b.VENDOR_ID=\" & SID & \" and B.pono='\" & f & \"'  and b.po_line_id='\" & r & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "adi_Load",
+        "line": 1069,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "SELECT COUNT(*)CNT,TO_CHAR(JAN_FYR_DATE,'yyyy')  YR FROM DUAL WHERE SYSDATE  BETWEEN JAN_FYR_DATE AND JAN_FYR_END_DATE",
+        "variable": "sql"
+      },
+      {
+        "method": "adi_Load",
+        "line": 1084,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select * from jan_gate_courier",
+        "variable": "sql"
+      },
+      {
+        "method": "adi_Load",
+        "line": 1091,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select vendor_name from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' order by vendor_name asc",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "Validate.vb",
+    "queries": [
+      {
+        "method": "VALIDATE_Load",
+        "line": 34,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT pono,ITEM , STATUS  FROM  (SELECT  pono,LOCATION_ID,ITEM ,(select case when (quantity-(quantity_received+quantity_cancelled)) =0 THEN 'No pending Qty' when QUANTITY_CANCELLED>0 then 'PO cancelled' when nvl(closed_code,'OPEN')<>'OPEN' then 'Line closed' when APPROVED_FLAG   <>'Y' then 'Approval Pend'  when  (quantity-(quantity_received+quantity_cancelled))<a.supdcqty then 'Po Qty less than inward Qty' when(select  count(*) from po_headers_all where authorization_status <>'APPROVED' and po_header_id=a.pohead)>0 then 'PO Not Approved' when (select count(*) from po_lines_all where po_line_id=a.poline and item_revision is null)>0  then  'No Revision for item in PO' else 'NP' end from PO_LINE_LOCATIONS_ALL  where LINE_LOCATION_ID=a.LOCATION_ID  ) STATUS from JAN_GATE_LINES a where GATE_NO=\" & txtgno.Text & \" and location_id in ( select location_id  from jan_receipt_pending where gate_no=a.gate_no and shipment_line_id is null) )  where STATUS<>'NP'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "VALIDATE_Load",
+        "line": 50,
+        "raw_line": "'cl.oradap = New OracleDataAdapter(cl.sql,cl.oracon)",
+        "query": "SELECT pono,ITEM , STATUS  FROM  (SELECT  pono,LOCATION_ID,ITEM ,(select case when (quantity-(quantity_received+quantity_cancelled)) =0 THEN 'No pending Qty' when QUANTITY_CANCELLED>0 then 'PO cancelled' when nvl(closed_code,'OPEN')<>'OPEN' then 'Line closed' when APPROVED_FLAG   <>'Y' then 'Approval Pend'  when  (quantity-(quantity_received+quantity_cancelled))<a.supdcqty then 'Po Qty less than inward Qty' when(select  count(*) from po_headers_all where authorization_status <>'APPROVED' and po_header_id=a.pohead)>0 then 'PO Not Approved' when (select count(*) from po_lines_all where po_line_id=a.poline and item_revision is null)>0  then  'No Revision for item in PO' else 'NP' end from PO_LINE_LOCATIONS_ALL  where LINE_LOCATION_ID=a.LOCATION_ID  ) STATUS from JAN_GATE_LINES a where GATE_NO=\" & txtgno.Text & \" and location_id in ( select location_id  from jan_receipt_pending where gate_no=a.gate_no and shipment_line_id is null) )  where STATUS<>'NP'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "RBTNV_CheckedChanged",
+        "line": 114,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_CODE,REA_NAME,REA_REMARK,ACTION,ACTION_REMARK,TO_CHAR(ACTION_DT)ACTION_DT,REA_SEL FROM JAN_GATE_NVAL_REASON WHERE GATE_NO='\" & txtgno.Text & \"' and line_no='\" & TXTLINE.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "RBTNNV_CheckedChanged",
+        "line": 194,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(eway_no,(select eway_bill from jan_gate_del where gate_no=\" & txtgno.Text & \" and  DEL_FOR='Header' and eway_bill is not null and rownum=1)) from jan_gate_header where gate_no=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "RBTNNV_CheckedChanged",
+        "line": 203,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_CODE,REA_NAME FROM JAN_GATE_REASON  WHERE LIVE_FLAG='Y'   ORDER BY REA_CODE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "RBTNNV_CheckedChanged",
+        "line": 268,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_REMARK,REAson_Date,TO_CHAR(ACTION)ACTION,TO_CHAR(ACTION_REMARK)ACTION_REMARK,ACTION_DT,rea_sel FROM JAN_GATE_NVAL_REASON WHERE GATE_NO='\" & txtgno.Text & \"' AND LINE_NO IN (\" & TXTLINE.Text & \") AND DECODE(REA_CODE,8,28,REA_CODE)='\" & ds.Tables(\"JAN_GATE_REASON\").Rows(J).Item(\"REA_CODE\") & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 305,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select JAN_iNWARD_QTY_VALIDATE (\" & txtgno.Text & \",1) gate_Val from dual",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 315,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "Update  JAN_GATE_HEADER Set VALIDATED=2 WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 321,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "Update JAN_GATE_LINES SET VALIDATED=2 WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 328,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "INSERT INTO JAN_GATE_NVAL_REASON(GATE_NO, LINE_NO, REA_CODE, REA_NAME, REA_DT, REA_SEL, REASON_DATE, unit) values(\" & txtgno.Text & \", 1, 31, (select rea_name from jan_gate_reason where rea_code=31),sysdate,1,sysdate,(Select unit from jan_gate_header where gate_No= \" & txtgno.Text & \"))",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 342,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_header where gate_no=\" & txtgno.Text & \" and po_Wt is not null and rec_wt is null",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 356,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from po_vendors where invoice_currency_code='INR' and vendor_id in (select vendor_id from jan_gate_header where gate_no=\" & txtgno.Text & \")",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 363,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(distinct pohead) from jan_gate_lines where gate_no=\" & txtgno.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 368,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(distinct trx_id) from jai_tax_lines where trx_id in (select pohead from jan_gate_lines where gate_no=\" & txtgno.Text & \")",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 382,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_einvoice_Vendor where vendor_id=(select vendor_id from jan_gate_header where gate_no=\" & txtgno.Text & \" )",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 392,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select nvl(state_code,substr(REGISTRATION_NUMBER, 0,2)),(select dcval from jan_gate_header where gate_no=\" & txtgno.Text & \")inv_amt,nvl((select eway_bill from jan_gate_del where gate_no=\" & txtgno.Text & \" and del_for='Header' and rownum=1),'\" & txtgst.Text & \"')eway from  JAN_GST_REG_DETAILS_VIEW where PARTY_CLASS_NAME='Supplier' AND REGISTRATION_TYPE_CODE='GSTIN' and party_id=(select vendor_id from jan_gate_header where gate_no=\" & txtgno.Text & \" ) and org_id=\" & OP_ID & \" and party_id in (select vendor_id from po_Vendors where invoice_Currency_code='INR')",
+        "variable": "sql"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 434,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where gate_no=\" & txtgno.Text & \" and checked_by is not null",
+        "variable": "sql"
+      },
+      {
+        "method": "valfun",
+        "line": 476,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "Select receipt_num from rcv_shipment_headers where packing_slip='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "valfun",
+        "line": 524,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_nval_reason set action='\" & dgv.Rows(i).Cells(4).Value & \" ' , action_remark='\" & dgv.Rows(i).Cells(5).Value & \"' , action_dt='\" & dgv.Rows(i).Cells(6).Value & \"', rea_sel='0' where gate_no='\" & txtgno.Text & \"' and rea_code='\" & dgv.Rows(i).Cells(1).Value & \"' AND LINE_NO IN (\" & TXTLINE.Text & \")",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "valfun",
+        "line": 534,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_nval_Reason set gdate=(select gdate from jan_gate_header where gate_no='\" & txtgno.Text & \"'),ORG=(SELECT ORG FROM JAN_GATE_HEADER WHERE GATE_NO='\" & txtgno.Text & \"') WHERE GATE_NO='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "valfun",
+        "line": 541,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_header set einv_flag=1 WHERE GATE_NO='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "valfun",
+        "line": 549,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_header set eway_no='\" & txtgst.Text & \"' WHERE GATE_NO='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "ADD_REASON",
+        "line": 664,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_nval_reason set action='\" & dgv.Rows(i).Cells(4).Value & \" ' , action_remark='\" & dgv.Rows(i).Cells(5).Value & \"' , action_dt='\" & dgv.Rows(i).Cells(6).Value & \"', rea_sel='0' where gate_no='\" & txtgno.Text & \"' and rea_code='\" & dgv.Rows(i).Cells(1).Value & \"' AND LINE_NO IN (\" & TXTLINE.Text & \")",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "ADD_REASON",
+        "line": 669,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select gate_no,rea_code from jan_gate_nval_reason where gate_no='\" & txtgno.Text & \"' and rea_code='\" & dgv1.Rows(i).Cells(1).Value & \"' AND LINE_NO IN (\" & TXTLINE.Text & \")",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "ADD_REASON",
+        "line": 718,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "INSERT INTO JAN_GATE_NVAL_REASON(GATE_NO,LINE_NO,REA_CODE,REA_NAME,REA_REMARK,REA_DT,REA_SEL,rea_dt1,REASON_DATE,unit ,UNAME  ) VALUES('\" & txtgno.Text & \"',\" & ST & \", '\" & dgv1.Rows(i).Cells(1).Value & \"','\" & dgv1.Rows(i).Cells(2).Value & \"','\" & dgv1.Rows(i).Cells(3).Value & \"','\" & dgv1.Rows(i).Cells(4).Value & \"','1',sysdate,SYSDATE,'\" & unit & \"'  ,'\" & per & \"'  ,'' )",
+        "variable": "sql"
+      },
+      {
+        "method": "ADD_REASON",
+        "line": 728,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update JAN_GATE_NVAL_REASON set  REA_DT= SYSDATE ,reason_date=sysdate where gate_no='\" & txtgno.Text & \"' and  line_no IN (\" & TXTLINE.Text & \")  and rea_code='\" & dgv1.Rows(i).Cells(1).Value & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "VALID",
+        "line": 738,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT * FROM JAN_GATE_LINES WHERE VALIDATED IN ('0','4') AND GATE_NO='\" & txtgno.Text & \"' AND LINE_NO='\" & TXTLINE.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "VALID",
+        "line": 750,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT * FROM JAN_GATE_LINES WHERE GATE_NO='\" & txtgno.Text & \"' AND VALIDATED NOT IN('0','4') and flag<>'0'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "VALID",
+        "line": 772,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT * FROM JAN_GATE_LINES WHERE GATE_NO='\" & txtgno.Text & \"' AND VALIDATED IN('4')",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "VALID",
+        "line": 784,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT * FROM JAN_GATE_LINES WHERE GATE_NO='\" & txtgno.Text & \"' AND VALIDATED IN('5')",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "VALID",
+        "line": 790,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_HEADER set validated='5',VALIDATED_BY='\" & cmbval.SelectedItem & \"' where gate_no='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "operation_eod_exception.vb",
+    "queries": [
+      {
+        "method": "operation_eod_exception_Load",
+        "line": 14,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "[\"select PROC_ID,MAJOR_PROCESS,PROCESSNAME,PROCESS_DESCRIPTION,PHASE_OF_IMPLEMENTATION_OF_V2K_INITIATIVES,nvl(eod_id,exception_id )]",
+        "variable": "sql"
+      },
+      {
+        "method": "DataGridView1_CellClick",
+        "line": 55,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select process_id,(select process_name from jan_eod_process_master where idno=a.process_id and rownum=1)process_name,count(*)cnt from jan_eod_transactions a where process_id in (\" & DataGridView1.CurrentRow.Cells(5).Value & \") and operating_unit=103 and comp_flag=0     and a.target_DAte>= TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.target_DAte<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')   group by process_id  union all  select exception_id,remarks, count  (*)cnt  from jan_outward_new_requirement a where exception_id in (\" & DataGridView1.CurrentRow.Cells(5).Value & \") and org_id in (select organization_id from jan_organization_list_View where org_id=103 )    and  a.created_dt>= TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.created_dt<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')   group by  exception_id,remarks",
+        "variable": "sql"
+      },
+      {
+        "method": "DataGridView3_CellClick",
+        "line": 70,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  org,item_no,item_Desc,vendor_name,ref_id,ref_dt,target_date,responsible_person from jan_eod_excel_list a  where operating_unit=103  and process_id=\" & DataGridView3.CurrentRow.Cells(0).Value & \" and a.target_DAte>= TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.target_DAte<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')",
+        "variable": "sql"
+      },
+      {
+        "method": "DataGridView3_CellClick",
+        "line": 87,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select jan_orgcode(org_id)org,jan_itemname(item_id)item_no,jan_itemdesc(jan_itemname(item_id))item_desc,job_qty  from jan_outward_new_requirement a where org_id in (select organization_id from jan_organization_list_View where org_id=103) and exception_id= \" & DataGridView3.CurrentRow.Cells(0).Value & \" and a.created_dt>= TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.created_dt<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "minmax.vb",
+    "queries": [
+      {
+        "method": "btngo_Click",
+        "line": 284,
+        "raw_line": "cl.oradap = New OracleDataAdapter(s, CON)",
+        "query": "[s]   and  min_minmax_quantity >  (nvl(on_hand,0)+nvl(decode(conversion_Rate,null,(1*po_pend),(po_pend* conversion_rate)),0)+nvl(wip_qty,0)+nvl(decode(conversion_Rate,null,(1*qty_inspn),(qty_inspn* conversion_rate)),0)+nvl(decode(conversion_Rate,null,(1*store_pend),(store_pend* conversion_rate)),0))  and nvl(on_hand,0) < min_minmax_quantity  and  organization_id=(select organization_id from org_organization_definitions a  where a.organization_code='\" & cmborg.SelectedItem & \"')  and inventory='\" & cmbinv.SelectedItem & \"'   and item_type='\" & cmbitem.SelectedItem & \"'  and item_no ='\" & txtitem.Text & \"'  and make_buy='\" & cmbtyp.SelectedItem & \"'  order by item_no",
+        "variable": "s"
+      }
+    ]
+  },
+  {
+    "file": "Gate.vb",
+    "queries": [
+      {
+        "method": "Gate_Load",
+        "line": 94,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select REPLACE(vendor_name,'''','''''')supplier,vendor_id from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' AND END_DATE_ACTIVE IS NULL   AND VENDOR_ID IN (SELECT VENDOR_ID FROM PO_vENDOR_SITES_ALL WHERE ORG_ID=\" & OP_ID & \" AND INACTIVE_DATE IS NULL ) ORDER BY VENDOR_NAME",
+        "variable": "sql"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 101,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select organization_code  from org_organization_definitions where organization_id in (\" & orgid & \" ) order by organization_code",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 110,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_NAME FROM JAN_GATE_REASON WHERE REA_CODE IN (42,43,44,45,46)",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 123,
+        "raw_line": "'cl.oradap= New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_NAME FROM JAN_GATE_REASON WHERE REA_CODE IN (42,43,44,45,46)",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 133,
+        "raw_line": "'    cl.oradap= New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT REA_NAME FROM JAN_GATE_REASON WHERE REA_CODE IN (42,43,44,45,46)",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 235,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select   a.gate_no,a.gdate,a.supplier_name,a.supplier_site,(select registration_number from  JAN_GST_REG_DETAILS_VIEW where PARTY_CLASS_NAME='Supplier' AND REGISTRATION_TYPE_CODE='GSTIN' and rownum=1     And org_id = \" & opid & \"   And org_id = 103   And party_id=a.vendor_id  And PARTY_SITE_ID=(Select VENDOR_SITE_ID FROM PO_VENDOR_SITES_ALL WHERE VENDOR_SITE_CODE=A.SUPPLIER_SITE And inactive_Date Is null   And org_id=\" & opid & \"   And org_id = 103   And vendor_id=a.vendor_id))gst, a.dc_no,a.dc_Date,A.VALIDATED, (Case When (Select DECODE(POTYPE,'Services',potype,type) from jan_gate_lines  WHERE GATe_NO=A.GATE_NO and rownum=1 and flag<>0) is not  null then (SELECT DECODE(POTYPE,'Services',potype,type) from jan_gate_lines  WHERE GATe_NO=A.GATE_NO and rownum=1 and flag<>0)  else a. gtype end ) gtype,  DECODE(A.VALIDATED,'0','VALIDATED','1','GATE','2','NOT VALIDATED','3','ACTION TAKEN','4','RTV','5','CANCEL ENTRY','6','No Reference')STATUS,(Select max(reaSON_dATE) rea_dt from jan_gatE_nval_reason where gate_no=a.gate_no and REA_CODE=28) rea_dt,a.org, adi_no,adi_date,reason,decode(uname,null,(SELECT UNAME FROM JAN_GATe_NVAL_REASON WHERE GATe_NO=A.GATE_NO AND ROWNUM=1 HAVING REASON_DATE=MAX(REASON_DATE) GROUP BY UNAME,REASON_DATE ),uname) UNAME,NVL(VENDOR_ID ,0) VENDOR_ID,vehicle_Det,inv_category ,rearef , (SELECT  COUNT(*)  FROM JAN_Dds_SHORTAGE_VS_COMPLETION xx,jan_gate_lines bb   WHERE NEED_BY_WEEK<=TO_NUMBER(TO_CHAR(SYSDATE-14,'IYYYIW'))  AND REQUIREMENT-CANCELLED_QTY-RECEIVED_QUANTITY>0 and organization_id=bb.org_id and inventory_item_id=bb.item_id and gate_no=a.gate_no) dds,(select count(*) from jan_gate_lines where gate_no=a.gate_no and flag=1 )gcnt,dcval ,mmcard ,(select count(*) from jan_gate_nval_reason where gate_no=a.gate_no and rea_code=48)eway,validated_by,(select count(*) from jan_gate_lines where gate_no=a.gate_no and item_location is not null)loc_ent, (select item_checked_dt from jan_gate_lines where gate_no=a.gate_no and rownum=1 AND CHECKED_BY IS NOT NULL) item_checked_dt,(select count(*) from jan_gate_lines gl,po_lines_all pol where  GL.type='OSP' AND pol.po_line_id=gl.poline and pol.po_header_id=gl.pohead and unit_price=0 and gl.gate_no=a.gate_no) wop ,responsible_person ,shortage_form_no ,(select nvl(checked_by,item_check_by) ||'-'||other_checked_by from jan_gate_lines where gate_no=a.gate_no and rownum=1 AND CHECKED_BY IS NOT NULL )checked_by,kanban_flag , responsible_dept , transport_mode ,person_name ,(select  TO_CHAR(item_check_start, 'DD/MM/YYYY HH24:MI:SS AM')  ||'-'||  item_check_by from jan_gate_lines where gate_no=a.gate_no and rownum=1) item_check_dt  ,nvl(open_challan_recpt ,0) open_challan_recpt,bin_qty, (select  case when item_checked_dt is not null AND ROUND((item_checked_dt - item_check_start) * 1440) >0  then  case when ROUND((item_checked_dt - item_check_start) * 1440) >60 then    TRUNC(MOD(item_checked_dt - item_check_start, 1) * 24) || 'h ' || ROUND(MOD(MOD(item_checked_dt - item_check_start, 1) * 24, 1) * 60) || 'm' else   ROUND(MOD(MOD(item_checked_dt - item_check_start, 1) * 24, 1) * 60) || 'm' end end   from jan_gate_lines where gate_no=a.gate_no and rownum=1)diff_time,(SELECT  COUNT(*)  FROM jan_vendor_item_master_Temp1 xx,jan_gate_lines bb   WHERE sourcing_percent >0 and xx.self_Certified=1   AND  gcs_from_Date is not null and vendor_id=a.vendor_id and xx.org_id=bb.org_id and inventory_item_id=JAN_ITEMNO(BB.ITEM) and gate_no=a.gate_no) gcs  from jan_gate_header a where a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')  order by A.gate_no",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 431,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select dcval from jan_gatE_header a  where gatE_no='\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 450,
+        "raw_line": "'    cl.oradap= New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select dcval from jan_gatE_header a  where gatE_no='\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 605,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where gate_no=\" & dgv.CurrentRow.Cells(1).Value & \" and item_check_Start is    null",
+        "variable": "sql"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 698,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select courier_name,pod_no ,no_of_box ,po_wt ,rec_Wt from jan_gate_header where gate_no='\" & dgv.Rows(i).Cells(1).Value & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 712,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select jan_orgcode(ship_to_org_id)org,receipt_num from rcv_shipment_headers where packing_slip='\" & dgv.Rows(i).Cells(1).Value & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 737,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select distinct b.line_no,b.pono,(select creation_Date from po_line_locations_All where line_location_id=b.location_id)podt,(select approved_Date from po_line_locations_All where line_location_id=b.location_id)poapp_dt,case when type='OSP' then (select jan_challan_no from jan_osp_regular_challan_mast where po_header_id=b.pohead and wip_entity_id=b.wip_entity_id and rownum=1)else '' end  challan_no,b.item,b.description,b.org,b.poqty,b.popend,b.supdcqty , case when org_id<110 then to_date(null) else  Need_by_dt end need_by_dt ,b.potype,b.ratecat,b.actval,b.rev,b.uom,b.job,b.oper,b.osp,b.type,b.remark,B.VALIDATED,DECODE(B.VALIDATED,'0','VALIDATED','1','GATE','2','NOT VALIDATED','3','ACTION TAKEN','4','RETURN TO VENDOR')STATUS , b.poline,b.pohead,(select nvl(invoice_val,0) from jan_gate_header where gatE_no= \" & dgv.Rows(i).Cells(1).Value & \")invoice_val,org_id,(SELECT  COUNT(*)  FROM JAN_Dds_SHORTAGE_VS_COMPLETION xx  WHERE NEED_BY_WEEK<=TO_NUMBER(TO_CHAR(SYSDATE-14,'IYYYIW'))  AND REQUIREMENT-CANCELLED_QTY-RECEIVED_QUANTITY>0 and organization_id=b.org_id and inventory_item_id=b.item_id ) dds,(SELECT  min(NEED_BY_WEEK)  FROM JAN_Dds_SHORTAGE_VS_COMPLETION xx  WHERE REQUIREMENT-CANCELLED_QTY-RECEIVED_QUANTITY>0 and organization_id=b.org_id and inventory_item_id=b.item_id )dds_wk,(select buyer_name from jan_item_master_Tab where inventory_item_id=b.item_id and organization_id=b.org_id)buyer_name, CASE WHEN NVL(\" & dgv.Rows(i).Cells(17).Value & \",0) =0 THEN 0 ELSE nvl((SELECT SELF_certified from jan_vendor_item_master_temp1 where  inventory_item_id=JAN_ITEMNO(B.ITEM) and org_id=b.org_id and sourcing_percent >0 and vendor_id= \" & dgv.Rows(i).Cells(17).Value & \" and osp_no=b.osp),0) END  sc ,nvl(shortage_Qty,0)shortage_Qty ,pack_type,pack_qty ,   [\" nvl((select sum(stg_mtl_cost) from jan_wip_materials where entity_id=b.wip_entity_id) ,0) stage_mtl_cost ,]   From jan_gate_lines b  where  b.gate_no='\" & dgv.Rows(i).Cells(1).Value & \"'and flag ='1' order by line_no",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 966,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select gtype ,CASE WHEN GTYPE='PO' THEN  (select count(*) from jan_blanket_vendor_status where vendor_id=a.vendor_id and releases>0 ) ELSE 0 END cnt from jan_gate_header a  where gate_no='\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnwop_Click",
+        "line": 1215,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select supplier_name,dc_no,dc_date,item,pono,supdcqty,podt,gh.gdate from jan_gate_lines GL,JAN_GATE_HEader gh where gh.gate_no=\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \"   And gh.gate_no=gl.gate_no",
+        "variable": "sql"
+      },
+      {
+        "method": "btnwop_Click",
+        "line": 1261,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select reason_name,description from mtl_transaction_reasons where reason_name  like 'OSP%' and ATTRIBUTE1='Without Process' union all select reason_name,description from mtl_transaction_reasons where reason_name='OSP-018'",
+        "variable": "sql"
+      },
+      {
+        "method": "inw_tag",
+        "line": 1320,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "select gh.gate_no,gh.gdate,substr(gh.supplier_name,0,30)supplier_name,gl.item,substr(jan_itemdesc(gl.item),0,20) it_Desc, sum(gl.supdcqty)qty,CASE WHEN (SELECT COUNT (*) FROM JAN_DIRECT_DELIVERY_SUPPLIER WHERE VID=GH.vendor_ID) >0 AND org_id <>384 THEN JAN_ORGCODE(org_id)|| '-DD'  WHEN (SELECT COUNT(*) FROM JAN_VENDOR_ITEM_MASTER_TEMP1 WHERE VENDOR_ID=gh.vendor_ID AND ORG_ID=gl.org_id AND INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND SOURCING_PERCENT>0 AND SPOT_INSPECTION=1) >0  THEN JAN_ORGCODE(gl.org_id)|| '-SI'WHEN NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<3 THEN JAN_ORGCODE(gl.ORG_ID)|| '-1' when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )=3 THEN JAN_ORGCODE(gl.ORG_ID)|| '-2' when  NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>3 and  NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<5 THEN JAN_ORGCODE(gl.ORG_ID)||'-3'when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>=5 and NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<7 THEN JAN_ORGCODE(gl.ORG_ID)|| '-4' when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>=7 THEN JAN_ORGCODE(gl.ORG_ID)|| '-5' end insp_cat,gl.pack_type,gl.pack_qty   from jan_gate_header gh,jan_gate_lines gl where gh.gate_no=gl.gate_no and gh.gate_no in (\" & gt & \" ) group by gh.gate_no,gh.supplier_name,gl.item,gl.org_id,gh.gdate,GH.VENDOR_ID,gl.pack_type,gl.pack_qty",
+        "variable": "sql"
+      },
+      {
+        "method": "inw_tag_new",
+        "line": 1406,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "select gh.gate_no,gh.gdate,substr(gh.supplier_name,0,30)supplier_name,gl.item,substr(jan_itemdesc(gl.item),0,20) it_Desc, sum(gl.supdcqty)qty,(select lot_no from jan_fifo_lotno_details where ref_id=gh.gate_no and organization_id = gl.org_id AND inventory_item_id= jan_itemno(gl.item) )lot_no,rowtocol('select     LOCATION FROM JAN_ITEM_VS_LOCATOR    WHERE organization_id = '||gl.org_id||' AND    item_no='''||gl.item||'''')loc,CASE WHEN (SELECT COUNT (*) FROM JAN_DIRECT_DELIVERY_SUPPLIER WHERE VID=GH.vendor_ID) >0 AND org_id <>384 THEN JAN_ORGCODE(org_id)|| '-DD'  WHEN (SELECT COUNT(*) FROM JAN_VENDOR_ITEM_MASTER_TEMP1 WHERE VENDOR_ID=gh.vendor_ID AND ORG_ID=gl.org_id AND INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND SOURCING_PERCENT>0 AND SPOT_INSPECTION=1) >0  THEN JAN_ORGCODE(gl.org_id)|| '-SI'WHEN NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<3 THEN JAN_ORGCODE(gl.ORG_ID)|| '-1' when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )=3 THEN JAN_ORGCODE(gl.ORG_ID)|| '-2' when  NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>3 and  NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<5 THEN JAN_ORGCODE(gl.ORG_ID)||'-3'when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>=5 and NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )<7 THEN JAN_ORGCODE(gl.ORG_ID)|| '-4' when NVL((select INSP_DAYS from jan_item_master_tab where INVENTORY_ITEM_ID=JAN_ITEMNO(gl.ITEM) AND insp_days is not null AND ROWNUM=1),case when gl.ORG_ID=505 then 10 else 3 end )>=7 THEN JAN_ORGCODE(gl.ORG_ID)|| '-5' end insp_cat ,(select weight from jan_lot_weight_master where organization_id = gl.org_id AND inventory_item_id= jan_itemno(gl.item) )wt  from jan_gate_header gh,jan_gate_lines gl where gh.gate_no=gl.gate_no and gh.gate_no in (\" & gt & \" ) group by gh.gate_no,gh.supplier_name,gl.item,gl.org_id,gh.gdate,GH.VENDOR_ID",
+        "variable": "sql"
+      },
+      {
+        "method": "job_shrt_Click",
+        "line": 1601,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_header where gate_no=\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \" and shortage_form_no is null",
+        "variable": "sql"
+      },
+      {
+        "method": "job_shrt_Click",
+        "line": 1607,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update jan_gate_header set shortage_form_no =JAN_JOBC_NO.nextval,shortage_form_dt=sysdate  where  gate_no=\" & dgv.Rows(dgv.CurrentRow.Index).Cells(1).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "job_shrt_Click",
+        "line": 1624,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "[\"select  shortage_form_no , TO_CHAR(shortage_form_dt,'dd-mon-yyyy')form_dt, TO_CHAR(b.GDATE,'dd-mon-yyyy')GDATE,b.GATE_NO,JAN_FY(sysdate)FRDS_YEAR,ITEM, SUPPLIER_NAME ,a.DESCRIPTION,(select wip_entity_name from wip_entities where wip_entity_id=a.wip_entity_id)JOB,jan_orgcode(a.ORG_id)org ,SHORTAGE_QTY,  b.DC_NO , TO_CHAR(b.DC_DATE,'dd-mon-yyyy')  DC_DATE,a.pono, case when b.gtype='OSP' then nvl((select sum(stg_mtl_cost) from jan_wip_materials where entity_id=a.wip_entity_id) ,0)]",
+        "variable": "sql"
+      },
+      {
+        "method": "btnrtv_Click",
+        "line": 1823,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select * from jan_gate_rtv where gate_no='\" & dgv.Rows(i).Cells(0).Value & \"'",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "cancelentry.vb",
+    "queries": [
+      {
+        "method": "Button1_Click",
+        "line": 10,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update  jan_gate_header set reason='\" & cmbrea.SelectedItem & \"',rearef='\" & txtref.Text & \"' ,org='\" & cmborg.SelectedItem & \"' where gate_no=\" & Gate.dgv.Rows(Gate.dgv.CurrentRow.Index).Cells(1).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 31,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_gatE_nval_reason (gate_no,rea_remark,rea_dt,flag,gdate,UNAME,rea_code,reason_date) values (\" & Gate.dgv.Rows(Gate.dgv.CurrentRow.Index).Cells(1).Value & \",'\" & cmbrea.SelectedItem & \"',sysdate,'1',sysdate , '\" & userid & \"' ,'21',sysdate) ,'4',sysdate) ,'1',sysdate)",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 35,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select reason from jan_gatE_header where gatE_no=\" & Gate.dgv.Rows(Gate.dgv.CurrentRow.Index).Cells(1).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 46,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update jan_gate_header set validated='4' where gate_no= \" & Gate.dgv.Rows(Gate.dgv.CurrentRow.Index).Cells(1).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "cancelentry_Load",
+        "line": 59,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select organization_code  from org_organization_definitions where organization_id     in(\" & orgid & \" )order by organization_code",
+        "variable": "sql"
+      },
+      {
+        "method": "cancelentry_Load",
+        "line": 67,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "SELECT REASON,REAREF,ORG FROM JAN_GAte_HEADER WHERE GATe_NO=\" & Gate.dgv.Rows(Gate.dgv.CurrentRow.Index).Cells(1).Value & \"",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "GateUpdate.vb",
+    "queries": [
+      {
+        "method": "btndel_Click",
+        "line": 66,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select receipt_num from rcv_shipment_headers where packing_slip='\" & txtgate.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 76,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT * FROM JAN_GATe_LINES WHERE GATE_NO=\" & txtgate.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 81,
+        "raw_line": "'    cl.oradap = New oracleDataAdapter(cl.sql,cl.oracon)",
+        "query": "SELECT * FROM JAN_GATe_LINES WHERE GATE_NO=\" & txtgate.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 101,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where checked_by is not null  and gate_no=\" & txtgate.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "GateUpdate_Load",
+        "line": 153,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select description from jan_open_challan_Category where CAT_FOR_GATE=1 and live_Flag=1",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "GateUpdate_Load",
+        "line": 165,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select * from jan_gate_courier",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "Login.vb",
+    "queries": [
+      {
+        "method": "Button1_Click",
+        "line": 22,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select * from jan_gate_login where   role ='\" & userid & \"'",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "Status.vb",
+    "queries": [
+      {
+        "method": "Status_Load",
+        "line": 20,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select REPLACE(vendor_name,'''','''''')supplier,vendor_id from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' AND END_DATE_ACTIVE IS NULL   AND VENDOR_ID IN (SELECT VENDOR_ID FROM PO_vENDOR_SITES_ALL WHERE ORG_ID=\" & OP_ID & \" AND INACTIVE_DATE IS NULL ) ORDER BY VENDOR_NAME",
+        "variable": "sql"
+      },
+      {
+        "method": "Status_Load",
+        "line": 27,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select organization_code  from org_organization_definitions where organization_id   in(\" & orgid & \" )order by organization_code",
+        "variable": "sql"
+      },
+      {
+        "method": "Status_Load",
+        "line": 34,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select * from jan_gate_courier",
+        "variable": "sql"
+      },
+      {
+        "method": "Button3_Click",
+        "line": 54,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select gate_no,gdate,dc_no,dc_Date,supplier_name,courier_name,pod_no,po_wt,no_of_box,rec_Wt,rec_wt_dt from jan_gatE_header where unit= '\" & unit & \"' and inv_category is null and gtype='PO'  and courier_name is not null and   to_date(gdate)>='\" & Format(inwdtf.Value, \"dd-MMM-yyyy\") & \"' and to_date(gdate)<='\" & Format(inwdtto.Value, \"dd-MMM-yyyy\") & \"'   order by gate_no,supplier_name",
+        "variable": "sql"
+      },
+      {
+        "method": "Button4_Click",
+        "line": 134,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  Gate_no , GDate, (SELECT LISTAGG   ( distinct org, ', ' ) WITHIN GROUP (ORDER BY line_no) from jan_gate_lines where gate_no=a.gate_no )org, supplier_name, supplier_site, (select registration_number from  JAN_GST_REG_DETAILS_VIEW where PARTY_CLASS_NAME='Supplier' AND REGISTRATION_TYPE_CODE='GSTIN' and rownum=1     And org_id = \" & OP_ID & \"   And party_id=a.vendor_id  And PARTY_SITE_ID=(Select VENDOR_SITE_ID FROM PO_VENDOR_SITES_ALL WHERE VENDOR_SITE_CODE=A.SUPPLIER_SITE And inactive_Date Is null   And org_id=\" & OP_ID & \"   And vendor_id=a.vendor_id))gst,dc_no,dc_date , gType ,(Select count(*) from jan_gate_lines where gate_no=a.gate_no) no_of_lines, case when (SELECT  COUNT(*)  FROM jan_vendor_item_master_Temp1 xx,jan_gate_lines bb   WHERE sourcing_percent >0 and xx.self_Certified=1   AND  gcs_from_Date is not null and vendor_id=a.vendor_id and xx.org_id=bb.org_id and inventory_item_id=JAN_ITEMNO(BB.ITEM) and gate_no=a.gate_no) >0 then 'GCS DC' else ''end gcs, responsible_person,( select listagg(distinct  rea_name, ', ' )WITHIN GROUP (ORDER BY line_no)  from jan_gate_nval_reason where gate_no= a.gate_no  and rea_code<>28  )reason_for_notvalidate,( select min(reason_Date) from jan_gate_nval_reason where gate_no= a.gate_no  and rea_code<>28  ) notvalidate_Date , case when validated=0 then 'Validated' when validated=2 then 'Not Validated' when validated=1 then 'Gate' when validated=4 then 'RTV' when validated=6 then 'No Reference' end    Status ,''Remark,(select max(reason_Date) from jan_gate_nval_reason where gate_no=a.gate_no and rea_code=28) validated_on,validated_by,eway_no,(select checked_by from jan_gate_lines where gate_no=a.gate_no and rownum=1 and checked_by is not null)checked_by,dcval , ( select LISTAGG   ( receipt_num, ', ' ) WITHIN GROUP (ORDER BY packing_slip) from rcv_shipment_headers where packing_slip=  a.gate_id   )receipt_no   from jan_gate_header a where unit='\" & unit & \"' and  gDATE>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and gDATE<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and inv_Category is null",
+        "variable": "sql"
+      },
+      {
+        "method": "Button5_Click",
+        "line": 230,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select DISTINCT a.gate_no,a.gdate,a.supplier_name,a.dc_no,a.dc_date,(case when (SELECT DECODE(POTYPE,'Services',potype,type) from jan_gate_lines  WHERE GATe_NO=A.GATE_NO and rownum=1 and flag<>0) is not  null then (SELECT DECODE(POTYPE,'Services',potype,type) from jan_gate_lines  WHERE GATe_NO=A.GATE_NO and rownum=1 and flag<>0)  else a. gtype end ) gtype,nvl(A.ORG,'-') org,nvl(b.rea_name,'-')rea_name,nvl(b.rea_remark,'-')rea_remark ,A.validated_by ,B.reason_Date ,(select checked_by from jan_gate_lines where gate_no=a.gate_no AND ROWNUM=1)checked_by    from jan_gate_header a,jan_gate_nval_reason b where a.gatE_no=b.gate_no and a.validated in(2) and b.rea_code <>28 AND  a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')  and A.unit='\" & unit & \"'  order by a.gate_no",
+        "variable": "sql"
+      },
+      {
+        "method": "Button6_Click",
+        "line": 276,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  a.Gate_no , a.GDate,  supplier_name, supplier_site, dc_no,dc_date , A.gType , case when A.validated=0 then 'Validated' when A.validated=2 then 'Not Validated' when A.validated=1 then 'Gate' when A.validated=4 then 'RTV' when A.validated=6 then 'No Reference' end    Status ,''Remark,(select max(reason_Date) from jan_gate_nval_reason where gate_no=a.gate_no and rea_code=28) validated_on,validated_by,(select checked_by from jan_gate_lines where gate_no=a.gate_no and rownum=1 and checked_by is not null)checked_by,rowtocol('select receipt_num from rcv_shipment_headers where packing_slip='''||a.gate_id||'''' )receipt_no,b.item,b.supdcqty qty ,jan_orgcode(org_id)org,substr(rowtocol('select location from jan_item_vs_locator where inventory_item_id =jan_itemno('''|| b.item|| ''' ) and organization_id= '||b.org_id|| '' ),0,35) location from jan_gate_header a ,jan_gate_lines b  where a.gate_no=b.gate_no and a.unit='\" & unit & \"' and  a.gDATE>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and a.gDATE<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and inv_Category is null",
+        "variable": "sql"
+      },
+      {
+        "method": "btn_short_Click",
+        "line": 345,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "[\"select  a.Gate_no , a.GDate, a.shortage_form_no, supplier_name, supplier_site, dc_no,dc_date , A.gType , case when A.validated=0 then 'Validated' when A.validated=2 then 'Not Validated' when A.validated=1 then 'Gate' when A.validated=4 then 'RTV' when A.validated=6 then 'No Reference' end    Status ,''Remark,(select max(reason_Date) from jan_gate_nval_reason where gate_no=a.gate_no and rea_code=28) validated_on,validated_by,(select checked_by from jan_gate_lines where gate_no=a.gate_no and rownum=1 and checked_by is not null)checked_by,rowtocol('select receipt_num from rcv_shipment_headers where packing_slip='''||a.gate_id||'''' )receipt_no,b.item,b.supdcqty qty ,jan_orgcode(org_id)org,b.shortage_Qty,  round(b.shortage_Qty* case when a.gtype='OSP' then nvl((select sum(stg_mtl_cost) from jan_wip_materials where entity_id=b.wip_entity_id) ,0)]",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "gt_checked.vb",
+    "queries": [
+      {
+        "method": "gt_checked_Load",
+        "line": 13,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select organization_code  from MTL_PARAMETERS where organization_id in (select org_id from jan_gatE_lines where gate_no=\" & txtgate.Text & \" ) order by organization_code",
+        "variable": "sql"
+      },
+      {
+        "method": "gt_checked_Load",
+        "line": 31,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  item,sum(supdcqty)qty  from jan_gate_lines where  gate_no=\" & txtgate.Text & \"  group by item",
+        "variable": "sql"
+      },
+      {
+        "method": "gt_checked_Load",
+        "line": 48,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where  gate_no=\" & txtgate.Text & \"  and item_check_by is not null",
+        "variable": "sql"
+      },
+      {
+        "method": "gt_checked_Load",
+        "line": 55,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select item_check_by,CHECKED_BY   from jan_gate_lines where  gate_no=\" & txtgate.Text & \"  and rownum=1",
+        "variable": "sql"
+      },
+      {
+        "method": "gt_checked_Load",
+        "line": 64,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select ITEM_NO, GATE_QTY, PACK_METHOD, NO_OF_PACK, PACK_QTY, pack_qty total_qty , STATUS from jan_gate_pack_Details a where gate_no=\" & txtgate.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 101,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*)  from jan_gate_lines where  gate_no=\" & txtgate.Text & \"  and item_check_by is not null",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 115,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from JAN_INSP_TRACEABILITY_T where DIVISION='INWARD' and ref_id=    '\" & txtstby.Text.ToUpper & \"'   '\" & txtchk.Text.ToUpper & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 127,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where  gate_no=\" & txtgate.Text & \"  and item_check_by is not null",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 135,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update jan_gate_lines  Set  item_check_Start =sysdate, item_check_by = (Select measurement_name from JAN_INSP_TRACEABILITY_T where DIVISION='INWARD' and  ref_id='\" & txtstby.Text.ToUpper & \"')  where gate_no=\" & txtgate.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 180,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update jan_gate_lines Set checked_by =      (Select measurement_name from JAN_INSP_TRACEABILITY_T where DIVISION='INWARD' and  ref_id='\" & txtchk.Text.ToUpper & \"')   '\" & txtchk.Text & \"'  ,item_location='\" & txtqty.Text & \"',other_checked_by='\" & txt_oth.Text & \"',item_checked_Dt=sysdate     where gate_no=\" & txtgate.Text & \" And org_id=jan_orgid('\" & cmborg.Text & \"')  and   line_no= '\" & cmbitem.SelectedItem.ToString.Substring(idx, idx1) & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "cmborg_SelectedIndexChanged",
+        "line": 200,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select   item||'*'|| line_no list from jan_gate_lines where gate_no= \" & txtgate.Text & \" and org_id=jan_orgid('\" & cmborg.Text & \"')",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 239,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_pack_Details where gate_no=\" & txtgate.Text & \" and status='MISMATCH'",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 248,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_gate_pack_Details (gate_no,item_No,gate_qty,pack_method ,no_of_pack,pack_qty ) values (\" & txtgate.Text & \",'\" & .Cells(0).Value & \"',\" & .Cells(1).Value & \",'\" & .Cells(2).Value & \"',\" & .Cells(3).Value & \",\" & .Cells(5).Value & \")",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 257,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "delete from jan_gate_pack_Details where gate_no=\" & txtgate.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 266,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_gate_pack_Details (gate_no,item_No,gate_qty,pack_method ,no_of_pack,pack_qty ) values (\" & txtgate.Text & \",'\" & .Cells(0).Value & \"',\" & .Cells(1).Value & \",'\" & .Cells(2).Value & \"',\" & .Cells(3).Value & \",\" & .Cells(5).Value & \")",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 281,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "[\"select GATE_NO, iTEM_NO,]",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 288,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "update jan_gate_pack_Details set status ='\" & ds.Tables(\"packdet\").Rows(l).Item(2) & \"' where gate_no=\" & txtgate.Text & \" and item_no='\" & ds.Tables(\"packdet\").Rows(l).Item(1) & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 294,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  item_No,gate_qty,pack_method ,no_of_pack,pack_qty,no_of_pack*pack_qty total_qty ,status from jan_gate_pack_Details where gate_no=\" & txtgate.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 342,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select supdcqty from jan_gate_lines where gate_no=\" & txtgate.Text & \"   And line_no = '\" & cmbitem.SelectedItem.ToString.Substring(idx, idx1) & \"'",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "direct_delivery.vb",
+    "queries": [
+      {
+        "method": "btnshow_Click",
+        "line": 101,
+        "raw_line": "DV(i)(\"adi_no\") = SCMRETVAL(\"select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno\") & \"' and oper='\" & DV(i)(\"opn_Seq\") & \"' and adi_type IN ('All','Approved')\")",
+        "query": "select asn_no from jan_gate_lines_v where job='",
+        "variable": "\"select asn_no from jan_gate_lines_v where job='\""
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 101,
+        "raw_line": "DV(i)(\"adi_no\") = SCMRETVAL(\"select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno\") & \"' and oper='\" & DV(i)(\"opn_Seq\") & \"' and adi_type IN ('All','Approved')\")",
+        "query": "select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno",
+        "variable": "literal"
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 103,
+        "raw_line": "DV(i)(\"adi_no\") = SCMRETVAL(\"select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno\") & \"' and oper='\" & DV(i)(\"opn_Seq\") & \"' and adi_type IN ('Rejected')\")",
+        "query": "select asn_no from jan_gate_lines_v where job='",
+        "variable": "\"select asn_no from jan_gate_lines_v where job='\""
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 103,
+        "raw_line": "DV(i)(\"adi_no\") = SCMRETVAL(\"select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno\") & \"' and oper='\" & DV(i)(\"opn_Seq\") & \"' and adi_type IN ('Rejected')\")",
+        "query": "select asn_no from jan_gate_lines_v where job='\" & DV(i)(\"jobno",
+        "variable": "literal"
+      }
+    ]
+  },
+  {
+    "file": "fifo_sticker.vb",
+    "queries": [
+      {
+        "method": "btnshow_Click",
+        "line": 116,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select ORG,GATE_NO,\tITEM,\tITEM_DESC\t,SUPPLIER_NAME,\tACTUAL_LOT\t,ITEM_ID\t,QTY,\tORG_ID\t,LOT_SUFFIX_CURRENT,\tSTART_AUTO_LOT_NUMBER,\tRANK\t,ROW_ID\t,YR, MTH,\tPRINT_FLAG,NVL((SELECT lot_no  FROM JAN_FIFO_LOTNO_DETAILS WHERE ref_id=xx.gate_no  And organization_id  =xx.org_id  And inventory_item_id=xx.item_id And ref_source ='Po'), xx.item ||'_' ||TO_CHAR((select gdate from jan_gatE_header where gate_no=xx.gate_no),'iyyyiwdhh24miss'))LOT,\trECEIPT_NUM\t,QTY_DLYD from (SELECT JAN_ORGCODE(ORG_ID)ORG,X.GATE_NO,X.ITEM,JAN_ITEMDESC(X.ITEM)ITEM_DESC,Y.SUPPLIER_NAME,''ACTUAL_LOT,ITEM_ID,SUM(SUPDCQTY)QTY,ORG_ID,lot_no LOT_SUFFIX_CURRENT,'' START_AUTO_LOT_NUMBER,'' RANK ,'' ROW_ID ,TO_CHAR(Y.GDATE,'yyyy')YR,TO_CHAR(Y.GDATE,'Mon')MTH, (SELECT COUNT(*) FROM JAN_FIFO_LOTNO_DETAILS WHERE REF_ID=X.GATE_NO AND ORGANIZATION_ID=X.ORG_ID AND INVENTORY_ITEM_ID=X.ITEM_ID AND REF_SOURCE='Po' and print_flag=1)PRINT_FLAG,(SELECT RECEIPT_NUM FROM RCV_SHIPMENT_HEADERS WHERE PACKING_SLIP=TO_CHAR(X.GATE_NO) AND SHIP_TO_ORG_ID=X.ORG_ID) RECEIPT_NUM,0 QTY_DLYD FROM JAN_GATE_LINES  X,JAN_GATE_HEADER Y WHERE Y.GDATE>=TO_DATE('\" & Format(DateTimePicker1.Value, \"dd-MMM-yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') AND Y.GDATE<=TO_DATE('\" & Format(DateTimePicker2.Value, \"dd-MMM-yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') AND  X.GATE_NO=Y.GATE_NO   AND Y.GTYPE='PO'   group by x.GATE_NO,ITEM,ITEM_ID,ORG_ID,TRUNC(x.GDATE),y.supplier_name,to_char(y.gdate,'yyyy'),to_char(y.gdate,'Mon'),lot_no)xx",
+        "variable": "sql"
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 123,
+        "raw_line": "DV(i)(\"QTY_DLYD\") = RETVAL(\"SELECT SUM(QTY_DLYD) FROM JAN_PUR_LISTING WHERE GATE_NO= '\" & DV(i)(\"GATE_NO\") & \"' And TO_ORGANIZATION_ID = \" & DV(i)(\"ORG_ID\") & \" And ITEM_ID =\" & DV(i)(\"ITEM_ID\") & \" AND RECEIPT_NUM='\" & DV(i)(\"RECEIPT_NUM\") & \"'\")",
+        "query": "select sum(qty_dlyd) from jan_pur_listing where gate_no= '",
+        "variable": "\"select sum(qty_dlyd) from jan_pur_listing where gate_no= '\""
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 123,
+        "raw_line": "DV(i)(\"QTY_DLYD\") = RETVAL(\"SELECT SUM(QTY_DLYD) FROM JAN_PUR_LISTING WHERE GATE_NO= '\" & DV(i)(\"GATE_NO\") & \"' And TO_ORGANIZATION_ID = \" & DV(i)(\"ORG_ID\") & \" And ITEM_ID =\" & DV(i)(\"ITEM_ID\") & \" AND RECEIPT_NUM='\" & DV(i)(\"RECEIPT_NUM\") & \"'\")",
+        "query": "SELECT SUM(QTY_DLYD) FROM JAN_PUR_LISTING WHERE GATE_NO= '\" & DV(i)(\"GATE_NO",
+        "variable": "literal"
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 206,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from JAN_FIFO_LOTNO_DETAILS where ORGANIZATION_ID=\" & dgv.Rows(i).Cells(9).Value & \" and item_no='\" & dgv.Rows(i).Cells(3).Value & \"'  and ref_id=\" & dgv.Rows(i).Cells(2).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 242,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select SYS_CONTEXT('USERENV','IP_ADDRESS') IP from DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "bntjob_Click",
+        "line": 295,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select y.*,case when PRINT_FLAG >0 then (select lot_no from JAN_FIFO_LOTNO_DETAILS where ref_id=y.wip_entity_id and organization_id=y.organization_id and inventory_item_id=y.inventory_item_id  and ref_source='Job' and  CREATION_DATE=(SELECT MAX(CREATION_DATE) FROM JAN_FIFO_LOTNO_DETAILS  WHERE REF_ID=y.wip_entity_id AND ORGANIZATION_ID=y.organization_id AND INVENTORY_ITEM_ID=y.INVENTORY_ITEM_ID AND REF_SOURCE='Job' ))  else new_lot end  LOT from (select JAN_ORGCODE(a.ORGANIZATION_ID) ORG,ITEM_NO,DESCRIPTION,JOB_NO,JOB_DT,OPN_SEQ,LOT_MOVE QUANTITY,COMP_DT,RES_CODE,RESOURC,OSP_ISP INHOUSE_OSP,item_no||'_'||to_char(comp_dt,'iyyyiwdhh24miss')new_lot,'' LOT_SUFFIX_CURRENT,''START_AUTO_LOT_NUMBER,'' RID, to_char(a.COMP_DT,'yyyy')yr,to_char(a.COMP_DT,'Mon')mth,wip_entity_id, (select count(*) from JAN_FIFO_LOTNO_DETAILS where ref_id=a.wip_entity_id and organization_id=a.organization_id and inventory_item_id=a.inventory_item_id and ref_source='Job' and print_Flag=1)print_flag, inventory_item_id ,organization_id  from JAN_FINAL_OPERATIONS a where 1=1 and  comp_Dt>=TO_DATE('\" & Format(jfm.Value, \"dd-MMM-yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and comp_dt<=TO_DATE('\" & Format(jto.Value, \"dd-MMM-yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') AND ITEM_TYPE<>'FG'   ) Y",
+        "variable": "sql"
+      },
+      {
+        "method": "btn_jstk_Click",
+        "line": 372,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from JAN_FIFO_LOTNO_DETAILS where ORGANIZATION_ID=\" & dgvjob.Rows(i).Cells(21).Value & \"  and item_no='\" & dgvjob.Rows(i).Cells(2).Value & \"'  and ref_id=\" & dgvjob.Rows(i).Cells(18).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btn_jstk_Click",
+        "line": 397,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select SYS_CONTEXT('USERENV','IP_ADDRESS') IP from DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "btncshow_Click",
+        "line": 456,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select jan_itemname(inventory_item_id)item_no,jan_itemdesc(jan_itemname(inventory_item_id))item_Desc,sum(transaction_quantity)qty,lot_number, to_char(date_received,'yyyy')yr,to_char(date_received,'Mon')mth, (select count(*) from JAN_FIFO_LOTNO_DETAILS where  organization_id=a.organization_id and inventory_item_id=a.inventory_item_id and ref_source='Stock' and lot_no=a.lot_number)print_flag ,(select SEGMENT3||'.'||SEGMENT4||'.'||SEGMENT5||'.'||SEGMENT6||'.'||SEGMENT7 from MTL_ITEM_LOCATIONS where ORGANIZATION_ID=a.ORGANIZATION_ID and INVENTORY_LOCATION_ID=a.LOCATOR_ID)LOC from mtl_onhand_quantities a where organization_id =JAN_ORGID('\" & cmbcorg.Text & \"') and subinventory_code='\" & cmbsub.SelectedItem & \"'   group by inventory_item_id,lot_number, organization_id ,to_char(date_received,'yyyy') ,to_char(date_received,'Mon'),LOCATOR_ID  order by jan_itemname(inventory_item_id)",
+        "variable": "sql"
+      },
+      {
+        "method": "btncprint_Click",
+        "line": 587,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select SYS_CONTEXT('USERENV','IP_ADDRESS') IP from DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "btnship_Click",
+        "line": 651,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select JAN_ORGCODE(a.ship_to_ORG_ID)ORG,a.SHIPMENT_NUM,JAN_ITEMNAME(b.ITEM_ID)ITEM_NO,JAN_ITEMDESC(JAN_ITEMNAME(b.ITEM_ID))ITEM_DESCription,b.QUANTITY_shipped,JAN_ITEMNAME(b.ITEM_ID)||'_'|| to_char(a.creation_date,'iyyyiwdhh24miss')LOT_NUMBER ,to_char(a.creation_date,'yyyy')yr,to_char(a.creation_date,'Mon')mth, (select count(*) from JAN_FIFO_LOTNO_DETAILS where to_char(ref_id)=a.SHIPMENT_NUM and organization_id=a.ship_to_ORG_ID and inventory_item_id=b.item_id and ref_source='Shipment' and print_Flag=1)print_flag from rcv_shipment_headers a ,rcv_shipment_lines B    where a.SHIPMENT_NUM  is not null and a.shipment_header_id=b.shipment_header_id  and a.CREATION_DATE>= TO_DATE('\" & Format(dtsfm.Value, \"dd-MMM-yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and a.CREATION_DATE<=TO_DATE('\" & Format(dtsto.Value, \"dd-MMM-yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')  order by a.SHIPMENT_NUM",
+        "variable": "sql"
+      },
+      {
+        "method": "btnslist_Click",
+        "line": 781,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from JAN_FIFO_LOTNO_DETAILS where ORGANIZATION_ID=JAN_ORGID('\" & cmbsorg.SelectedItem & \"') and item_no='\" & dgvs.Rows(i).Cells(3).Value & \"' and lot_no='\" & dgvs.Rows(i).Cells(6).Value & \"' and ref_id=\" & dgvs.Rows(i).Cells(2).Value & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "btnslist_Click",
+        "line": 810,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select SYS_CONTEXT('USERENV','IP_ADDRESS') IP from DUAL",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 900,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select SYS_CONTEXT('USERENV','IP_ADDRESS') IP from DUAL",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "gatestatus.vb",
+    "queries": [
+      {
+        "method": "Button5_Click",
+        "line": 274,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select * from   a    where  a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')  AND unit  in ('\" & unit.Replace(\",\", \"','\") & \"')",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "Form1.vb",
+    "queries": [
+      {
+        "method": "Button1_Click",
+        "line": 5,
+        "raw_line": "adap = New OracleClient.OracleDataAdapter(sql, CON)",
+        "query": "SELECT 0 gate1_Rating,round( JAN_individual_rate_summary ('122021',A.Last_name,'Rating',A.location,'AML',A.EMPloyee_NUMBER),2) month_Individual_Rating_Average ,A.* FROM JAN_EMP_MAST_V A WHERE  location='BANGALORE' AND level1 like 'AML%' ORDER BY LAST_NAME,REPORTING_TO_NAME",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "gatelist.vb",
+    "queries": [
+      {
+        "method": "btngo_Click",
+        "line": 18,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select  gate_no,receipt_num,receipt_date,pono,podt,item_description,quantity_received,qty_appd,inv_no from jan_pur_listing where pono='\" & txtpo.Text & \"' and item_no='\" & txtitem.Text & \"' order by gate_no",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 24,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select description,pono,podt,po_qty,recd,po_pend,gate_receipt from jan_po_pending_bought_outs where pono='\" & txtpo.Text & \"' and item_no='\" & txtitem.Text & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 30,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select gatE_no,pono,podt,description,popend,supdcqty from jan_gatE_lines where type='PO' and   pono='\" & txtpo.Text & \"' and item='\" & txtitem.Text & \"' and flag='1' order by gate_no",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 37,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select gate_no,receipt_num,receipt_date,pono,podt,partname as item_description,quantity_received,qty_appd,inv_no from jan_osp_listing where pono='\" & txtpo.Text & \"' and partno='\" & txtitem.Text & \"' order by gate_no",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 43,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select partname as description,pono,podt,po_qty,recd,po_pend,gate_receipt from jan_po_pending_osp where partno='\" & txtitem.Text & \" ' and pono='\" & txtpo.Text & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 49,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select gate_no,pono,podt,description,popend,supdcqty from jan_gatE_lines where type='OSP' and  pono='\" & txtpo.Text & \"' and item='\" & txtitem.Text & \"' and flag='1' order by gate_no",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "pocheck.vb",
+    "queries": [
+      {
+        "method": "btngo_Click",
+        "line": 43,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT B.pono,B.po_date,B.vendor_name,B.sh_location,B.line_type,A.item ,B.item_description,B.uom,B.line_qty,b.pend_qty,A.SUPDCQTY,b.unit_price,round((B.unit_price*B.line_qty),2)value,round((b.unit_price * a.supdcqty),2) DcVal,B.item_class,B.HSN_CODE,a.line_no,b.po_price,round((B.po_price*B.line_qty),2)cvalue,round((b.po_price * a.supdcqty),2) cDcVal,b.currency_code, (select  nvl(nvl(segment2,segment11),segment17) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)) ch, (select description from FND_FLEX_VALUES_VL where rownum=1 and flex_value in (select nvl(nvl(segment2,segment11),segment17) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)))cod,  (select  nvl(nvl(segment3,segment12),segment18) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id))ac,   (select description from FND_FLEX_VALUES_VL where rownum=1 And flex_value in (select nvl(nvl(segment3,segment12),segment18) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)))acd   FROM JAN_GATE_LINES A,JAN_PURCHASE_2 B WHERE A.POHEAD=B.PO_HEADER_ID And a.flag =1 And A.POLINE=B.PO_LINE_ID  And a.location_id=b.line_location_id  And A.GATE_NO='\" & TXTGNO.Text & \"'  order  by a.line_no",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 57,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT B.pono,B.po_date,B.vendor_name,B.sh_location,B.line_type,A.item ,B.item_description,B.uom,B.line_qty,b.pend_qty,A.SUPDCQTY,b.unit_price,round((B.unit_price*B.line_qty),2)value,round((b.unit_price * a.supdcqty),2) DcVal,B.item_class,B.HSN_CODE,a.line_no,b.po_price,round((B.po_price*B.line_qty),2)cvalue,round((b.po_price * a.supdcqty),2) cDcVal,b.currency_code, (select  nvl(nvl(segment2,segment11),segment17) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)) ch, (select description from FND_FLEX_VALUES_VL where rownum=1 and flex_value in (select nvl(nvl(segment2,segment11),segment17) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)))cod,  (select  nvl(nvl(segment3,segment12),segment18) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id))ac,   (select description from FND_FLEX_VALUES_VL where rownum=1 And flex_value in (select nvl(nvl(segment3,segment12),segment18) from gl_code_combinations where code_combination_id in (select code_combination_id from po_distributions_all where line_location_id=b.line_location_id)))acd   FROM JAN_GATE_LINES A,JAN_PURCHASE_2 B WHERE A.POHEAD=B.PO_HEADER_ID And a.flag =1 And A.POLINE=B.PO_LINE_ID  And a.location_id=b.line_location_id  And A.GATE_NO='\" & TXTGNO.Text & \"'  order  by a.line_no",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 76,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select  b.pono,B.need_by_date,B.approved_flag ,to_char(B.approved_date,'dd/mm/yyyy') approved_date,B.PRICE from jan_po_pending_osp B,JAN_GATE_LINES A where B.po_HEADER_ID=A.POHEAD AND A.GATE_NO='\" & TXTGNO.Text & \"'  and a.flag = 1  AND A.POLINE=B.PO_LINE_ID and a.location_id=b.line_location_id  ORDER BY PONO",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "pocheck_Load",
+        "line": 177,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select  SUM(NVL(freigHt,0))FREIGHT,SUM(NVL(rate,0))RATE from jan_gatE_lines where   gatE_no='\" & TXTGNO.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "pocheck_Load",
+        "line": 190,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gate_header set dcval='\" & lbldctotval.Text & \"' where gate_no=\" & TXTGNO.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "pocheck_Load",
+        "line": 197,
+        "raw_line": "'    cl.or(cl.orcmd) = New oracleCommand(cl.sql,cl.oracon)",
+        "query": "update jan_gate_header set dcval='\" & lbldctotval.Text & \"' where gate_no=\" & TXTGNO.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "pocheck_Load",
+        "line": 203,
+        "raw_line": "'    cl.or(cl.orcmd) = New oracleCommand(cl.sql,cl.oracon)",
+        "query": "update jan_gate_header set dcval='\" & lbldctotval.Text & \"' where gate_no=\" & TXTGNO.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "BTNCALTAX_Click",
+        "line": 219,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT b.*,a.supdcqty FROM JAN_GATE_LINES A,JAN_PURCHASE_2 B WHERE A.POHEAD=B.PO_HEADER_ID  and a.flag = '\" & 1 & \"' AND A.POLINE=B.PO_LINE_ID  and A.location_id=B.line_location_id  AND A.GATE_NO='\" & TXTGNO.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 285,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "update jan_gatE_lines set rate='\" & txtrate.Text & \"',freight='\" & txtdc.Text & \"' where gate_no='\" & TXTGNO.Text & \"' and line_no='\" & txtline.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv1_CellClick",
+        "line": 307,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT distinct GATe_NO, bed,bed_per,cess,cess_per,scess,scess_per,service,srv_cess,stx_cess_per,srv_scess,stx_scess_per,vat,vat_per,cst,cst_per,(select tariff from jan_gate_lines where item=a.item and gate_no='\" & TXTGNO.Text & \"' and line_no='\" & dgv1.Rows(dgv1.CurrentRow.Index).Cells(16).Value & \"' and rownum=1) tariff FROM JAN_PURCHASE_2 a,jan_gate_lines b  WHERE    a.ITEM='\" & dgv1.Rows(dgv1.CurrentRow.Index).Cells(5).Value & \"'   and NVL(REF_DOC_TRX_ID,A.po_header_ID)=b.poHEAD and a.line_location_id=b.location_id and a.item=b.item and a.vendor_name='\" & txtvendor.Text.Replace(\"'\", \" \") & \"' and b.flag=1 AND ROWNUM<4  ORDER BY GATE_NO DESC",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv1_CellClick",
+        "line": 364,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select  SUM(NVL(freigHt,0))FREIGHT,SUM(NVL(rate,0))RATE from jan_gatE_lines where   gatE_no='\" & TXTGNO.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv1_CellClick",
+        "line": 375,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT NVL(FREIGHT,0) FREIGHT,NVL(RATE,0) RATE FROM JAN_GATE_LINES WHERE GATE_NO='\" & TXTGNO.Text & \"' AND LINE_NO= '\" & dgv1.Rows(dgv1.CurrentRow.Index).Cells(16).Value & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dgv2_CellClick",
+        "line": 904,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select y.tax_rate_CODE,''tax_type_name,y.tax_rate_percentage,y.UNROUND_TAX_AMT_FUN_CURR,y.LINE_AMT,c.supdcqty  from    apps.jai_tax_lines  y , jan_gatE_lines c where       (( ENTITY_CODE='RELEASE' and TRX_TYPE='BLANKET')or (ENTITY_CODE='PURCHASE_ORDER' and TRX_TYPE='STANDARD'))  AND    CASE WHEN TRX_TYPE='STANDARD' THEN   Y.TRX_ID WHEN TRX_TYPE='BLANKET'  THEN Y.ref_doc_TRX_id END=\" & dgv2.Rows(dgv2.CurrentRow.Index).Cells(2).Value & \" AND CASE WHEN TRX_TYPE='STANDARD' THEN   Y.trx_line_id WHEN TRX_TYPE='BLANKET'  THEN Y.ref_doc_line_id END   =  \" & dgv2.Rows(dgv2.CurrentRow.Index).Cells(1).Value & \" and c.gate_no=\" & TXTGNO.Text & \" and line_no=\" & dgv2.Rows(dgv2.CurrentRow.Index).Cells(4).Value & \" AND Y.ITEM_ID=C.ITEM_ID AND  TRX_LOC_LINE_ID=C.LOCATION_ID",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "order",
+        "line": 930,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select  y.tax_rate_CODE TAX_TYPE,NVL(SUM(y.UNROUND_TAX_AMT_FUN_CURR),0)tax_amount  from    apps.jai_tax_lines y , jan_gatE_lines c where  (( ENTITY_CODE='RELEASE' and TRX_TYPE='BLANKET')or (ENTITY_CODE='PURCHASE_ORDER' and TRX_TYPE='STANDARD'))    and c.gate_no=\" & TXTGNO.Text & \"  AND Y.ITEM_ID=C.ITEM_ID AND TRX_LOC_LINE_ID=C.LOCATION_ID    GROUP BY y.tax_rate_CODE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "dcorder",
+        "line": 951,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select   Y.TAX_RATE_CODE tax_Type ,  NVL(round(SUM ((y.UNROUND_TAX_AMT_FUN_CURR / Y.TRX_LINE_QUANTITY) * c.supdcqty),3),0) tax_amount  from    apps.jai_tax_lines  y , jan_gatE_lines c where  (( ENTITY_CODE='RELEASE' and TRX_TYPE='BLANKET')or (ENTITY_CODE='PURCHASE_ORDER' and TRX_TYPE='STANDARD'))     and c.gate_no=\" & TXTGNO.Text & \" AND Y.ITEM_ID=C.ITEM_ID AND TRX_LOC_LINE_ID=C.LOCATION_ID and   TRX_LINE_QUANTITY > 0 GROUP BY y.tax_rate_CODE",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "Add.vb",
+    "queries": [
+      {
+        "method": "cmbsup_SelectedIndexChanged",
+        "line": 108,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select vendor_site_code from po_vendor_sites_all where vendor_id= '\" & cmbsup.SelectedValue & \"' and inactive_Date is null AND  ORG_ID= \" & OP_ID & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbsup_SelectedIndexChanged",
+        "line": 118,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select supplier_name from jan_gate_supplier where supplier_name='\" & cmbsup.Text.ToString.Replace(\"'\", \"\") & \"' and type<>'URGENT'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 258,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select ((select SEGMENT1 from PO_HEADERS_ALL where PO_HEADER_ID=B.PO_HEADER_ID) || '|---|'|| B.PO_LINE_ID) PONO,PO_LINE_LOCATION_ID,TO_ORGANIZATION_ID  from MTL_SUPPLY B ,PO_DISTRIBUTIONS_ALL a,wip_discrete_jobs c  where B.PO_HEADER_ID=B.PO_HEADER_ID and a.PO_DISTRIBUTION_ID=B.PO_DISTRIBUTION_ID AND B.SUPPLY_TYPE_CODE='PO' and B.DESTINATION_TYPE_CODE in ('SHOP FLOOR') and a.PO_HEADER_ID in (select PO_HEADER_ID from PO_HEADERS_ALL where  vendor_id = JAN_VENDORNO('\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"')) and   A.WIP_ENTITY_id=c.wip_entity_id and c.primary_item_id=JAN_ITEMNO('\" & f & \"')  and b.to_organization_id   IN (\" & orgid & \" )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 285,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT (TRUNC(EXEMPTION_VALIDITY_TILL)-TRUNC(sysdate))CNT  FROM jan_gate_adi_exempt WHERE VENDOR_ID=\" & cmbsup.SelectedValue & \" AND LIVE_FLAG=1",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 359,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(po_qty-recd),0) po from jan_po_pending_bought_outs where po_header_id=(select po_header_id from po_headers_all where segment1='\" & f & \"') and item_id =JAN_ITEMNO('\" & b & \"') and po_line_id='\" & r & \"' AND LINE_LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 365,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(supdcqty),0) po from jan_gate_lines  where pono='\" & f & \"'  and item ='\" & b & \"' and validated<>'4'  and flag<>0 and poline='\" & r & \"' and  LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 371,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(b.quantity_received),0) po from jan_gate_lines a,jan_pur_listing b where  a.item=b.item_no and a.gate_id=b.gate_no and b.item_id =JAN_ITEMNO('\" & b & \"') and a.flag<>0 and a.poline='\" & r & \"' AND A.POLINE=B.PO_LINE_ID AND B.po_header_id=(select po_header_id from po_headers_all where segment1='\" & f & \"') and  LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 378,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(po_qty-recd),0) po from jan_po_pending_osp where po_header_id=(select po_header_id from po_headers_all where segment1='\" & f & \"')  and primary_item_id =JAN_ITEMNO('\" & b & \"') and po_line_id='\" & r & \"' AND LINE_LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 384,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(supdcqty),0) po from jan_gate_lines  where pono='\" & f & \"' and item ='\" & b & \"'  and validated<>'4'  and flag<>0 and poline='\" & r & \"' AND LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 390,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select nvl(sum(b.quantity_received),0) po from jan_gate_lines a,jan_osp_listing b where  a.item=b.partno and a.gate_id=b.gate_no and b.primary_item_id =JAN_ITEMNO('\" & b & \"')  and a.flag<>0 and a.poline='\" & r & \"'  AND A.POLINE=B.PO_LINE_ID AND  B.po_header_id=(select po_header_id from po_headers_all where segment1='\" & f & \"')",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 423,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select  b.po_line_id,b.po_header_id,b.line_location_id,b.po_qty,b.bom_revision, b.po_uom, b.osp_no,(select organization_code from org_organization_definitions  where organization_id=b.ship_to_organization_id)org ,b.price,B.PARTNAME,trunc(b.podt)podt,b.operations, b.job_no,  (SELECT CATEGORY  FROM(JAN_COUNTING_CATEGORY)  WHERE(organization_id = b.ship_to_organization_id) AND DECODE((SELECT ITEM_COST  FROM JAN_ITEMCOST B   WHERE(ITEM_NO = b.PARTNO) AND org_id = b.ship_to_organization_id  AND PO_LINE_ID=B.PO_LINE_ID),0,   (SELECT STAGE_COST FROM JAN_PO_PENDING_OSP C WHERE(PARTNO = b.PARTNO)AND ship_to_organization_id = b.ship_to_organization_id AND PO_LINE_ID=B.PO_LINE_ID), (SELECT ITEM_COST  FROM JAN_ITEMCOST B WHERE(ITEM_NO = b.PARTNO) AND org_id = b.ship_to_organization_id AND PO_LINE_ID=B.PO_LINE_ID)) BETWEEN from_value and to_value) CAT,DECODE(B.LINE_TYPE_ID,1021,'Services',B.LINE_TYPE)LINE_TYPE,WIP_ENTITY_ID,OPN_sEQ,need_by_date from jan_po_pending_osp b   where b. vendor_id = JAN_VENDORNO('\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"') and B.po_header_id=(select po_header_id from po_headers_all where segment1='\" & f & \"')  and b.po_line_id='\" & r & \"' AND LINE_LOCATION_ID=\" & lineno & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 581,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select receipt_num from rcv_shipment_headers where packing_slip='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 625,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select jan_GATE_NO_SEQ.NEXTVAL FROM DUAL",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 637,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "SELECT TO_CHAR(JAN_FYR_DATE,'yyyy') FROM DUAL",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 646,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='SKYFAST'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 665,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='UNIT1'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 685,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='COIL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 704,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='POLYMER'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 724,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='SPM'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 741,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='Palathurai'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 761,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='GLOBAL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 777,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select gate_no from jan_gate_header where gate_no='\" & txtgno.Text & \"' AND UNIT='\" & unit & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 796,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select COUNT(*) CNT from jan_gate_header where supplier_name='\" & cmbsup.Text.ToString.Replace(\"'\", \"''\") & \"'   and  gdate BETWEEN JAN_FYR_DATE AND JAN_FYR_END_DATE  AND DC_NO='\" & txtdcno.Text & \"' AND UNIT='\" & unit & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 884,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "insert into jan_gate_header(gate_no,gate_id,supplier_name,vendor_id,supplier_site,dc_no,dc_date,validated,gtype,gdate,vehicle_det ,courier_name,pod_no ,no_of_box ,po_wt ,rec_Wt,eway_no   ,unit,flag,invoice_val,UNAME  , responsible_person,responsible_dept ,transport_mode,person_name  ) values(\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & cmbsup.Text & \"', \" & cmbsup.SelectedValue & \" ,'\" & txtsite.Text & \"','\" & txtdcno.Text & \"','\" & Format(dtdc.Value, \"dd-MMM-yyyy\") & \"',  '\" & cmbtype.SelectedItem & \"'   ,nvl((select gate_Dt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),sysdate),nvl((select vehicle_Det from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),'') ,(select courier_name from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),(select pod_no from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),(select no_of_box from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),(select pod_wt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),(select rec_wt from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header'),(select eway_bill from jan_gate_del where gate_no=\" & txtgno.Text & \" and rownum=1 and del_For='Header') ,sysdate, '\" & txtveh.Text & \"','\" & cmbcr.Text & \"','\" & txtpod.Text & \"','\" & txtbox.Text & \"','\" & txtpodwt.Text & \"','\" & txtrwt.Text & \"',''  ,'\" & unit & \"'   ,'\" & 1 & \"','\" & txtinv.Text & \"'  ,'\" & per & \"' ,''  ,'\" & txtper.Text & \"'    ,'\" & cmbres.Text & \"'    ,'\" & ddldept.Text & \"','\" & ddltranp.Text & \"','\" & txtjper.Text & \"'  )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 925,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID ,LAST_UPDT   )values(jan_itemno('\" & dgv1.Item(2, i).Value & \"'),jan_orgid('\" & dgv1.Item(4, i).Value & \"'), SYSDATE,\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt2, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \", '\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value & \"'  ,'\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"' ,'\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"',   '\" & Format(dgv1.Item(25, i).Value, \"dd-MMM-yyyy\") & \"'   '' ,(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),SYSDATE  , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &    )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 932,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 942,
+        "raw_line": "'        cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 947,
+        "raw_line": "'            cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 952,
+        "raw_line": "'                cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "addnew",
+        "line": 958,
+        "raw_line": "'                cl.or(cl.orcmd) = New oracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1010,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "[\"select    (select JAN_ITEMNAME(PRIMARY_ITEM_ID) from WIP_ENTITIES where WIP_ENTITY_ID=a.WIP_ENTITY_ID)||'|----|'||]  and b.to_organization_id in (\" & orgid & \")  and  A.PO_HEADER_ID in (select PO_HEADER_ID from PO_HEADERS_ALL where vendor_id =  JAN_VENDORNO('\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"'))",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1029,
+        "raw_line": "'cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "[\"select    (select JAN_ITEMNAME(PRIMARY_ITEM_ID) from WIP_ENTITIES where WIP_ENTITY_ID=a.WIP_ENTITY_ID)||'|----|'||]  and b.to_organization_id in (\" & orgid & \")  and  A.PO_HEADER_ID in (select PO_HEADER_ID from PO_HEADERS_ALL where vendor_id =  JAN_VENDORNO('\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"'))",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1039,
+        "raw_line": "'cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "[\"select    (select JAN_ITEMNAME(PRIMARY_ITEM_ID) from WIP_ENTITIES where WIP_ENTITY_ID=a.WIP_ENTITY_ID)||'|----|'||]  and b.to_organization_id in (\" & orgid & \")  and  A.PO_HEADER_ID in (select PO_HEADER_ID from PO_HEADERS_ALL where vendor_id =  JAN_VENDORNO('\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"'))",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1046,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select reason,rearef from jan_gatE_header where gate_no='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1054,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT ADI_REASON,adi_no,adi_date,dc_no,dc_date  FROM JAN_GATe_HEADER WHERE GATe_NO='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1064,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select pono,podt,item,description,org,rev,poqty,popend,supdcqty,remark,uom,job,oper,osp,type ,poline,pohead,VALIDATED,location_id ,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,LAST_UPDT,lot_no    from jan_gate_lines where gate_no='\" & txtgno.Text & \"' and flag ='\" & 1 & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1115,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select count(*) from jan_gate_lines where checked_by is not null  and gate_no=\" & txtgno.Text & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "updt",
+        "line": 1124,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "INSERT INTO jan_gate_del  (GATE_NO,org_id,item_location,del_For,item_checked_Dt,checked_by )  select distinct \" & txtgno.Text & \",org_id,item_location,'Lines',item_checked_Dt,checked_by   from jan_gate_lines where gate_no= \" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1132,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "DELETE FROM JAN_GATe_LINES WHERE GATe_NO='\" & txtgno.Text & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1160,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID,LAST_UPDT,lot_no  ,checked_by,item_location,item_checked_Dt    )values(JAN_ITEMNO('\" & dgv1.Item(2, i).Value & \"'),JAN_ORGID('\" & dgv1.Item(4, i).Value & \"'),(SELECT GDATE FROM JAN_GATe_HEADER WHERE GATe_NO=\" & txtgno.Text & \"),\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \",'\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value.ToString.Replace(\"'\", \"\") & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"','\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"', '\" & Format(CDate(dgv1.Item(25, i).Value), \"dd-MMM-yyyy\") & \"',(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),'\" & Format(CDate(dgv1.Item(26, i).Value), \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(27, i).Value & \"' , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &   )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1166,
+        "raw_line": "'cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID,LAST_UPDT,lot_no  ,checked_by,item_location,item_checked_Dt    )values(JAN_ITEMNO('\" & dgv1.Item(2, i).Value & \"'),JAN_ORGID('\" & dgv1.Item(4, i).Value & \"'),(SELECT GDATE FROM JAN_GATe_HEADER WHERE GATe_NO=\" & txtgno.Text & \"),\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \",'\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value.ToString.Replace(\"'\", \"\") & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"','\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"', '\" & Format(CDate(dgv1.Item(25, i).Value), \"dd-MMM-yyyy\") & \"',(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),'\" & Format(CDate(dgv1.Item(26, i).Value), \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(27, i).Value & \"' , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &   )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1183,
+        "raw_line": "'        cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID,LAST_UPDT,lot_no  ,checked_by,item_location,item_checked_Dt    )values(JAN_ITEMNO('\" & dgv1.Item(2, i).Value & \"'),JAN_ORGID('\" & dgv1.Item(4, i).Value & \"'),(SELECT GDATE FROM JAN_GATe_HEADER WHERE GATe_NO=\" & txtgno.Text & \"),\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \",'\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value.ToString.Replace(\"'\", \"\") & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"','\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"', '\" & Format(CDate(dgv1.Item(25, i).Value), \"dd-MMM-yyyy\") & \"',(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),'\" & Format(CDate(dgv1.Item(26, i).Value), \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(27, i).Value & \"' , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &   )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1191,
+        "raw_line": "'            cl.or(cl.orcmd) = New oracleCommand(cl.sql, cl.oraCON)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID,LAST_UPDT,lot_no  ,checked_by,item_location,item_checked_Dt    )values(JAN_ITEMNO('\" & dgv1.Item(2, i).Value & \"'),JAN_ORGID('\" & dgv1.Item(4, i).Value & \"'),(SELECT GDATE FROM JAN_GATe_HEADER WHERE GATe_NO=\" & txtgno.Text & \"),\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \",'\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value.ToString.Replace(\"'\", \"\") & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"','\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"', '\" & Format(CDate(dgv1.Item(25, i).Value), \"dd-MMM-yyyy\") & \"',(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),'\" & Format(CDate(dgv1.Item(26, i).Value), \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(27, i).Value & \"' , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &   )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1200,
+        "raw_line": "'            cl.or(cl.orcmd) = New oracleCommand(cl.sql, cl.oraCON)",
+        "query": "insert into jan_gate_lines (item_id,org_id,GDATE,line_no,gate_no,gate_id,pono,podt,item,description,rev,popend,supdcqty,uom,job,oper,osp,type,remark,status,validated,org,flag,poline,pohead,location_id,poqty,actval,ratecat,potype,tariff,WIP_ENTITY_ID,OPN_SEQ,need_by_dt,CAT_ID,LAST_UPDT,lot_no  ,checked_by,item_location,item_checked_Dt    )values(JAN_ITEMNO('\" & dgv1.Item(2, i).Value & \"'),JAN_ORGID('\" & dgv1.Item(4, i).Value & \"'),(SELECT GDATE FROM JAN_GATe_HEADER WHERE GATe_NO=\" & txtgno.Text & \"),\" & line & \",\" & txtgno.Text & \",'\" & txtgno.Text & \"','\" & dgv1.Item(0, i).Value & \"','\" & Format(dt, \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(2, i).Value & \"','\" & de & \"','\" & dgv1.Item(5, i).Value & \"',\" & dgv1.Item(6, i).Value & \",'\" & dgv1.Item(8, i).Value.ToString & \"','\" & dgv1.Item(7, i).Value & \"','\" & dgv1.Item(15, i).Value & \"','\" & dgv1.Item(14, i).Value.ToString.Replace(\"'\", \"\") & \"','\" & dgv1.Item(13, i).Value & \"','\" & dgv1.Item(16, i).Value & \"','\" & dgv1.Item(9, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(19, i).Value & \"','\" & dgv1.Item(4, i).Value & \"','\" & 1 & \"','\" & dgv1.Item(17, i).Value & \"','\" & dgv1.Item(18, i).Value & \"','\" & dgv1.Item(21, i).Value & \"','\" & dgv1.Item(10, i).Value & \"','\" & dgv1.Item(8, i).Value & \"','\" & dgv1.Item(11, i).Value & \"','\" & dgv1.Item(12, i).Value & \"','\" & dgv1.Item(22, i).Value & \"','\" & dgv1.Item(23, i).Value & \"','\" & dgv1.Item(24, i).Value & \"', '\" & Format(CDate(dgv1.Item(25, i).Value), \"dd-MMM-yyyy\") & \"',(SELECT ATTRIBUTE1 FROM PO_HEADERS_ALL WHERE PO_HEADER_ID=\" & dgv1.Item(18, i).Value & \"),'\" & Format(CDate(dgv1.Item(26, i).Value), \"dd-MMM-yyyy\") & \"','\" & dgv1.Item(27, i).Value & \"' , (select checked_by from jan_gate_del where gate_no=\" & txtgno.Text &   )",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1220,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "UPDATE JAN_GATE_HEADER SET INVOICE_VAL='\" & txtinv.Text & \"', dc_no='\" & txtdcno.Text & \"',dc_date='\" & Format(dtdc.Value, \"dd-MMM-yyyy\") & \"',  courier_name ='\" & cmbcr.Text & \"',pod_no='\" & txtpod.Text & \"',no_of_box ='\" & txtbox.Text & \"',po_wt ='\" & txtpodwt.Text & \"',rec_Wt='\" & txtrwt.Text & \"',  WHERE GATE_NO = \" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1230,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1237,
+        "raw_line": "'cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1243,
+        "raw_line": "'    cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1249,
+        "raw_line": "'        cl.or(cl.orcmd) = New OracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1254,
+        "raw_line": "'        'cl.or(cl.orcmd) = New oracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1258,
+        "raw_line": "'        cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1264,
+        "raw_line": "'            cl.or(cl.orcmd) = New OracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1274,
+        "raw_line": "'    cl.or(cl.orcmd) = New OracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1279,
+        "raw_line": "'    cl.oradap = New OracleDataAdapter(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "updt",
+        "line": 1285,
+        "raw_line": "'        cl.or(cl.orcmd) = New OracleCommand(cl.sql, cl.oraCON)",
+        "query": "UPDATE JAN_GATE_HEADER SET ORG='\" & dgv1.Item(4, 0).Value & \"' WHERE GATE_NO=\" & txtgno.Text & \"",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "txtdcno_Leave",
+        "line": 1303,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select supplier_name from jan_gate_supplier where supplier_name='\" & cmbsup.Text.ToString.Replace(\"'\", \"''\") & \"' and type  LIKE 'ADI%'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1372,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select * from jan_gate_courier",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1390,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select description from jan_open_challan_Category where CAT_FOR_GATE=1 and live_Flag=1",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1409,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select description from jan_open_challan_Category where org_id=\" & OP_ID & \" and live_Flag=1  and CAT_FOR_GATE=1 and unit_name='\" & unit & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1435,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select REPLACE(vendor_name,'''','''''')VENDOR_NAME,vendor_id from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' AND END_DATE_ACTIVE IS NULL AND   VENDOR_ID IN (SELECT VENDOR_ID FROM PO_vENDOR_SITES_ALL WHERE ORG_ID=\" & OP_ID & \" )  order by vendor_name asc",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1444,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "Select REA_NAME FROM JAN_GATE_REASON WHERE REA_CODE In (42,43,44,45,46)",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1462,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select supplier_name from jan_gate_supplier where supplier_name='\" & TextBox1.Text.ToString.Replace(\"'\", \"''\") & \"' and type  LIKE 'ADI%'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1480,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "SELECT COUNT(*)CNT,TO_CHAR(JAN_FYR_DATE,'yyyy')|| \" & SEQNO & \"   YR FROM DUAL WHERE SYSDATE  BETWEEN JAN_FYR_DATE AND JAN_FYR_END_DATE",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "non-po.vb",
+    "queries": [
+      {
+        "method": "btnsave_Click",
+        "line": 15,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "SELECT TO_CHAR(JAN_FYR_DATE,'yyyy') FROM DUAL",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 26,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select jan_GATE_NO_SEQ.NEXTVAL FROM DUAL",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 41,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='POLYMER'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 61,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='SKYFAST'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 81,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='UNIT1'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 103,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='SPM'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 122,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='COIL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 140,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select NVL(MAX(gate_no),0)GATE_NO from jan_gate_header WHERE UNIT='GLOBAL'  AND GDATE>JAN_FYR_DATE",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 163,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select COUNT(*) CNT from jan_gate_header where supplier_name='\" & cmbsup.Text.ToString.Replace(\"'\", \"''\") & \"'   and  gdate BETWEEN JAN_FYR_DATE AND JAN_FYR_END_DATE  AND DC_NO='\" & txtdcno.Text & \"'    And UNIT= '\" & unit & \"'",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 226,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "insert into jan_gate_header(gate_no,gate_id,supplier_name,vendor_id, dc_no,dc_date,validated, gdate,vehicle_det  ,unit,flag ,inv_category,responsible_person  ,responsible_dept ,transport_mode,person_name   ,bin_qty   ) values(\" & txtgno.Text & \",'\" & txtgno.Text & \"',  '\" & txtdcno.Text & \"','\" & Format(dtdc.Value, \"dd-MMM-yyyy\") & \"',1 ,'\" & txtveh.Text & \"'  , '\" & unit & \"' ,1,'\" & cmbcat.Text & \"'    ,'\" & txtper.Text & \"'    ,'\" & cmbres.Text & \"'   ,'\" & ddldept.Text & \"','\" & ddltranp.Text & \"','\" & txtjper.Text & \"'   ,\" & txtbin.Text & \"  )",
+        "variable": "sql"
+      },
+      {
+        "method": "non_po_Load",
+        "line": 254,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select REPLACE(vendor_name,'''','''''')VENDOR_NAME,vendor_id from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' AND END_DATE_ACTIVE IS NULL   AND VENDOR_ID IN (SELECT VENDOR_ID FROM PO_vENDOR_SITES_ALL WHERE ORG_ID=\" & OP_ID & \" AND INACTIVE_DATE IS NULL )  union   select REPLACE(customer_name,'''','''''')VENDOR_NAME,customer_id from ra_customers  order by vendor_name asc",
+        "variable": "sql"
+      },
+      {
+        "method": "non_po_Load",
+        "line": 266,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select description from jan_open_challan_Category where cat_for_gate=1 and live_Flag=1",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "non_po_Load",
+        "line": 286,
+        "raw_line": "adap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select description from jan_open_challan_Category where org_id=\" & OP_ID & \" and live_Flag=1   and CAT_FOR_GATE=1 and unit_name='\" & unit & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 338,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select gate_no,gdate,supplier_name,dc_no,dc_date,vehicle_det,inv_category ,responsible_dept ,transport_mode from jan_gate_header a where inv_category is not null and a.gdate>=TO_DATE('\" & Format(dtfm.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(dtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')  and gate_no=\" & txtgno.Text & \"  AND UNIT='\" & unit & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "txtogno_Leave",
+        "line": 398,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select vehicle_Det from jan_gate_del where gate_no=\" & txtogno.Text & \" and rownum=1",
+        "variable": "cl.sql"
+      }
+    ]
+  },
+  {
+    "file": "kanban_scan.vb",
+    "queries": [
+      {
+        "method": "kanban_scan_Load",
+        "line": 69,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select REPLACE(vendor_name,'''','''''')supplier,vendor_id from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' AND END_DATE_ACTIVE IS NULL   AND VENDOR_ID IN (SELECT VENDOR_ID FROM PO_vENDOR_SITES_ALL WHERE ORG_ID=103 AND INACTIVE_DATE IS NULL ) ORDER BY VENDOR_NAME",
+        "variable": "sql"
+      },
+      {
+        "method": "kanban_scan_Load",
+        "line": 76,
+        "raw_line": "cl.oradap = New OracleDataAdapter(cl.sql, cl.oracon)",
+        "query": "select organization_code  from jan_organization_list_view where unit_name='UNIT7' order by organization_code",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Button2_Click",
+        "line": 106,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select kanban_card_number,jan_itemname(inventory_item_id)item_no,jan_itemdesc(jan_itemname(inventory_item_id)) item_Desc, packing_method,packing_qty ,  (select vendor_name from po_Vendors where vendor_id=a.supplier_id)vendor,creation_Date    from jan_supplier_kanban_view A where 1=1   and supplier_id=jan_vendorno('\" & cmbsup.SelectedItem & \"')  and organization_id=jan_orgid('\" & cmborg.SelectedItem & \"')  and inventory_item_id=jan_itemno('\" & txtitem.Text & \"')  and source_Type_meaning= '\" & cmbcat.SelectedItem & \"'     And creation_Date >=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and creation_date <=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS')",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "mmcard.vb",
+    "queries": [
+      {
+        "method": "mmcard_Load",
+        "line": 198,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select vendor_name from po_vendors where vendor_type_lookup_code <>'EMPLOYEE' order by vendor_name asc",
+        "variable": "sql"
+      },
+      {
+        "method": "mmcard_Load",
+        "line": 205,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "select organization_code  from org_organization_definitions where organization_id not in(105,112 )order by organization_code",
+        "variable": "sql"
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 679,
+        "raw_line": "cl.oradap = New OracleDataAdapter(sql, cl.oracon)",
+        "query": "(select   a.gate_no,a.ORG, C.item_NO,C.ITEM_description description,C.pono,substr(supplier_name,0,30)sup ,SUM(c.quantity_received)QTY,C. receipt_num , C.receipt_date,'' JOBNO,b.mmcard,B.DC_NO,0,decode(Checked_By,'OTHERS',other_name,checked_by)Checked_By,A.REV,nvl(A.SPOT_INSPECTION,0)SPOT_INSPECTION,nvl(A.SELF_CERTIFY,0) SELF_CERTIFY  from jan_gate_lines a,jan_gatE_header b,jan_pur_listing c   where a.gatE_no=b.gatE_no and b.gate_id=c.gatE_no  and a.poline=c.po_line_id and a.flag=1  AND A.LOCATION_ID=C.LINE_LOCATION_ID  and   C.receipt_dAtE >=TO_DATE('\" & Format(DateTimePicker1.Value, \"dd-MMM-yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and C.receipt_dAtE<=TO_DATE('\" & Format(DateTimePicker2.Value, \"dd-MMM-yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and c.quantity_received>0   AND UNIT='UNIT2'  AND UNIT='UNIT4'  AND UNIT='SKYFAST'  AND UNIT='UNIT7'  AND UNIT='UNIT1' GROUP BY a.gate_no,  a.ORG,  C.item_NO,  C.ITEM_description,  C.pono,  SUBSTR(supplier_name,0,30),  C. receipt_num,  C.receipt_date,   b.mmcard,  B.DC_NO,  DECODE(Checked_By,'OTHERS',other_name,checked_by),  A.REV,   A.SPOT_INSPECTION ,        a.SELF_CERTIFY   ) UNION ALL  (select    a.gate_no,a.ORG, D.PARTNO,D.PARTNAME description,D.pono,substr(VENDOR_name,0,30)sup ,SUM(D.quantity_received) QTY,D. receipt_num , D.receipt_date ,D.JOBNO ,b.mmcard,B.DC_NO,0,decode(Checked_By,'OTHERS',other_name,checked_by)Checked_By,a.rev, nvl(A.SPOT_INSPECTION,0)SPOT_INSPECTION,nvl(A.SELF_CERTIFY,0) SELF_CERTIFY  from jan_gate_lines a,jan_gatE_header b,jan_OSP_listing D where a.gatE_no=b.gatE_no and  a.poline=d.po_line_id and b.gate_id=D.gatE_no  and a.flag=1    and   D.receipt_dAtE>=TO_DATE('\" & Format(DateTimePicker1.Value, \"dd-MMM-yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and D.receipt_dAtE<=TO_DATE('\" & Format(DateTimePicker2.Value, \"dd-MMM-yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and  D.quantity_received>0  AND UNIT='UNIT2'  AND UNIT='UNIT4'  AND UNIT='SKYFAST'  AND UNIT='UNIT1' GROUP BY a.gate_no,    a.ORG,    D.PARTNO,    D.PARTNAME,    D.pono,    SUBSTR(VENDOR_name,0,30),    D. receipt_num,    D.receipt_date,    D.JOBNO,    b.mmcard,    B.DC_NO,    DECODE(Checked_By,'OTHERS',other_name,checked_by),    a.rev,     A.SPOT_INSPECTION ,       a.SELF_CERTIFY        )",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "eod.vb",
+    "queries": [
+      {
+        "method": "eod_Load",
+        "line": 39,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select  name,organization_id from hr_operating_units WHERE ORGANIZATION_ID In (\" & ORG_ID & \")",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 82,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "select *  from jan_eod_excel_list a where 1=1 and operating_unit=\" & cmbou.SelectedValue & \"    and a.process_id =\" & cmbp.SelectedValue & \" AND prime_responsibility = '\" & txtres.Text & \"'   And (a.process_id,mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where live_Flag=1)    and  a.process_id =\" & cmbp.SelectedValue & \"  AND prime_responsibility = '\" & txtres.Text & \"'   And (a.process_id,a.mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where prime_responsibility = '\" & txtres.Text & \"')",
+        "variable": "sql"
+      },
+      {
+        "method": "cmbprc_SelectedIndexChanged",
+        "line": 204,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select distinct prime_responsibility from jan_eod_process_master where live_flag=1 and org_id=\" & cmbou.SelectedValue & \"",
+        "variable": "sql"
+      },
+      {
+        "method": "cmbprc_SelectedIndexChanged",
+        "line": 223,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select distinct process_name,idno from jan_eod_process_master where live_flag=1 and org_id=\" & cmbou.SelectedValue & \"  And prime_responsibility =  '\" & txtres.Text & \"'   '\" & res & \"'   And live_flag=1",
+        "variable": "sql"
+      },
+      {
+        "method": "txtres_SelectedIndexChanged",
+        "line": 246,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select distinct process_name,idno from jan_eod_process_master where live_flag=1 and org_id=\" & cmbou.SelectedValue & \"  And prime_responsibility =  '\" & txtres.Text & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "Button2_Click",
+        "line": 293,
+        "raw_line": "cl.oradap = New OracleClient.OracleDataAdapter(sql, cl.oracon)",
+        "query": "Select C.*,Case When PENDING_DAYS> 0 Then'OVER DUE' ELSE'DUE' END STATUS,(SELECT DECODE(PLANNING_MAKE_BUY_CODE,1,'Make',2,'Buy') from mtl_system_items where organization_id=JAN_ORGID(C.org) and inventory_item_id=JAN_ITEMNO(C.Item_NO))make_buy FROM(   [\" Select B.PROCESS_name, JAN_ORGCODE(a.ORGANIZATION_ID)ORG,JAN_ITEMNAME(a.INVENTORY_ITEM_ID)ITEM_NO, jan_itemdesc(JAN_ITEMNAME(a.INVENTORY_ITEM_ID))item_desc ,(SELECT VENDOR_NAME FROM PO_VENDORS WHERE VENDOR_ID=A.VENDOR_ID)VENDOR_NAME,REF_ID,REf_DT,a.quantity,A.TARGET_DATE,b.prime_responsibility,ROUND(SYSDATE-TARGET_DATE)PENDING_DAYS,Case WHEN  ROUND(SYSDATE-TARGET_DATE) <=0 THEN 'NA'WHEN ROUND(SYSDATE-TARGET_DATE) >0 And ROUND(SYSDATE-TARGET_DATE)<=3 THEN 'SEVERITY-4' WHEN ROUND(SYSDATE-TARGET_DATE) >3 And ROUND(SYSDATE-TARGET_DATE) <=7 THEN 'SEVERITY-3']   [\"(select COMMODITY from jan_item_master_tab where organization_id=A.organization_id And inventory_item_id=A.inventory_item_id)COMMODITy,Case when b.item_responsibility='Buyers' then (select buyer_name from jan_item_master_tab where organization_id=A.organization_id and inventory_item_id=A.inventory_item_id)]   And (a.process_id,mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where prime_responsibility = '\" & txtres.Text & \"')    and (a.process_id,mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where prime_responsibility = '\" & txtres.Text & \"' and b.process_name='\" & cmbp.Text & \"')   And (a.process_id,mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where prime_responsibility = '\" & txtres.Text & \"')    And (a.process_id,mast_id) in (select idno,row_id from JAN_EOD_PROCESS_MASTER where prime_responsibility = '\" & txtres.Text & \"')    ) c",
+        "variable": "sql"
+      }
+    ]
+  },
+  {
+    "file": "gacc.vb",
+    "queries": [
+      {
+        "method": "Button4_Click",
+        "line": 10,
+        "raw_line": "cl.orcmd = New OracleCommand(cl.sql, cl.oracon)",
+        "query": "select gate_no,gdate,supplier_name,dc_no,dc_date,gtype,vehicle_det ,inv_category,case when validated=1 then 'Gate' when validated=0 then 'Validated' when validated=2 then 'Not Validate' when validated=6 then 'No Reference' end status from jan_gatE_header a where a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and unit='\" & unit & \"'  order by A.gate_no",
+        "variable": "cl.sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 39,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "select MIN(GATE_NO),MAX(GATE_NO),count(*)cnt,SUM(CASE WHEN GTYPE='PO' THEN 1 ELSE 0 END) PO_CNT,SUM(cASE WHEN GTYPE='OSP' THEN 1 ELSE 0 END)OSP_CNT,SUM (CASE WHEN  GTYPE IS NULL THEN 1 ELSE 0 END)NON_PO,SUM(CASE WHEN POD_NO IS NOT NULL THEN 1 ELSE 0 END)POD   from jan_gatE_header a where a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and unit='\" & unit & \"'",
+        "variable": "sql"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 108,
+        "raw_line": "cl.orcmd = New OracleCommand(sql, cl.oracon)",
+        "query": "select count(*),inv_category from jan_Gate_header a where  a.gdate>=TO_DATE('\" & Format(inwdtf.Value, \"dd/MM/yyyy\") & \" 00:00:00','DD/MM/YYYY HH24:MI:SS') and  a.gdate<=TO_DATE('\" & Format(inwdtto.Value, \"dd/MM/yyyy\") & \" 23:59:00','DD/MM/YYYY HH24:MI:SS') and unit='\" & unit & \"' AND inv_category IS NOT NULL group by inv_category",
+        "variable": "sql"
+      }
+    ]
+  }
+]

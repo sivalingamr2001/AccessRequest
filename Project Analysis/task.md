@@ -1,0 +1,10 @@
+- [x] Search and index all `.vb` files to map out project components
+- [x] Analyze application configuration and entry point for `project-overview.md`
+- [x] Extract UI forms, controls, events, and navigation flow for `screens.md`
+- [x] Parse business logic, validations, calculations, and role checks for `business-rules.md` and `validations.md`
+- [x] Find and catalog all SQL queries and stored procedure calls for `queries.md` and `database-model.md`
+- [x] Formulate REST API backend mapping for `api-mapping.md`
+- [x] Draft frontend architecture and component mapping for `react-migration-plan.md`
+- [x] Evaluate security and migration risks for `risk-report.md`
+- [x] Create `README.md` index linking all artifacts
+- [x] Verify complete project coverage across all `.vb` files

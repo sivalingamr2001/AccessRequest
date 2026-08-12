@@ -1,0 +1,4667 @@
+{
+  "Gate_Password": {
+    "file_path": "Gate Entry/Gate_Password.vb",
+    "controls": [
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtcpwd",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "txtpwd",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtuname",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "updt",
+        "type": "Button"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "DGV1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtper",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "adi": {
+    "file_path": "Gate Entry/adi.vb",
+    "controls": [
+      {
+        "name": "self_certified",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "opn_seq",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "wip_entity_id",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Tariff",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "LINE_TYPE",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "RateCategory",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "asn_dt",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "asn_no",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "lineloc",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "price",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "val",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "pohead",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "poline",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "type",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "txtrwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label23",
+        "type": "Label"
+      },
+      {
+        "name": "txtpodwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label24",
+        "type": "Label"
+      },
+      {
+        "name": "txtbox",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label22",
+        "type": "Label"
+      },
+      {
+        "name": "txtpod",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label21",
+        "type": "Label"
+      },
+      {
+        "name": "spot_inspection",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "cmbcr",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "chkoadi",
+        "type": "CheckBox"
+      },
+      {
+        "name": "txtveh",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "Txt_inv_val",
+        "type": "TextBox"
+      },
+      {
+        "name": "nval_cb",
+        "type": "CheckBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "Column1",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "scmcon2",
+        "type": "SqlConnection"
+      },
+      {
+        "name": "BUT_DWNLD_ASN",
+        "type": "Button"
+      },
+      {
+        "name": "TXT_ASN_NO",
+        "type": "TextBox"
+      },
+      {
+        "name": "asn_grid",
+        "type": "DataGrid"
+      },
+      {
+        "name": "job",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "Column3",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "SCMCON",
+        "type": "OleDbConnection"
+      },
+      {
+        "name": "Column2",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "operation",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "btnclose",
+        "type": "Button"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "pono",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "podt",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "item",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "description",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "org",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "rev",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "popend",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "uom",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "dcqty",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "remark",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "poqty",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "osp",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "TXTUSER",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnupdt",
+        "type": "Button"
+      },
+      {
+        "name": "txtorg",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnmod",
+        "type": "Button"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "cmbtype",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv12",
+        "type": "DataGridView"
+      },
+      {
+        "name": "dtdc",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dtgdt",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "txtdcno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "txttype",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtsite",
+        "type": "TextBox"
+      },
+      {
+        "name": "ErrorProvider1",
+        "type": "ErrorProvider"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbpo",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "cmbitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "newreport": {
+    "file_path": "Gate Entry/newreport.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "btnconsolidate",
+        "type": "Button"
+      },
+      {
+        "name": "txtfm",
+        "type": "TextBox"
+      },
+      {
+        "name": "calto",
+        "type": "MonthCalendar"
+      },
+      {
+        "name": "calfm",
+        "type": "MonthCalendar"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtto",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnfm",
+        "type": "Button"
+      },
+      {
+        "name": "btnto",
+        "type": "Button"
+      },
+      {
+        "name": "btndaily",
+        "type": "Button"
+      },
+      {
+        "name": "btncancel",
+        "type": "Button"
+      },
+      {
+        "name": "btnrtv",
+        "type": "Button"
+      },
+      {
+        "name": "btnpoamend",
+        "type": "Button"
+      },
+      {
+        "name": "btninward",
+        "type": "Button"
+      },
+      {
+        "name": "btntime",
+        "type": "Button"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btnadi",
+        "type": "Button"
+      },
+      {
+        "name": "btnurg",
+        "type": "Button"
+      },
+      {
+        "name": "btnskip",
+        "type": "Button"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "txt_miss",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "txtgfm",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtgto",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btngt",
+        "type": "Button"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "rdpo",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rdosp",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rdser",
+        "type": "RadioButton"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "RDALL",
+        "type": "RadioButton"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnlong",
+        "type": "Button"
+      },
+      {
+        "name": "btnper",
+        "type": "Button"
+      },
+      {
+        "name": "UNIT7",
+        "type": "RadioButton"
+      },
+      {
+        "name": "UNIT2",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "xerox",
+        "type": "Button"
+      },
+      {
+        "name": "delayaccount",
+        "type": "Button"
+      },
+      {
+        "name": "adimanual",
+        "type": "Button"
+      },
+      {
+        "name": "btninv",
+        "type": "Button"
+      },
+      {
+        "name": "btnprep",
+        "type": "Button"
+      },
+      {
+        "name": "GroupBox4",
+        "type": "GroupBox"
+      },
+      {
+        "name": "GroupBox5",
+        "type": "GroupBox"
+      },
+      {
+        "name": "btnm2o",
+        "type": "Button"
+      },
+      {
+        "name": "RD3",
+        "type": "RadioButton"
+      },
+      {
+        "name": "RDSKY",
+        "type": "RadioButton"
+      },
+      {
+        "name": "btnvallist",
+        "type": "Button"
+      },
+      {
+        "name": "rdu1",
+        "type": "RadioButton"
+      }
+    ],
+    "handlers": []
+  },
+  "adi_exemption": {
+    "file_path": "Gate Entry/adi_exemption.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "Validate": {
+    "file_path": "Gate Entry/Validate.vb",
+    "controls": [
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "rbtnnv",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rbtnv",
+        "type": "RadioButton"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "txtpo",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "TXTLINE",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtlog",
+        "type": "TextBox"
+      },
+      {
+        "name": "txttypt",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtorg",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "lbtype",
+        "type": "Label"
+      },
+      {
+        "name": "btnok",
+        "type": "Button"
+      },
+      {
+        "name": "dgval",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "cmbval",
+        "type": "ComboBox"
+      },
+      {
+        "name": "chkeinv",
+        "type": "CheckBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "txtgst",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "qc_block": {
+    "file_path": "Gate Entry/qc_block.vb",
+    "controls": [
+      {
+        "name": "tJolt",
+        "type": "Timer"
+      },
+      {
+        "name": "Timer1",
+        "type": "Timer"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "dgvlist",
+        "type": "DataGridView"
+      }
+    ],
+    "handlers": []
+  },
+  "fifo_login": {
+    "file_path": "Gate Entry/fifo_login.vb",
+    "controls": [
+      {
+        "name": "PictureBox1",
+        "type": "PictureBox"
+      },
+      {
+        "name": "Label35",
+        "type": "Label"
+      },
+      {
+        "name": "txtuname",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtpwd",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "bnlogin",
+        "type": "Button"
+      },
+      {
+        "name": "btncpwd",
+        "type": "Button"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "operation_eod_exception": {
+    "file_path": "Gate Entry/operation_eod_exception.vb",
+    "controls": [
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "DataGridView1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "DataGridView2",
+        "type": "DataGridView"
+      },
+      {
+        "name": "DataGridView3",
+        "type": "DataGridView"
+      }
+    ],
+    "handlers": []
+  },
+  "PO_BLOCK": {
+    "file_path": "Gate Entry/PO_BLOCK.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "tJolt",
+        "type": "Timer"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Timer1",
+        "type": "Timer"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "dgvlist",
+        "type": "DataGridView"
+      }
+    ],
+    "handlers": []
+  },
+  "headerval": {
+    "file_path": "Gate Entry/headerval.vb",
+    "controls": [
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "rea1",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "rea2",
+        "type": "ComboBox"
+      }
+    ],
+    "handlers": []
+  },
+  "minmax": {
+    "file_path": "Gate Entry/minmax.vb",
+    "controls": [
+      {
+        "name": "TabControl1",
+        "type": "TabControl"
+      },
+      {
+        "name": "TabPage1",
+        "type": "TabPage"
+      },
+      {
+        "name": "dgmm",
+        "type": "DataGridView"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "rd1",
+        "type": "RadioButton"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "cmbitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbtyp",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbinv",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "rd2",
+        "type": "RadioButton"
+      },
+      {
+        "name": "btnpri",
+        "type": "Button"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "TabPage2",
+        "type": "TabPage"
+      },
+      {
+        "name": "ProgressBar2",
+        "type": "ProgressBar"
+      },
+      {
+        "name": "txtitem1",
+        "type": "TextBox"
+      },
+      {
+        "name": "dfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "dgfc",
+        "type": "DataGridView"
+      },
+      {
+        "name": "cmbfc",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmborg1",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btngo1",
+        "type": "Button"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "lblord",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "lblmaxcst",
+        "type": "Label"
+      },
+      {
+        "name": "lblmin",
+        "type": "Label"
+      },
+      {
+        "name": "lblmincst",
+        "type": "Label"
+      },
+      {
+        "name": "lbitem",
+        "type": "Label"
+      },
+      {
+        "name": "ProgressBar1",
+        "type": "ProgressBar"
+      },
+      {
+        "name": "btnpri1",
+        "type": "Button"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "lbsale",
+        "type": "Label"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "lbmfg",
+        "type": "Label"
+      },
+      {
+        "name": "Label18",
+        "type": "Label"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "lbcur",
+        "type": "Label"
+      },
+      {
+        "name": "lbfc",
+        "type": "Label"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "rd3",
+        "type": "RadioButton"
+      }
+    ],
+    "handlers": []
+  },
+  "Service1": {
+    "file_path": "Gate Entry/Service1.vb",
+    "controls": [
+      {
+        "name": "Timer1",
+        "type": "Timer"
+      }
+    ],
+    "handlers": []
+  },
+  "Gate": {
+    "file_path": "Gate Entry/Gate.vb",
+    "controls": [
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "btnval",
+        "type": "Button"
+      },
+      {
+        "name": "btnadd",
+        "type": "Button"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "txtlog",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label18",
+        "type": "Label"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "btnmod",
+        "type": "Button"
+      },
+      {
+        "name": "btnsta",
+        "type": "Button"
+      },
+      {
+        "name": "Label24",
+        "type": "Label"
+      },
+      {
+        "name": "Label23",
+        "type": "Label"
+      },
+      {
+        "name": "glist",
+        "type": "Button"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "linkpwd",
+        "type": "LinkLabel"
+      },
+      {
+        "name": "lbupdt",
+        "type": "LinkLabel"
+      },
+      {
+        "name": "Label28",
+        "type": "Label"
+      },
+      {
+        "name": "Label27",
+        "type": "Label"
+      },
+      {
+        "name": "ADIbt",
+        "type": "Button"
+      },
+      {
+        "name": "btncan",
+        "type": "Button"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label30",
+        "type": "Label"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label33",
+        "type": "Label"
+      },
+      {
+        "name": "Label32",
+        "type": "Label"
+      },
+      {
+        "name": "Label34",
+        "type": "Label"
+      },
+      {
+        "name": "btnrecpt",
+        "type": "Button"
+      },
+      {
+        "name": "CheckBox1",
+        "type": "CheckBox"
+      },
+      {
+        "name": "btnnonpo",
+        "type": "Button"
+      },
+      {
+        "name": "Label35",
+        "type": "Label"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "txtinw",
+        "type": "TextBox"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "cmbval",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "gtype",
+        "type": "ComboBox"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "btnxs",
+        "type": "Button"
+      },
+      {
+        "name": "lbvehicle",
+        "type": "Label"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Label31",
+        "type": "Label"
+      },
+      {
+        "name": "UNBLOCK",
+        "type": "Button"
+      },
+      {
+        "name": "btnreport",
+        "type": "Button"
+      },
+      {
+        "name": "mmcard",
+        "type": "Button"
+      },
+      {
+        "name": "bprint",
+        "type": "Button"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "lblcnt",
+        "type": "Label"
+      },
+      {
+        "name": "btnview",
+        "type": "Button"
+      },
+      {
+        "name": "btndel",
+        "type": "Button"
+      },
+      {
+        "name": "TXTREF",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "btnitem",
+        "type": "Button"
+      },
+      {
+        "name": "dgvcr",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label21",
+        "type": "Label"
+      },
+      {
+        "name": "Label22",
+        "type": "Label"
+      },
+      {
+        "name": "btnwop",
+        "type": "Button"
+      },
+      {
+        "name": "Label29",
+        "type": "Label"
+      },
+      {
+        "name": "Label37",
+        "type": "Label"
+      },
+      {
+        "name": "btngacc",
+        "type": "Button"
+      },
+      {
+        "name": "dgvr",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label38",
+        "type": "Label"
+      },
+      {
+        "name": "Label39",
+        "type": "Label"
+      },
+      {
+        "name": "btntag",
+        "type": "Button"
+      },
+      {
+        "name": "Label41",
+        "type": "Label"
+      },
+      {
+        "name": "Label40",
+        "type": "Label"
+      },
+      {
+        "name": "Label42",
+        "type": "Label"
+      },
+      {
+        "name": "Label43",
+        "type": "Label"
+      },
+      {
+        "name": "Label44",
+        "type": "Label"
+      },
+      {
+        "name": "Label45",
+        "type": "Label"
+      },
+      {
+        "name": "job_shrt",
+        "type": "Button"
+      },
+      {
+        "name": "Label46",
+        "type": "Label"
+      },
+      {
+        "name": "Label36",
+        "type": "Label"
+      },
+      {
+        "name": "Label48",
+        "type": "Label"
+      },
+      {
+        "name": "Label47",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "ProjectInstaller": {
+    "file_path": "Gate Entry/ProjectInstaller.vb",
+    "controls": [
+      {
+        "name": "ServiceProcessInstaller1",
+        "type": "ServiceProcessInstaller"
+      },
+      {
+        "name": "ServiceInstaller1",
+        "type": "ServiceInstaller"
+      }
+    ],
+    "handlers": []
+  },
+  "excess-release": {
+    "file_path": "Gate Entry/excess-release.vb",
+    "controls": [
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtrem",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "btnclose",
+        "type": "Button"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "lbxs",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "CheckBox1",
+        "type": "CheckBox"
+      },
+      {
+        "name": "INWDTTO",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "lblastex",
+        "type": "Label"
+      },
+      {
+        "name": "BTNPRINT",
+        "type": "Button"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "lbnext",
+        "type": "Label"
+      },
+      {
+        "name": "DGVLINE",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "Voucher": {
+    "file_path": "Gate Entry/Voucher.vb",
+    "controls": [
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtvou",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtdc",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "txtsup",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "cancelentry": {
+    "file_path": "Gate Entry/cancelentry.vb",
+    "controls": [
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbrea",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtref",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "GateUpdate": {
+    "file_path": "Gate Entry/GateUpdate.vb",
+    "controls": [
+      {
+        "name": "btnupdt",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtline",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "txtqty",
+        "type": "TextBox"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "btndel",
+        "type": "Button"
+      },
+      {
+        "name": "txtwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "cmbcat",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "cmbres",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtpodwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "txtpod",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "cmbcr",
+        "type": "ComboBox"
+      }
+    ],
+    "handlers": []
+  },
+  "Login": {
+    "file_path": "Gate Entry/Login.vb",
+    "controls": [
+      {
+        "name": "PictureBox1",
+        "type": "PictureBox"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtuser",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtpwd",
+        "type": "TextBox"
+      },
+      {
+        "name": "ErrorProvider1",
+        "type": "ErrorProvider"
+      },
+      {
+        "name": "Panel1",
+        "type": "Panel"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Button3",
+        "type": "Button"
+      },
+      {
+        "name": "MyGroupBox1",
+        "type": "myGroupBox"
+      }
+    ],
+    "handlers": []
+  },
+  "pocheck.designer": {
+    "file_path": "Gate Entry/pocheck.designer.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "Class1": {
+    "file_path": "Gate Entry/Class1.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "Login.designer": {
+    "file_path": "Gate Entry/Login.designer.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "Status": {
+    "file_path": "Gate Entry/Status.vb",
+    "controls": [
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "ProgressBar1",
+        "type": "ProgressBar"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Button3",
+        "type": "Button"
+      },
+      {
+        "name": "Button4",
+        "type": "Button"
+      },
+      {
+        "name": "Button5",
+        "type": "Button"
+      },
+      {
+        "name": "Button6",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbcr",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "btn_short",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "Report": {
+    "file_path": "Gate Entry/Report.vb",
+    "controls": [
+      {
+        "name": "dtfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "RadioButton1",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "RadioButton2",
+        "type": "RadioButton"
+      },
+      {
+        "name": "dtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "cmbval",
+        "type": "ComboBox"
+      },
+      {
+        "name": "po",
+        "type": "Button"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Button3",
+        "type": "Button"
+      },
+      {
+        "name": "Button4",
+        "type": "Button"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "rdpo",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rdosp",
+        "type": "RadioButton"
+      },
+      {
+        "name": "btnprintnew",
+        "type": "Button"
+      },
+      {
+        "name": "btngt",
+        "type": "Button"
+      },
+      {
+        "name": "btnnval",
+        "type": "Button"
+      },
+      {
+        "name": "rdser",
+        "type": "RadioButton"
+      },
+      {
+        "name": "cmbcat",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "gt_checked": {
+    "file_path": "Gate Entry/gt_checked.vb",
+    "controls": [
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtqty",
+        "type": "TextBox"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txt_oth",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "txtshtr",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "cmbitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbchk1",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtchk",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "cmbpack",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtpqty",
+        "type": "TextBox"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "txtstby",
+        "type": "TextBox"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "dgvpack",
+        "type": "DataGridView"
+      },
+      {
+        "name": "cmbpitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Item",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column1",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "cmbpk",
+        "type": "DataGridViewComboBoxColumn"
+      },
+      {
+        "name": "Column3",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column2",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column4",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column5",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "btnpack",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "Class2": {
+    "file_path": "Gate Entry/Class2.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "MyGroupBox": {
+    "file_path": "Gate Entry/MyGroupBox.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "del": {
+    "file_path": "Gate Entry/del.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox2",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox3",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox4",
+        "type": "TextBox"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "TextBox5",
+        "type": "TextBox"
+      },
+      {
+        "name": "TextBox6",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "rtvreason": {
+    "file_path": "Gate Entry/rtvreason.vb",
+    "controls": [
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txttrans",
+        "type": "TextBox"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtamt",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtterm",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtqty",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtdoc",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "btnupdt",
+        "type": "Button"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtremark",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "btndel",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "gate_lot_print": {
+    "file_path": "Gate Entry/gate_lot_print.vb",
+    "controls": [
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btnshow",
+        "type": "Button"
+      },
+      {
+        "name": "DateTimePicker2",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "DateTimePicker1",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "cmbtype",
+        "type": "ComboBox"
+      },
+      {
+        "name": "chkpend",
+        "type": "CheckBox"
+      }
+    ],
+    "handlers": []
+  },
+  "direct_delivery": {
+    "file_path": "Gate Entry/direct_delivery.vb",
+    "controls": [
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbven",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btnshow",
+        "type": "Button"
+      },
+      {
+        "name": "dtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dtfrm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "rdrej",
+        "type": "RadioButton"
+      },
+      {
+        "name": "RDAPP",
+        "type": "RadioButton"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "cmbcri",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "fifo_sticker": {
+    "file_path": "Gate Entry/fifo_sticker.vb",
+    "controls": [
+      {
+        "name": "TabControl1",
+        "type": "TabControl"
+      },
+      {
+        "name": "TabPage1",
+        "type": "TabPage"
+      },
+      {
+        "name": "TabPage2",
+        "type": "TabPage"
+      },
+      {
+        "name": "TabPage4",
+        "type": "TabPage"
+      },
+      {
+        "name": "DateTimePicker1",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "chkpend",
+        "type": "CheckBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btnshow",
+        "type": "Button"
+      },
+      {
+        "name": "DateTimePicker2",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      },
+      {
+        "name": "cmbjorg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "jto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "jfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label38",
+        "type": "Label"
+      },
+      {
+        "name": "Label41",
+        "type": "Label"
+      },
+      {
+        "name": "Label40",
+        "type": "Label"
+      },
+      {
+        "name": "Label36",
+        "type": "Label"
+      },
+      {
+        "name": "Label35",
+        "type": "Label"
+      },
+      {
+        "name": "txtjob",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtjitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "bntjob",
+        "type": "Button"
+      },
+      {
+        "name": "TabPage3",
+        "type": "TabPage"
+      },
+      {
+        "name": "cmbsub",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbcorg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "cfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "txtcitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "btncshow",
+        "type": "Button"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgvjob",
+        "type": "DataGridView"
+      },
+      {
+        "name": "btn_jstk",
+        "type": "Button"
+      },
+      {
+        "name": "dgvcstk",
+        "type": "DataGridView"
+      },
+      {
+        "name": "btncprint",
+        "type": "Button"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "TabPage5",
+        "type": "TabPage"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "rdsrc",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rddes",
+        "type": "RadioButton"
+      },
+      {
+        "name": "btnslist",
+        "type": "Button"
+      },
+      {
+        "name": "chkspend",
+        "type": "CheckBox"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsorg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btnship",
+        "type": "Button"
+      },
+      {
+        "name": "dtsto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dtsfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "Label18",
+        "type": "Label"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "Label21",
+        "type": "Label"
+      },
+      {
+        "name": "txtsitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtship",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgvs",
+        "type": "DataGridView"
+      },
+      {
+        "name": "chkjpend",
+        "type": "CheckBox"
+      },
+      {
+        "name": "chkptc",
+        "type": "CheckBox"
+      },
+      {
+        "name": "TabPage6",
+        "type": "TabPage"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "DataGridView1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Column1",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "txtto",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtloc",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtfrm",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "Label24",
+        "type": "Label"
+      },
+      {
+        "name": "Label23",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "suplist": {
+    "file_path": "Gate Entry/suplist.vb",
+    "controls": [
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "btncan",
+        "type": "Button"
+      },
+      {
+        "name": "dt",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "dt1",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "sealed",
+        "type": "CheckBox"
+      },
+      {
+        "name": "rdurg",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rdadi",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "txtname",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "gatestatus": {
+    "file_path": "Gate Entry/gatestatus.vb",
+    "controls": [
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Button5",
+        "type": "Button"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "cmborder",
+        "type": "ComboBox"
+      },
+      {
+        "name": "ComboBox1",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "ProgressBar1",
+        "type": "ProgressBar"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "CheckBox1",
+        "type": "CheckBox"
+      },
+      {
+        "name": "GroupBox4",
+        "type": "GroupBox"
+      },
+      {
+        "name": "rd7",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rd6",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rd5",
+        "type": "RadioButton"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "rd4",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rd3",
+        "type": "RadioButton"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Rd1",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Rd2",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Panel1",
+        "type": "Panel"
+      }
+    ],
+    "handlers": []
+  },
+  "Form1": {
+    "file_path": "Gate Entry/Form1.vb",
+    "controls": [
+      {
+        "name": "Button1",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "gatelist": {
+    "file_path": "Gate Entry/gatelist.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "txtpo",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "dgv2",
+        "type": "DataGridView"
+      },
+      {
+        "name": "dgv3",
+        "type": "DataGridView"
+      },
+      {
+        "name": "rd1",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rd2",
+        "type": "RadioButton"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "pocheck": {
+    "file_path": "Gate Entry/pocheck.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtpo",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtpodate",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtvendor",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtlocation",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "dgv2",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "lblval",
+        "type": "Label"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "txt1",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv3",
+        "type": "DataGridView"
+      },
+      {
+        "name": "BTLCALTAX",
+        "type": "Button"
+      },
+      {
+        "name": "TXTITEM",
+        "type": "TextBox"
+      },
+      {
+        "name": "TXTPQTY",
+        "type": "TextBox"
+      },
+      {
+        "name": "TXTPOOSP",
+        "type": "TextBox"
+      },
+      {
+        "name": "TXTGNO",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "lbldcval",
+        "type": "Label"
+      },
+      {
+        "name": "lbldctotval",
+        "type": "Label"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "txtdc",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "Label23",
+        "type": "Label"
+      },
+      {
+        "name": "txtrate",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "Label28",
+        "type": "Label"
+      },
+      {
+        "name": "lbfreight",
+        "type": "Label"
+      },
+      {
+        "name": "lbrate",
+        "type": "Label"
+      },
+      {
+        "name": "Label29",
+        "type": "Label"
+      },
+      {
+        "name": "txtline",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgvtax",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Panel1",
+        "type": "Panel"
+      },
+      {
+        "name": "Button3",
+        "type": "Button"
+      },
+      {
+        "name": "Label30",
+        "type": "Label"
+      },
+      {
+        "name": "txtvendorid",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgvtaxdetails",
+        "type": "DataGridView"
+      },
+      {
+        "name": "richorder",
+        "type": "RichTextBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "richdc",
+        "type": "RichTextBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label27",
+        "type": "Label"
+      },
+      {
+        "name": "dcoth",
+        "type": "Label"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "dctt",
+        "type": "Label"
+      },
+      {
+        "name": "dcvat",
+        "type": "Label"
+      },
+      {
+        "name": "dcstax",
+        "type": "Label"
+      },
+      {
+        "name": "Label22",
+        "type": "Label"
+      },
+      {
+        "name": "Label24",
+        "type": "Label"
+      },
+      {
+        "name": "Label21",
+        "type": "Label"
+      },
+      {
+        "name": "dcscess",
+        "type": "Label"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "dccess",
+        "type": "Label"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "dcbed",
+        "type": "Label"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "dcpf",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "lblcval",
+        "type": "Label"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "lblcdcval",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "lbordertot",
+        "type": "Label"
+      },
+      {
+        "name": "txtcur",
+        "type": "TextBox"
+      }
+    ],
+    "handlers": []
+  },
+  "Add": {
+    "file_path": "Gate Entry/Add.vb",
+    "controls": [
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "cmbitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "cmbpo",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtsite",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "txtdcno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "dtgdt",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dtdc",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "ErrorProvider1",
+        "type": "ErrorProvider"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv12",
+        "type": "DataGridView"
+      },
+      {
+        "name": "cmbtype",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "txttype",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "btnmod",
+        "type": "Button"
+      },
+      {
+        "name": "txtorg",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnupdt",
+        "type": "Button"
+      },
+      {
+        "name": "TXTUSER",
+        "type": "TextBox"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "txt_adi_no",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      },
+      {
+        "name": "scmcon2",
+        "type": "SqlConnection"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "chk_adi",
+        "type": "CheckBox"
+      },
+      {
+        "name": "txtinv",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "xerox",
+        "type": "CheckBox"
+      },
+      {
+        "name": "txtadirea",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "dtadi",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label18",
+        "type": "Label"
+      },
+      {
+        "name": "chkref",
+        "type": "CheckBox"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "txtnorg",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label13",
+        "type": "Label"
+      },
+      {
+        "name": "TXTREF",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtveh",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "chkogt",
+        "type": "CheckBox"
+      },
+      {
+        "name": "cmbcat",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "txtrwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label23",
+        "type": "Label"
+      },
+      {
+        "name": "txtpodwt",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label24",
+        "type": "Label"
+      },
+      {
+        "name": "txtbox",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label22",
+        "type": "Label"
+      },
+      {
+        "name": "txtpod",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label21",
+        "type": "Label"
+      },
+      {
+        "name": "cmbcr",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "txtper",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "cmbres",
+        "type": "ComboBox"
+      },
+      {
+        "name": "pono",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "podt",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "item",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "description",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "org",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "rev",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "popend",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "uom",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "dcqty",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column1",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "poqty",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Cat",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Po",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "osp",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "operation",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "job",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "type",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "poline",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "pohead",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "val",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "price",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "lineloc",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "remark",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column2",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column3",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column4",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column5",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "Column6",
+        "type": "DataGridViewTextBoxColumn"
+      },
+      {
+        "name": "ddltranp",
+        "type": "ComboBox"
+      },
+      {
+        "name": "ddldept",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "Label27",
+        "type": "Label"
+      },
+      {
+        "name": "txtjper",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label28",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "Class3": {
+    "file_path": "Gate Entry/Class3.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "non-po": {
+    "file_path": "Gate Entry/non-po.vb",
+    "controls": [
+      {
+        "name": "cmbcat",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "txtsup",
+        "type": "TextBox"
+      },
+      {
+        "name": "dtdc",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "txtdcno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "txtveh",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label14",
+        "type": "Label"
+      },
+      {
+        "name": "btnsave",
+        "type": "Button"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "chknon",
+        "type": "CheckBox"
+      },
+      {
+        "name": "btnrep",
+        "type": "Button"
+      },
+      {
+        "name": "Panel1",
+        "type": "Panel"
+      },
+      {
+        "name": "dtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dtfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "txtgno",
+        "type": "TextBox"
+      },
+      {
+        "name": "chkogt",
+        "type": "CheckBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "txtogno",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "txtper",
+        "type": "TextBox"
+      },
+      {
+        "name": "cmbres",
+        "type": "ComboBox"
+      },
+      {
+        "name": "ddltranp",
+        "type": "ComboBox"
+      },
+      {
+        "name": "ddldept",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "Label27",
+        "type": "Label"
+      },
+      {
+        "name": "txtjper",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label28",
+        "type": "Label"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "txtbin",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "ComboBox1",
+        "type": "ComboBox"
+      }
+    ],
+    "handlers": []
+  },
+  "Service2": {
+    "file_path": "Gate Entry/Service2.vb",
+    "controls": [
+      {
+        "name": "EventLog1",
+        "type": "EventLog"
+      }
+    ],
+    "handlers": []
+  },
+  "kanban_scan": {
+    "file_path": "Gate Entry/kanban_scan.vb",
+    "controls": [
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "PictureBox1",
+        "type": "PictureBox"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "cmbcat",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "PO_BLOCK.designer": {
+    "file_path": "Gate Entry/PO_BLOCK.designer.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "mmcard": {
+    "file_path": "Gate Entry/mmcard.vb",
+    "controls": [
+      {
+        "name": "txtgfm",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtgto",
+        "type": "TextBox"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "DateTimePicker1",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "DateTimePicker2",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "btnshow",
+        "type": "Button"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "cmbven",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "txtgate",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label9",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "Gate Status Login": {
+    "file_path": "Gate Entry/Gate Status Login.vb",
+    "controls": [
+      {
+        "name": "txtuname",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtpwd",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "btncan",
+        "type": "Button"
+      },
+      {
+        "name": "btnlog",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "Module1": {
+    "file_path": "Gate Entry/Module1.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "receipt-prepared": {
+    "file_path": "Gate Entry/receipt-prepared.vb",
+    "controls": [
+      {
+        "name": "gtype",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label26",
+        "type": "Label"
+      },
+      {
+        "name": "Label25",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "rdpo",
+        "type": "RadioButton"
+      },
+      {
+        "name": "rdosp",
+        "type": "RadioButton"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      }
+    ],
+    "handlers": []
+  },
+  "CycleCount": {
+    "file_path": "Gate Entry/CycleCount.vb",
+    "controls": [
+      {
+        "name": "ProgressBar1",
+        "type": "ProgressBar"
+      },
+      {
+        "name": "txtitem",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label19",
+        "type": "Label"
+      },
+      {
+        "name": "Label20",
+        "type": "Label"
+      },
+      {
+        "name": "Label18",
+        "type": "Label"
+      },
+      {
+        "name": "Label17",
+        "type": "Label"
+      },
+      {
+        "name": "Label16",
+        "type": "Label"
+      },
+      {
+        "name": "adjto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "appto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "adjfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "appfm",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "cmbitem",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbinv",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmbmb",
+        "type": "ComboBox"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "dgcycle",
+        "type": "DataGridView"
+      },
+      {
+        "name": "btnpri",
+        "type": "Button"
+      },
+      {
+        "name": "btngo",
+        "type": "Button"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox1",
+        "type": "GroupBox"
+      },
+      {
+        "name": "Label7",
+        "type": "Label"
+      },
+      {
+        "name": "Label6",
+        "type": "Label"
+      },
+      {
+        "name": "Label5",
+        "type": "Label"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "lbex",
+        "type": "Label"
+      },
+      {
+        "name": "lbst",
+        "type": "Label"
+      },
+      {
+        "name": "Label11",
+        "type": "Label"
+      },
+      {
+        "name": "Label12",
+        "type": "Label"
+      }
+    ],
+    "handlers": []
+  },
+  "eod": {
+    "file_path": "Gate Entry/eod.vb",
+    "controls": [
+      {
+        "name": "Button1",
+        "type": "Button"
+      },
+      {
+        "name": "dgv1",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label8",
+        "type": "Label"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "cmbprc",
+        "type": "ComboBox"
+      },
+      {
+        "name": "txtres",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "cmbp",
+        "type": "ComboBox"
+      },
+      {
+        "name": "Button2",
+        "type": "Button"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "cmbou",
+        "type": "ComboBox"
+      }
+    ],
+    "handlers": []
+  },
+  "NOTVALIDATELIST": {
+    "file_path": "Gate Entry/NOTVALIDATELIST.vb",
+    "controls": [
+      {
+        "name": "btnshow",
+        "type": "Button"
+      },
+      {
+        "name": "dgvdetails",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "cmbsup",
+        "type": "ComboBox"
+      },
+      {
+        "name": "GroupBox3",
+        "type": "GroupBox"
+      },
+      {
+        "name": "tocal",
+        "type": "MonthCalendar"
+      },
+      {
+        "name": "txtqpto",
+        "type": "TextBox"
+      },
+      {
+        "name": "GroupBox2",
+        "type": "GroupBox"
+      },
+      {
+        "name": "fmcal",
+        "type": "MonthCalendar"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "txtqpfm",
+        "type": "TextBox"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "btnfm",
+        "type": "Button"
+      },
+      {
+        "name": "btnto",
+        "type": "Button"
+      },
+      {
+        "name": "Label4",
+        "type": "Label"
+      },
+      {
+        "name": "cmborg",
+        "type": "ComboBox"
+      },
+      {
+        "name": "dgvlines",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Label15",
+        "type": "Label"
+      },
+      {
+        "name": "Label10",
+        "type": "Label"
+      },
+      {
+        "name": "btnprint",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "ApplicationEvents": {
+    "file_path": "Gate Entry/ApplicationEvents.vb",
+    "controls": [],
+    "handlers": []
+  },
+  "gacc": {
+    "file_path": "Gate Entry/gacc.vb",
+    "controls": [
+      {
+        "name": "TextBox1",
+        "type": "TextBox"
+      },
+      {
+        "name": "txtrole",
+        "type": "TextBox"
+      },
+      {
+        "name": "inwdtto",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "inwdtf",
+        "type": "DateTimePicker"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Button4",
+        "type": "Button"
+      },
+      {
+        "name": "dgv",
+        "type": "DataGridView"
+      },
+      {
+        "name": "Button1",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  },
+  "valreason": {
+    "file_path": "Gate Entry/valreason.vb",
+    "controls": [
+      {
+        "name": "Label1",
+        "type": "Label"
+      },
+      {
+        "name": "gate",
+        "type": "TextBox"
+      },
+      {
+        "name": "save",
+        "type": "Button"
+      },
+      {
+        "name": "Label2",
+        "type": "Label"
+      },
+      {
+        "name": "Label3",
+        "type": "Label"
+      },
+      {
+        "name": "line",
+        "type": "TextBox"
+      },
+      {
+        "name": "reason",
+        "type": "TextBox"
+      },
+      {
+        "name": "cancel",
+        "type": "Button"
+      }
+    ],
+    "handlers": []
+  }
+}

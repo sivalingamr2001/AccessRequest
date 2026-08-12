@@ -1,0 +1,372 @@
+[
+  {
+    "file": "adi.vb",
+    "rules": [
+      {
+        "method": "adi_Load",
+        "line": 1114,
+        "raw_line": "chkoadi.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "Validate.vb",
+    "rules": [
+      {
+        "method": "VALIDATE_Load",
+        "line": 76,
+        "raw_line": "If gtpur = \"Entry\" Or txtrole.Text = \"U7_VIEW\" Then btnok.Visible = True Else btnok.Visible = False"
+      },
+      {
+        "method": "VALIDATE_Load",
+        "line": 78,
+        "raw_line": "'  If control = \"VIEW\" Then btnok.Visible = False Else btnok.Visible = True"
+      },
+      {
+        "method": "VALIDATE_Load",
+        "line": 81,
+        "raw_line": "'    rbtnv.Enabled = False"
+      },
+      {
+        "method": "VALIDATE_Load",
+        "line": 86,
+        "raw_line": "'    GroupBox1.Enabled = False"
+      },
+      {
+        "method": "VALIDATE_Load",
+        "line": 98,
+        "raw_line": "'        btnok.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "Gate.vb",
+    "rules": [
+      {
+        "method": "Gate_Load",
+        "line": 24,
+        "raw_line": "If OP_ID = 103 Then job_shrt.Visible = True"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 49,
+        "raw_line": "'            btnadd.Enabled = False ' Gate.btnvou.Enabled = False"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 56,
+        "raw_line": "'                mmcarcl.ds.Visible = True"
+      },
+      {
+        "method": "btnadd_Click",
+        "line": 388,
+        "raw_line": "ADD.txtgno.Visible = False"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 457,
+        "raw_line": "'            btnval.Enabled = False"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 461,
+        "raw_line": "'                If DR = Windows.Forms.DialogResult.Yes Then btnval.Enabled = True : val()"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 462,
+        "raw_line": "'                If DR = Windows.Forms.DialogResult.No Or DR = Windows.Forms.DialogResult.Cancel Then btnval.Enabled = False"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 630,
+        "raw_line": "'        btndel.Enabled = False"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 647,
+        "raw_line": "'    If cl.ds.Tables(\"resultab\").Rows.Count > 0 Then btnval.Enabled = False : DR = MessageBox.Show(\"Gate No : \" & dgv.Rows(i).Cells(0).Value & \" can't be validated\", \"Gate Register\", MessageBoxButtons.YesNoCancel)"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 650,
+        "raw_line": "'        btnval.Enabled = True"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 652,
+        "raw_line": "'        btnval.Enabled = False"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 661,
+        "raw_line": "'    If cl.ds.Tables(\"resultab\").Rows.Count > 0 Then btnval.Enabled = False Else btnval.Enabled = True"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 672,
+        "raw_line": "'            Label29.Visible = True"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 682,
+        "raw_line": "'    Label29.Visible = False"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 817,
+        "raw_line": "btndel.Enabled = False"
+      },
+      {
+        "method": "lbupdt_LinkClicked",
+        "line": 1805,
+        "raw_line": "' If txtrole.Text = \"UNIT2\" Then GateUpdate.btndel.Enabled = False"
+      }
+    ]
+  },
+  {
+    "file": "excess-release.vb",
+    "rules": [
+      {
+        "method": "excess_release_Load",
+        "line": 29,
+        "raw_line": "'    If  And (Or ip = \"192.168.0.178\") Then btnsave.Enabled = True Else btnsave.Enabled = False Or ip = \"192.168.13.11\""
+      },
+      {
+        "method": "Label5_Click",
+        "line": 388,
+        "raw_line": "dgv.Rows(i).Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "GateUpdate.vb",
+    "rules": [
+      {
+        "method": "GateUpdate_Load",
+        "line": 143,
+        "raw_line": "btndel.Visible = False"
+      },
+      {
+        "method": "GateUpdate_Load",
+        "line": 150,
+        "raw_line": "cmbres.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "Login.vb",
+    "rules": [
+      {
+        "method": "Button1_Click",
+        "line": 89,
+        "raw_line": "Gate.btnadd.Enabled = False ' Gate.btnvou.Enabled = False"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 100,
+        "raw_line": "If c = \"U7\" Or c = \"U7VIEW\" Then Gate.btnmod.Enabled = True Else Gate.btnmod.Enabled = False"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 102,
+        "raw_line": "If c = \"U7_VIEW\" Then Gate.btnitem.Enabled = True : Gate.lbupdt.Visible = True"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 109,
+        "raw_line": "'  If c = \"USER\" Or c = \"USER1\" And (ip = \"192.168.12.157\" Or ip = \"192.168.0.178\" Or ip = \"192.168.12.11\") Then Gate.btnxs.Visible = True"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 117,
+        "raw_line": "Gate.btnadd.Enabled = False ' Gate.btnvou.Enabled = False"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 126,
+        "raw_line": "Gate.btnadd.Enabled = False ' Gate.btnvou.Enabled = False"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 133,
+        "raw_line": "Gate.btnadd.Enabled = False ' Gate.btnvou.Enabled = False"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 157,
+        "raw_line": "Gate.txtlog.Text = txtuser.Text : Gate.mmcard.Visible = True"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 164,
+        "raw_line": "If c = \"U7_ADD\" Then Gate.btnsta.Enabled = True"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 169,
+        "raw_line": "'Gate.btnvou.Enabled = False : Gate.btngtlot.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "gt_checked.vb",
+    "rules": [
+      {
+        "method": "gt_checked_Load",
+        "line": 28,
+        "raw_line": "GroupBox3.Visible = True"
+      },
+      {
+        "method": "txtchk_Leave",
+        "line": 213,
+        "raw_line": "'    txt_oth.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "fifo_sticker.vb",
+    "rules": [
+      {
+        "method": "fifo_sticker_Load",
+        "line": 24,
+        "raw_line": "If orgid.Contains(\"I23\") = True Then chkptc.Visible = True Else chkptc.Visible = False"
+      }
+    ]
+  },
+  {
+    "file": "suplist.vb",
+    "rules": [
+      {
+        "method": "rdadi_CheckedChanged",
+        "line": 57,
+        "raw_line": "txtname.Enabled = False : txtitem.Enabled = False"
+      }
+    ]
+  },
+  {
+    "file": "pocheck.vb",
+    "rules": [
+      {
+        "method": "btngo_Click",
+        "line": 134,
+        "raw_line": "lblcval.Visible = True"
+      },
+      {
+        "method": "pocheck_Load",
+        "line": 166,
+        "raw_line": "Label17.Visible = False : Label23.Visible = False : txtrate.Visible = False : txtdc.Visible = False : btnsave.Visible = False : Label29.Visible = False : txtline.Visible = False"
+      },
+      {
+        "method": "dgv1_CellClick",
+        "line": 294,
+        "raw_line": "Panel1.Visible = True"
+      },
+      {
+        "method": "dgv2_CellClick",
+        "line": 916,
+        "raw_line": ".Columns(3).Visible = False"
+      }
+    ]
+  },
+  {
+    "file": "Add.vb",
+    "rules": [
+      {
+        "method": "clear",
+        "line": 20,
+        "raw_line": "If txtadirea.Visible = True Then Label17.Visible = False : txtadirea.Visible = False"
+      },
+      {
+        "method": "cmbsup_SelectedIndexChanged",
+        "line": 122,
+        "raw_line": "Label15.Visible = True"
+      },
+      {
+        "method": "cmbtype_SelectedIndexChanged",
+        "line": 563,
+        "raw_line": "If cmbtype.SelectedItem = \"PO\" Then Label16.Visible = True : txtinv.Visible = True"
+      },
+      {
+        "method": "addnew",
+        "line": 843,
+        "raw_line": "If txtadirea.Visible = True Then cl.sql &= \" ,adi_reason\" ''''for manual ADI entry"
+      },
+      {
+        "method": "addnew",
+        "line": 873,
+        "raw_line": "If txtadirea.Visible = True Then cl.sql &= \" ,'\" & txtadirea.Text & \"'\" ''''for manual ADI entry"
+      },
+      {
+        "method": "addnew",
+        "line": 875,
+        "raw_line": "If txtper.Visible = True Then"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1057,
+        "raw_line": "If ds.Tables(\"resultab\").Rows(0).Item(\"ADI_REASON\").ToString <> \"\" Then Label17.Visible = True : txtadirea.Visible = True : txtadirea.Text = ds.Tables(\"resultab\").Rows(0).Item(\"ADI_REASON\")"
+      },
+      {
+        "method": "updt",
+        "line": 1215,
+        "raw_line": "If txtadirea.Visible = True Then cl.sql &= \" ,ADI_REASON= '\" & txtadirea.Text & \"'\""
+      },
+      {
+        "method": "txtdcno_Leave",
+        "line": 1306,
+        "raw_line": "If ds1.Tables(\"resultab\").Rows.Count > 0 Then Label17.Visible = True : txtadirea.Visible = True"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1379,
+        "raw_line": "'    Label20.Visible = True : Label21.Visible = True : Label22.Visible = True : Label23.Visible = True : Label24.Visible = True : cmbcr.Visible = True : txtpod.Visible = True : txtpodwt.Visible = True : txtbox.Visible = True : txtrwt.Visible = True"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1387,
+        "raw_line": "cmbres.Visible = True"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1455,
+        "raw_line": "'If txtrole.Text = \"UNIT7\" Or txtrole.Text = \"U7_ADD\" Or txtrole.Text = \"ADD\" Or txtrole.Text = \"SKYFAST\" Or txtrole.Text = \"SKY_ADD\" Or txtrole.Text = \"JAPL\" Then chkogt.Visible = True : Else chkogt.Visible = False"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1494,
+        "raw_line": "If txttype.Text = \"PO\" Then Label16.Visible = True : txtinv.Visible = True"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1495,
+        "raw_line": "'    If txtrole.Text = \"UNIT1\" Or txtrole.Text = \"INWARD\" Then Label10.Visible = True : Label13.Visible = True : Label14.Visible = True : cmborg.Visible = True : txtref.Visible = True : cmbrea.Visible = True"
+      }
+    ]
+  },
+  {
+    "file": "non-po.vb",
+    "rules": [
+      {
+        "method": "btnsave_Click",
+        "line": 209,
+        "raw_line": "If txtper.Visible = True Then"
+      },
+      {
+        "method": "non_po_Load",
+        "line": 262,
+        "raw_line": "cmbres.Visible = True"
+      },
+      {
+        "method": "non_po_Load",
+        "line": 307,
+        "raw_line": "chkogt.Visible = True"
+      },
+      {
+        "method": "chknon_CheckedChanged",
+        "line": 316,
+        "raw_line": "txtsup.Visible = True"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1334 @@
+[
+  {
+    "file": "Gate_Password.vb",
+    "validations": [
+      {
+        "method": "updt_Click",
+        "line": 11,
+        "raw_line": "MessageBox.Show(\"Password Changed\", \"Gate Register\")",
+        "condition": "If CON.State = ConnectionState.Closed Then CON.Open()"
+      },
+      {
+        "method": "updt_Click",
+        "line": 18,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "adi.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 131,
+        "raw_line": "MessageBox.Show(\"Gate Number Already Exists!\", \"Gate Entry\")",
+        "condition": "If ds1.Tables(\"resultab\").Rows(i).Item(\"gate_no\") = txtgno.Text Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 149,
+        "raw_line": "MessageBox.Show(sql, \"Gate Entry\")",
+        "condition": "If ds.Tables(\"resultab\").Rows(i).Item(\"dc_no\").ToString = txtdcno.Text Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 166,
+        "raw_line": "'                MsgBox(\"Tariff No Not Empty !..\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 177,
+        "raw_line": "MessageBox.Show(\"DcQty Greater Then Po Pend\", \"Gate Entry\")",
+        "condition": "If dgv1.Rows(i).Cells(0).Value <> \"\" And txtdcno.Text <> \"\" And dgv1.Rows(i).Cells(8).Value <> \"\" And Convert.ToDecimal(dgv1.Rows(i).Cells(8).Value) > Convert.ToDecimal(dgv1.Rows(i).Cells(6).Value) Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 350,
+        "raw_line": "MessageBox.Show(\"Saved Successfully !!-Gate Number is: \" & head & \"\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 383,
+        "raw_line": "MessageBox.Show(\"Enter Dcno,DCqty,Remark To Save Gate Values\", \"Gate Entry\")",
+        "condition": "If B = True Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 386,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": "If B = True Then"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 437,
+        "raw_line": "MsgBox(\"This A D I No Already Exists !..,\")",
+        "condition": "If dgv1.Rows(i).Cells(20).Value = TXT_ASN_NO.Text Then"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 454,
+        "raw_line": "MsgBox(\"ADI Not Available!..,\")",
+        "condition": "If MDS.Tables(\"ASN_dET\").Rows.Count = 0 Then"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 459,
+        "raw_line": "MsgBox(\"ADI Entry Deleted by Supplier/Vendor !..,\")",
+        "condition": "If MDS.Tables(\"asn_det\").Rows(0).Item(\"DELASN\") = 1 Then"
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 473,
+        "raw_line": "'                MsgBox(\"Without Process ADI !..\" & vbNewLine & vbNewLine & vbNewLine & \"PO : [ \" & .Item(\"PONO\").ToString & \" ] Price Must be Zero !..\" & vbNewLine & vbNewLine)",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 522,
+        "raw_line": "'            MessageBox.Show(\"po pending not avail\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 582,
+        "raw_line": "'    '    MessageBox.Show(\"ADI has direct delivery items ,Amend the po and proceed\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 585,
+        "raw_line": "'        MessageBox.Show(\"ADI has items with need by date more than 1 month, Gate entry Can't be made get approval for inwarding the items\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 590,
+        "raw_line": "'        MessageBox.Show(\"Blanket schedule is more than 7 days, Gate entry Can't be made get approval for inwarding the items\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 652,
+        "raw_line": "'    '    MessageBox.Show(\"ADI has direct delivery items ,Amend the po and proceed\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 655,
+        "raw_line": "'        MessageBox.Show(\"Blanket schedule is more than 7 days, Gate entry Can't be made get approval for inwarding the items\")",
+        "condition": ""
+      },
+      {
+        "method": "BUT_DWNLD_ASN_Click",
+        "line": 711,
+        "raw_line": "MsgBox(\"Different Supplier DC Nos Occured !..,\" & vbNewLine & vbNewLine & \"Rule : One Supplier DC No = One ASN No\")",
+        "condition": "If txtdcno.Text <> .Item(\"DC_NO\") Then"
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 985,
+        "raw_line": "MessageBox.Show(\"Select Next Row\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 1042,
+        "raw_line": "MessageBox.Show(\"Select Next Row\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "DWNLD_ASN",
+        "line": 1048,
+        "raw_line": "MessageBox.Show(\"Line no : \" & adcnt & \" in ADI is not in Pending purchase order\")",
+        "condition": "If ASNCNT = 0 Then adcnt = 1"
+      },
+      {
+        "method": "adi_Load",
+        "line": 1081,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "adi_Load",
+        "line": 1110,
+        "raw_line": "MsgBox(ex.Message)",
+        "condition": "If TXT_ASN_NO.Text <> \"\" Then"
+      }
+    ]
+  },
+  {
+    "file": "newreport.vb",
+    "validations": [
+      {
+        "method": "btnconsolidate_Click",
+        "line": 92,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btndaily_Click",
+        "line": 202,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btncancel_Click",
+        "line": 255,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnrtv_Click",
+        "line": 306,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnpoamend_Click",
+        "line": 339,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btninward_Click",
+        "line": 454,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "Button9_Click",
+        "line": 568,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnadi_Click",
+        "line": 769,
+        "raw_line": "'   MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnurg_Click",
+        "line": 926,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnskip_Click",
+        "line": 973,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "Button1_Click",
+        "line": 1002,
+        "raw_line": "'MessageBox.Show(\"inserted\")",
+        "condition": ""
+      },
+      {
+        "method": "Button1_Click",
+        "line": 1122,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btngt_Click",
+        "line": 1272,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnlong_Click",
+        "line": 1358,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnper_Click",
+        "line": 1501,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "xerox_Click",
+        "line": 1563,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "delayaccount_Click",
+        "line": 1606,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "adimanual_Click",
+        "line": 1645,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btninv_Click",
+        "line": 1685,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnprep_Click",
+        "line": 1726,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "btnm2o_Click",
+        "line": 2212,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "btnvallist_Click",
+        "line": 2275,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "adi_exemption.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 26,
+        "raw_line": "MessageBox.Show(\"Exemption for ADI Saved\")",
+        "condition": "If CON.State = ConnectionState.Closed Then CON.Open()"
+      }
+    ]
+  },
+  {
+    "file": "Validate.vb",
+    "validations": [
+      {
+        "method": "RBTNNV_CheckedChanged",
+        "line": 298,
+        "raw_line": "MessageBox.Show(ex.Message, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 333,
+        "raw_line": "MessageBox.Show(.Item(0))",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 347,
+        "raw_line": "MessageBox.Show(\"Received Weight not entered for POD\", \"Gate Entry\")",
+        "condition": "If dswt.Tables(\"cnt\").Rows(0).Item(0) > 0 Then"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 373,
+        "raw_line": "MessageBox.Show(\"Tax not available for all lines as in gate entry\", \"Gate Register\")",
+        "condition": "If dsgt.Tables(\"gate_Cnt\").Rows.Count <> dscnt.Tables(\"tax_cnt\").Rows.Count Then"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 424,
+        "raw_line": "MessageBox.Show(\"Tick E-invoice Supplier and proceed\", \"Gate Register\")",
+        "condition": "If val = 0 And val1 = 0 Then"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 427,
+        "raw_line": "MessageBox.Show(\"Enter Supplier E-way bill No and proceed\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 444,
+        "raw_line": "MessageBox.Show(\"Select validated By and proceed validation\", \"Gate Register\")",
+        "condition": "If val = 0 And val2 = 1 And val1 = 0 And cmbval.SelectedIndex > 0 Then"
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 448,
+        "raw_line": "MessageBox.Show(\"Enter Item checked by details To proceed validation\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 452,
+        "raw_line": "MessageBox.Show(\"Tick E-invoice Supplier and proceed\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 456,
+        "raw_line": "MessageBox.Show(\"Enter E-way Bill No and proceed\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "BTNOK_Click",
+        "line": 461,
+        "raw_line": "MessageBox.Show(ex.Message, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "valfun",
+        "line": 469,
+        "raw_line": "MessageBox.Show(\"Enter valid Eway bill no and proceed\", \"Gate Register\")",
+        "condition": "If txtgst.Text.ToString.Length = 12 And txtgst.Text <> \"\" Then"
+      },
+      {
+        "method": "valfun",
+        "line": 481,
+        "raw_line": "'        MessageBox.Show(\"Receipt Made,Validation Not allowed\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "valfun",
+        "line": 553,
+        "raw_line": "MessageBox.Show(\"VALIDATED\", \"Gate Entry\")",
+        "condition": "If a = True Then"
+      },
+      {
+        "method": "valfun",
+        "line": 556,
+        "raw_line": "MessageBox.Show(\"REASON SAVED\", \"Gate Entry\")",
+        "condition": "If a = True Then"
+      },
+      {
+        "method": "valfun",
+        "line": 559,
+        "raw_line": "MessageBox.Show(\"REASON SAVED\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "valfun",
+        "line": 562,
+        "raw_line": "MessageBox.Show(\"ACTION ENTERED\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "dgv1_CellClick",
+        "line": 636,
+        "raw_line": "'                MessageBox.Show(\"Excess Qty Inwarded Than Required Qty!!! Line Can't Be Validated\", \"Gate Register\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "fifo_login.vb",
+    "validations": [
+      {
+        "method": "bnlogin_Click",
+        "line": 19,
+        "raw_line": "MessageBox.Show(\"Invalid Login\", \"FIFO Sticker Print\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "PO_BLOCK.vb",
+    "validations": [
+      {
+        "method": "PO_BLOCK_Load",
+        "line": 15,
+        "raw_line": "' MessageBox.Show(sql)",
+        "condition": ""
+      },
+      {
+        "method": "PO_BLOCK_Load",
+        "line": 20,
+        "raw_line": "'MessageBox.Show(ds.Tables(\"RESULT\").Rows.Count)",
+        "condition": "If ds.Tables(\"RESULT\").Rows.Count > 0 Then"
+      }
+    ]
+  },
+  {
+    "file": "headerval.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 21,
+        "raw_line": "MessageBox.Show(\"Validate Values Saved\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "minmax.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 298,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "dgmm_CellFormatting",
+        "line": 359,
+        "raw_line": "MessageBox.Show(ex.StackTrace)",
+        "condition": ""
+      },
+      {
+        "method": "btngo1_Click",
+        "line": 485,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Gate.vb",
+    "validations": [
+      {
+        "method": "Gate_Load",
+        "line": 85,
+        "raw_line": "MessageBox.Show(ex.Message, \"GATE ENTRY\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "Gate_Load",
+        "line": 118,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btngo_Click",
+        "line": 376,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btndel_Click",
+        "line": 407,
+        "raw_line": "dr = MessageBox.Show(\"Do You Want to delete?\", \"Gate Entry\", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 419,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnval_Click",
+        "line": 435,
+        "raw_line": "MessageBox.Show(\"View Tax Values\", \"Gate Register\")",
+        "condition": "If IsDBNull(cl.ds.Tables(\"resultab\").Rows(0).Item(\"dcval\")) Then"
+      },
+      {
+        "method": "btnval_Click",
+        "line": 460,
+        "raw_line": "'                Dim DR As DialogResult = MessageBox.Show(\"Diff between Invoice & DC Value is more than Rs.5\", \"Gate Register\", MessageBoxButtons.YesNoCancel)",
+        "condition": ""
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 610,
+        "raw_line": "DR1 = MessageBox.Show(\"Do you want to start counting the item\", \"Gate Register\", MessageBoxButtons.YesNo, MessageBoxIcon.Question)",
+        "condition": "If ds.Tables(\"cnt\").Rows(0).Item(0) > 0 Then"
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 647,
+        "raw_line": "'    If cl.ds.Tables(\"resultab\").Rows.Count > 0 Then btnval.Enabled = False : DR = MessageBox.Show(\"Gate No : \" & dgv.Rows(i).Cells(0).Value & \" can't be validated\", \"Gate Register\", MessageBoxButtons.YesNoCancel)",
+        "condition": ""
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 689,
+        "raw_line": "'    MessageBox.Show(ex.Message, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 823,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "Global",
+        "line": 860,
+        "raw_line": "'        MessageBox.Show(ex.Message, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "dgv1_CellFormatting",
+        "line": 910,
+        "raw_line": "'    MessageBox.Show(ex.StackTrace, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 955,
+        "raw_line": "MessageBox.Show(\"Modifying the Gate No With ADI is not allowed\", \"Gate Entry\")",
+        "condition": "If Not IsDBNull(dgv.Rows(dgv.CurrentRow.Index).Cells(13).Value) And modify_Flag <> 1 Then"
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 977,
+        "raw_line": "MessageBox.Show(\"Gate entry editing not allowed for Blanket suppliers\")",
+        "condition": "If cl.ds.Tables(\"resultab\").Rows(0).Item(0) = \"PO\" And cl.ds.Tables(\"resultab\").Rows(0).Item(1) > 0 Then"
+      }
+    ]
+  },
+  {
+    "file": "excess-release.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 72,
+        "raw_line": "MessageBox.Show(\"Remark Saved\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 79,
+        "raw_line": "MessageBox.Show(\"Enter Remark\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 82,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "Button1_Click",
+        "line": 251,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "dgv_CellClick",
+        "line": 292,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "BTNPRINT_Click",
+        "line": 369,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Voucher.vb",
+    "validations": [
+      {
+        "method": "Button1_Click",
+        "line": 16,
+        "raw_line": "MessageBox.Show(\"Voucher No Added\", \"Gate Entry\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 18,
+        "raw_line": "MessageBox.Show(\"Enter Voucher Number\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "Button1_Click",
+        "line": 21,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "cancelentry.vb",
+    "validations": [
+      {
+        "method": "Button1_Click",
+        "line": 49,
+        "raw_line": "MessageBox.Show(\"Gate No Cancelled\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 51,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "GateUpdate.vb",
+    "validations": [
+      {
+        "method": "btnupdt_Click",
+        "line": 51,
+        "raw_line": "MessageBox.Show(\"Gate Value Updated\", \" Gate Register\")",
+        "condition": "If unit.Contains(\"SPM\") = True And cmbres.Text <> \"\" Then"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 71,
+        "raw_line": "MessageBox.Show(\"Receipt Made,Gate Can't be updated\", \"Gate Register\")",
+        "condition": "If (dar.HasRows = True) Then"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 121,
+        "raw_line": "MessageBox.Show(\"Gate No:  \" & txtgate.Text & \"deleted\", \"Gate Register\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Login.vb",
+    "validations": [
+      {
+        "method": "Button1_Click",
+        "line": 46,
+        "raw_line": "MessageBox.Show(\"Login Mismatch !!!\", \"Gate Register\")",
+        "condition": "If Not IsDBNull(.Item(\"modify_Flag\")) Then modify_Flag = .Item(\"modify_Flag\")"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 197,
+        "raw_line": "'    ErrorProvider1.SetError(txtuser, \"Invalid Username\")",
+        "condition": ""
+      },
+      {
+        "method": "Button1_Click",
+        "line": 199,
+        "raw_line": "'    ErrorProvider1.SetError(txtpwd, \"Invalid Pwd\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Login.designer.vb",
+    "validations": [
+      {
+        "method": "InitializeComponent",
+        "line": 24,
+        "raw_line": "Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)",
+        "condition": ""
+      },
+      {
+        "method": "InitializeComponent",
+        "line": 37,
+        "raw_line": "CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()",
+        "condition": ""
+      },
+      {
+        "method": "InitializeComponent",
+        "line": 44,
+        "raw_line": "'ErrorProvider1",
+        "condition": ""
+      },
+      {
+        "method": "InitializeComponent",
+        "line": 46,
+        "raw_line": "Me.ErrorProvider1.ContainerControl = Me",
+        "condition": ""
+      },
+      {
+        "method": "InitializeComponent",
+        "line": 203,
+        "raw_line": "CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()",
+        "condition": ""
+      },
+      {
+        "method": "Global",
+        "line": 220,
+        "raw_line": "Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Status.vb",
+    "validations": [
+      {
+        "method": "Button5_Click",
+        "line": 253,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Report.vb",
+    "validations": [
+      {
+        "method": "po_Click",
+        "line": 164,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "Button5_Click",
+        "line": 331,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btngt_Click",
+        "line": 374,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnnval_Click",
+        "line": 416,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnnoref_Click",
+        "line": 469,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "gt_checked.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 120,
+        "raw_line": "MessageBox.Show(\"Invalid Name\", \"Gate Register\")",
+        "condition": "If ds.Tables(\"namecnt\").Rows(0).Item(0) = 0 Then"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 138,
+        "raw_line": "MessageBox.Show(\"Start time For Item Counting Saved\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 183,
+        "raw_line": "MessageBox.Show(\"Item Checked Details Added\", \"Gate Entry\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btngo_Click",
+        "line": 188,
+        "raw_line": "MessageBox.Show(\"Enter location To proceed\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "txtshtr_Leave",
+        "line": 223,
+        "raw_line": "MessageBox.Show(\"Shortage Qty entered is more than received qty for the line,correct qty and proceed\", \"Gate Register\")",
+        "condition": "If txtshtr.Text > gqty Then"
+      },
+      {
+        "method": "btnpack_Click",
+        "line": 270,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "Class2.vb",
+    "validations": [
+      {
+        "method": "dataacs",
+        "line": 25,
+        "raw_line": "'  MsgBox(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "del.vb",
+    "validations": [
+      {
+        "method": "Button1_Click",
+        "line": 34,
+        "raw_line": "'MessageBox.Show(\"Delete Reason Saved\", \"Gate Entry\")",
+        "condition": "If CON.State = ConnectionState.Closed Then"
+      },
+      {
+        "method": "Button1_Click",
+        "line": 62,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "rtvreason.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 9,
+        "raw_line": "MessageBox.Show(\"RTV Details saved for \" & txtgate.Text & \"\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btncan_Click",
+        "line": 28,
+        "raw_line": "MessageBox.Show(\" RTV Details for \" & txtgate.Text & \" Updated\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btndel_Click",
+        "line": 37,
+        "raw_line": "MessageBox.Show(\" RTV Details for \" & txtgate.Text & \" Deleted\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "gate_lot_print.vb",
+    "validations": [
+      {
+        "method": "btnshow_Click",
+        "line": 161,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "fifo_sticker.vb",
+    "validations": [
+      {
+        "method": "btnshow_Click",
+        "line": 166,
+        "raw_line": "MessageBox.Show(\"Select org\", \"FIFO\")",
+        "condition": ""
+      },
+      {
+        "method": "btnshow_Click",
+        "line": 170,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 220,
+        "raw_line": "MessageBox.Show(\"No of packet should be greater than 0\")",
+        "condition": ""
+      },
+      {
+        "method": "bntjob_Click",
+        "line": 335,
+        "raw_line": "MessageBox.Show(\"Select org\", \"FIFO\")",
+        "condition": ""
+      },
+      {
+        "method": "bntjob_Click",
+        "line": 339,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btn_jstk_Click",
+        "line": 382,
+        "raw_line": "MessageBox.Show(\"No of packet should be greater than 0\")",
+        "condition": ""
+      },
+      {
+        "method": "chkptc_CheckedChanged",
+        "line": 429,
+        "raw_line": "MessageBox.Show(\"Lot Generated For PTC items\", \"FIFO Sticker\")",
+        "condition": ""
+      },
+      {
+        "method": "btncshow_Click",
+        "line": 489,
+        "raw_line": "MessageBox.Show(\"Select org\", \"FIFO\")",
+        "condition": ""
+      },
+      {
+        "method": "btncshow_Click",
+        "line": 493,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnship_Click",
+        "line": 686,
+        "raw_line": "MessageBox.Show(\"Select Org\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "suplist.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 9,
+        "raw_line": "MessageBox.Show(\"Enter Supplier,Item no,follower name\", \"Gate Register\")",
+        "condition": "If cmbsup.SelectedItem <> \"\" And txtitem.Text <> \"\" And txtname.Text <> \"\" Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 25,
+        "raw_line": "MessageBox.Show(\"Supplier Details added\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "btncan_Click",
+        "line": 50,
+        "raw_line": "MessageBox.Show(\"Urgent List deleted\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "gatelist.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 57,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "pocheck.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 157,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "BTNCALTAX_Click",
+        "line": 277,
+        "raw_line": "MessageBox.Show(ex.Message, \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 287,
+        "raw_line": "MessageBox.Show(\"Rate Values added\", \"Gate Register\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "Add.vb",
+    "validations": [
+      {
+        "method": "cmbsup_SelectedIndexChanged",
+        "line": 86,
+        "raw_line": "'  MessageBox.Show(cl.sql)",
+        "condition": ""
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 297,
+        "raw_line": "MessageBox.Show(\"No Provision to add Manual Gate Entry ... ,ADI Required\", \"Gate Register\")",
+        "condition": "If ds.Tables(\"VALID\").Rows(0).Item(\"cnt\") >= 0 Then"
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 303,
+        "raw_line": "MessageBox.Show(\"No Provision to add Manual Gate Entry ... ,ADI Required\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 308,
+        "raw_line": "MessageBox.Show(\"Vendor Not in Exempted list\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbitem_SelectedIndexChanged",
+        "line": 319,
+        "raw_line": "' MessageBox.Show(\"Vendor Not in Exempted list\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 443,
+        "raw_line": "'        MessageBox.Show(\"No Gate Entry is allowed for the PO \" & f & \" \", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 446,
+        "raw_line": "'        MessageBox.Show(\"No Gate Entry is allowed for the PO \" & f & \" \", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 503,
+        "raw_line": "MessageBox.Show(\"Select Next Row\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "cmbpo_SelectedIndexChanged",
+        "line": 552,
+        "raw_line": "'        MessageBox.Show(\"Select Next Row\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 587,
+        "raw_line": "'        MessageBox.Show(\"Receipt Made,Gate Can't be updated\", \"Gate Register\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 604,
+        "raw_line": "'    MessageBox.Show(\"Enter Dcno,DCqty,Tariff No To Save Gate Values\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 607,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "addnew",
+        "line": 617,
+        "raw_line": "MessageBox.Show(\"Enter Dcno /supplier To Save Gate Values\", \"Gate Entry\")",
+        "condition": "If TextBox1.Text <> \"\" And txtdcno.Text <> \"\" Then '' And dgv1.Rows(0).Cells(22).Value <> \"\""
+      },
+      {
+        "method": "addnew",
+        "line": 786,
+        "raw_line": "MessageBox.Show(\"Gate Number Already Exists!\", \"Gate Entry\")",
+        "condition": "If ds1.Tables(\"resultab\").Rows(i).Item(\"gate_no\") = txtgno.Text Then"
+      },
+      {
+        "method": "addnew",
+        "line": 802,
+        "raw_line": "MessageBox.Show(\"DCNo already available for the supplier\", \"Gate Entry\")",
+        "condition": "If ds.Tables(\"resultab\").Rows(0).Item(0) > 0 Then"
+      },
+      {
+        "method": "addnew",
+        "line": 820,
+        "raw_line": "MessageBox.Show(\"DcQty Greater Then Po Pend\", \"Gate Entry\")",
+        "condition": "If dgv1.Rows(i).Cells(0).Value <> \"\" And txtdcno.Text <> \"\" And dgv1.Rows(i).Cells(8).Value <> \"\" And Convert.ToDecimal(dgv1.Rows(i).Cells(8).Value) > Convert.ToDecimal(dgv1.Rows(i).Cells(6).Value) Then"
+      },
+      {
+        "method": "addnew",
+        "line": 888,
+        "raw_line": "'MessageBox.Show(\"Saved Successfully !!-Gate Number is: \" & head & \"\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "addnew",
+        "line": 969,
+        "raw_line": "MessageBox.Show(\"Saved Successfully !!-Gate Number is: \" & txtgno.Text & \"\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "btnmod_Click",
+        "line": 1099,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "updt",
+        "line": 1290,
+        "raw_line": "MessageBox.Show(\"Gate Number is: \" & txtgno.Text & \" Updated\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "updt",
+        "line": 1292,
+        "raw_line": "MessageBox.Show(\"Gate Validated,Can't Add New Values\", \"Gate Entry\")",
+        "condition": "If b = True Then"
+      },
+      {
+        "method": "updt",
+        "line": 1296,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": "If b = True Then"
+      },
+      {
+        "method": "chkadi",
+        "line": 1326,
+        "raw_line": "MessageBox.Show(\"No Internet Connection !...\")",
+        "condition": "If scmcon2.State = ConnectionState.Closed Then scmcon2.Open()"
+      },
+      {
+        "method": "chkadi",
+        "line": 1332,
+        "raw_line": "MessageBox.Show(\"ADI Entry Found for this DC No !..,\")",
+        "condition": "If mds.Tables(\"asn_det\").Rows.Count > 0 Then"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1368,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1470,
+        "raw_line": "': MessageBox.Show(\"Can't update DC Value\", \"Gate Register\")",
+        "condition": "If dgv1.Rows(i).Cells(8).Value <> \"\" Then"
+      },
+      {
+        "method": "Add_Load",
+        "line": 1479,
+        "raw_line": "'  MessageBox.Show(cl.sql)",
+        "condition": "If FLG <> False Then"
+      }
+    ]
+  },
+  {
+    "file": "non-po.vb",
+    "validations": [
+      {
+        "method": "btnsave_Click",
+        "line": 169,
+        "raw_line": "MessageBox.Show(\"DCNo already available for the supplier\", \"Gate Entry\")",
+        "condition": "If ds.Tables(\"resultab\").Rows(0).Item(0) > 0 Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 176,
+        "raw_line": "MessageBox.Show(\"Enter Bin Qty and Proceed\", \"Gate Entry\")",
+        "condition": "If cmbcat.SelectedIndex = 0 And txtbin.Text = \"\" Then"
+      },
+      {
+        "method": "btnsave_Click",
+        "line": 228,
+        "raw_line": "MessageBox.Show(\"Saved Successfully !!-Gate Number is: \" & txtgno.Text & \"\", \"Gate Entry\")",
+        "condition": "If cl.oracon.State = ConnectionState.Closed Then cl.oracon.Open()"
+      }
+    ]
+  },
+  {
+    "file": "mmcard.vb",
+    "validations": [
+      {
+        "method": "Button1_Click",
+        "line": 33,
+        "raw_line": "MessageBox.Show(ex.Message, \" GATE\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "Gate Status Login.vb",
+    "validations": [
+      {
+        "method": "btnlog_Click",
+        "line": 16,
+        "raw_line": "MessageBox.Show(\"Invalid Login\", \"Kardex\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "receipt-prepared.vb",
+    "validations": [
+      {
+        "method": "receipt_prepared_Load",
+        "line": 23,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btngo_Click",
+        "line": 99,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 204,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "CycleCount.vb",
+    "validations": [
+      {
+        "method": "btngo_Click",
+        "line": 167,
+        "raw_line": "MessageBox.Show(ex.StackTrace)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "eod.vb",
+    "validations": [
+      {
+        "method": "releaseObject",
+        "line": 263,
+        "raw_line": "MessageBox.Show(\"Exception Occured while releasing object \" + ex.ToString())",
+        "condition": ""
+      },
+      {
+        "method": "Button2_Click",
+        "line": 322,
+        "raw_line": "MessageBox.Show(\"Over\")",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "NOTVALIDATELIST.vb",
+    "validations": [
+      {
+        "method": "btnshow_Click",
+        "line": 43,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "NOTVALIDATELIST_Load",
+        "line": 85,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "dgvdetails_CellClick",
+        "line": 117,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      },
+      {
+        "method": "btnprint_Click",
+        "line": 157,
+        "raw_line": "MessageBox.Show(ex.ToString)",
+        "condition": ""
+      }
+    ]
+  },
+  {
+    "file": "valreason.vb",
+    "validations": [
+      {
+        "method": "save_Click",
+        "line": 13,
+        "raw_line": "MessageBox.Show(\"Reason Saved\", \"Gate Entry\")",
+        "condition": "If reason.Text <> \"\" Then"
+      },
+      {
+        "method": "save_Click",
+        "line": 15,
+        "raw_line": "MessageBox.Show(\"Enter Reason\", \"Gate Entry\")",
+        "condition": ""
+      },
+      {
+        "method": "save_Click",
+        "line": 18,
+        "raw_line": "MessageBox.Show(ex.Message)",
+        "condition": ""
+      }
+    ]
+  }
+]
